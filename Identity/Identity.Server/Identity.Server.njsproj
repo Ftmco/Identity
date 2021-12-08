@@ -36,9 +36,23 @@
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="dataBase\" />
+    <Folder Include="dataBase\context\" />
+    <Folder Include="dataBase\entity\" />
+    <Folder Include="dataBase\entity\user\" />
+    <Folder Include="services\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="routes\" />
+    <Folder Include="services\service\" />
+    <Folder Include="services\rule\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="dataBase\context\extraSetup.ts" />
+    <TypeScriptCompile Include="dataBase\context\index.ts" />
+    <TypeScriptCompile Include="dataBase\entity\user\user.model.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

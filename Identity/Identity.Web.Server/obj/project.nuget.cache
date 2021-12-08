@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "GgQr8SuLTPIcVGz2qfNP6xPnPGxTiUxQ2in6ZI+3jQkTKzc4gGuiG99JLWOt+qQkD2s4TfEa8uS29JtTFmMjrg==",
+  "success": true,
+  "projectFilePath": "D:\\project\\Teams\\FTeam\\Identity\\Identity\\Identity.Web.Server\\Identity.Web.Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Hooshmand\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Hooshmand\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Hooshmand\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Hooshmand\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\Hooshmand\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\Hooshmand\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
