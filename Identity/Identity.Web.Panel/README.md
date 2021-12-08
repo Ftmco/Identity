@@ -1,3 +1,3 @@
-w# Identity.Web.Panel
+w# Identity Panel
 
 

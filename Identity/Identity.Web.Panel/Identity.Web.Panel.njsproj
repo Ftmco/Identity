@@ -31,20 +31,68 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="dist\css\chunk-vendors.8ac3acda.css" />
+    <Content Include="dist\favicon.ico" />
+    <Content Include="dist\img\icons\android-chrome-192x192.png" />
+    <Content Include="dist\img\icons\android-chrome-512x512.png" />
+    <Content Include="dist\img\icons\android-chrome-maskable-192x192.png" />
+    <Content Include="dist\img\icons\android-chrome-maskable-512x512.png" />
+    <Content Include="dist\img\icons\apple-touch-icon-120x120.png" />
+    <Content Include="dist\img\icons\apple-touch-icon-152x152.png" />
+    <Content Include="dist\img\icons\apple-touch-icon-180x180.png" />
+    <Content Include="dist\img\icons\apple-touch-icon-60x60.png" />
+    <Content Include="dist\img\icons\apple-touch-icon-76x76.png" />
+    <Content Include="dist\img\icons\apple-touch-icon.png" />
+    <Content Include="dist\img\icons\favicon-16x16.png" />
+    <Content Include="dist\img\icons\favicon-32x32.png" />
+    <Content Include="dist\img\icons\msapplication-icon-144x144.png" />
+    <Content Include="dist\img\icons\mstile-150x150.png" />
+    <Content Include="dist\img\icons\safari-pinned-tab.svg" />
+    <Content Include="dist\img\logo.63a7d78d.svg" />
+    <Content Include="dist\index.html" />
+    <Content Include="dist\js\app.fccc7a80.js" />
+    <Content Include="dist\js\app.fccc7a80.js.map" />
+    <Content Include="dist\js\chunk-vendors.1d540ff1.js" />
+    <Content Include="dist\js\chunk-vendors.1d540ff1.js.map" />
+    <Content Include="dist\manifest.json" />
+    <Content Include="dist\precache-manifest.0bad0d00ff45ba558564107204d07687.js" />
+    <Content Include="dist\robots.txt" />
+    <Content Include="dist\service-worker.js" />
     <Content Include="public\favicon.ico" />
+    <Content Include="public\img\icons\android-chrome-192x192.png" />
+    <Content Include="public\img\icons\android-chrome-512x512.png" />
+    <Content Include="public\img\icons\android-chrome-maskable-192x192.png" />
+    <Content Include="public\img\icons\android-chrome-maskable-512x512.png" />
+    <Content Include="public\img\icons\apple-touch-icon-120x120.png" />
+    <Content Include="public\img\icons\apple-touch-icon-152x152.png" />
+    <Content Include="public\img\icons\apple-touch-icon-180x180.png" />
+    <Content Include="public\img\icons\apple-touch-icon-60x60.png" />
+    <Content Include="public\img\icons\apple-touch-icon-76x76.png" />
+    <Content Include="public\img\icons\apple-touch-icon.png" />
+    <Content Include="public\img\icons\favicon-16x16.png" />
+    <Content Include="public\img\icons\favicon-32x32.png" />
+    <Content Include="public\img\icons\msapplication-icon-144x144.png" />
+    <Content Include="public\img\icons\mstile-150x150.png" />
+    <Content Include="public\img\icons\safari-pinned-tab.svg" />
     <Content Include="public\index.html" />
+    <Content Include="public\robots.txt" />
     <Content Include="src\App.vue" />
     <Content Include="src\assets\logo.svg" />
     <Content Include="src\components\HelloWorld.vue" />
     <Content Include="src\components\Home.vue" />
-    <Content Include="src\plugins\axios.js" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="dist\" />
+    <Folder Include="dist\css\" />
+    <Folder Include="dist\img\" />
+    <Folder Include="dist\img\icons\" />
+    <Folder Include="dist\js\" />
     <Folder Include="public\" />
+    <Folder Include="public\img\" />
+    <Folder Include="public\img\icons\" />
     <Folder Include="src\" />
     <Folder Include="src\assets\" />
     <Folder Include="src\components\" />
@@ -59,6 +107,7 @@
     <Content Include="babel.config.js" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\plugins\axios.ts" />
     <TypeScriptCompile Include="src\plugins\vuetify.ts" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
