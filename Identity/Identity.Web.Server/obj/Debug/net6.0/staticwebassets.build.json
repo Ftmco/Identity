@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Y9/kzb881pijE942iJzmN3CpofILFId5xdhuja8cIaI=",
+  "Source": "Identity.Web.Server",
+  "BasePath": "_content/Identity.Web.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

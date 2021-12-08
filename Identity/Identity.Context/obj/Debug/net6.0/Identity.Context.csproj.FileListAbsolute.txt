@@ -1,0 +1,17 @@
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\bin\Debug\net6.0\Identity.Context.deps.json
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\bin\Debug\net6.0\Identity.Context.runtimeconfig.json
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\bin\Debug\net6.0\Identity.Context.dll
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\bin\Debug\net6.0\ref\Identity.Context.dll
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\bin\Debug\net6.0\Identity.Context.pdb
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\bin\Debug\net6.0\Identity.Entity.dll
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\bin\Debug\net6.0\Identity.Entity.pdb
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\obj\Debug\net6.0\Identity.Context.csproj.AssemblyReference.cache
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\obj\Debug\net6.0\Identity.Context.GeneratedMSBuildEditorConfig.editorconfig
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\obj\Debug\net6.0\Identity.Context.AssemblyInfoInputs.cache
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\obj\Debug\net6.0\Identity.Context.AssemblyInfo.cs
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\obj\Debug\net6.0\Identity.Context.csproj.CoreCompileInputs.cache
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\obj\Debug\net6.0\Identity.Context.csproj.CopyComplete
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\obj\Debug\net6.0\Identity.Context.dll
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\obj\Debug\net6.0\ref\Identity.Context.dll
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\obj\Debug\net6.0\Identity.Context.pdb
+D:\project\Teams\FTeam\Identity\Identity\Identity.Context\obj\Debug\net6.0\Identity.Context.genruntimeconfig.cache

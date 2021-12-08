@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Identity.ViewModels/1.0.0": {
+        "dependencies": {
+          "Identity.Entity": "1.0.0"
+        },
+        "runtime": {
+          "Identity.ViewModels.dll": {}
+        }
+      },
+      "Identity.Entity/1.0.0": {
+        "runtime": {
+          "Identity.Entity.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Identity.ViewModels/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Identity.Entity/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
