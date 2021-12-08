@@ -78,6 +78,14 @@
     <Content Include="public\robots.txt" />
     <Content Include="src\App.vue" />
     <Content Include="src\assets\logo.svg" />
+    <Content Include="src\assets\R.png" />
+    <Content Include="src\components\core\AppBar.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\core\TheBottomNavigation.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\components\core\TheNavigation.vue" />
     <Content Include="src\components\HelloWorld.vue" />
     <Content Include="src\components\Home.vue" />
     <Content Include="tsconfig.json" />
@@ -96,6 +104,7 @@
     <Folder Include="src\" />
     <Folder Include="src\assets\" />
     <Folder Include="src\components\" />
+    <Folder Include="src\components\core\" />
     <Folder Include="src\plugins\" />
   </ItemGroup>
   <ItemGroup>
