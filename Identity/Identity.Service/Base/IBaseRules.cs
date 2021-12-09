@@ -1,12 +1,14 @@
 ﻿namespace Identity.Services.Base;
 
-internal interface IBaseRules<Tentity> where Tentity : class
+public interface IBaseRules<Tentity> where Tentity : class
 {
     Task<IEnumerable<Tentity>> GetAsync();
 
     Task<IEnumerable<Tentity>> GetAsync(Expression<Func<Tentity, bool>> where);
 
-    Task<Tentity> GetAsync(object id);
+    Task<Tentity> GetOneAsync(Expression<Func<Tentity, bool>> where);
+
+    Task<Tentity> GetOneAsync(object id);
 
     Task<bool> InsertAsync(Tentity entity);
 
