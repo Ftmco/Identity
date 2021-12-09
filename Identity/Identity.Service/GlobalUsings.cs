@@ -3,3 +3,7 @@ global using Identity.ViewModels.Account.Response;
 global using Identity.Context;
 global using Microsoft.EntityFrameworkCore;
 global using System.Linq.Expressions;
+global using Microsoft.AspNetCore.Http;
+global using Identity.ViewModels.Application;
+global using Identity.Entity.Application;
+global using Identity.Tools.Hash;
