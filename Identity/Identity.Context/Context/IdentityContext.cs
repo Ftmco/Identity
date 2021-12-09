@@ -19,4 +19,6 @@ public class IdentityContext : DbContext
     public DbSet<Page> Page { get; set; }
 
     public DbSet<RolePages> RolePages { get; set; }
+
+    public DbSet<Session> Session { get; set; }
 }
