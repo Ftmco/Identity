@@ -136,6 +136,36 @@ namespace Identity.Context.Migrations
                     b.ToTable("Role");
                 });
 
+            modelBuilder.Entity("Identity.Entity.User.Session", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Session");
+                });
+
             modelBuilder.Entity("Identity.Entity.User.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -242,6 +272,17 @@ namespace Identity.Context.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("Identity.Entity.User.Session", b =>
+                {
+                    b.HasOne("Identity.Entity.User.User", "User")
+                        .WithMany("Session")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Identity.Entity.User.UserRoles", b =>
                 {
                     b.HasOne("Identity.Entity.User.Role", "Role")
@@ -283,6 +324,8 @@ namespace Identity.Context.Migrations
             modelBuilder.Entity("Identity.Entity.User.User", b =>
                 {
                     b.Navigation("ApplicationUsers");
+
+                    b.Navigation("Session");
 
                     b.Navigation("UserRoles");
                 });
