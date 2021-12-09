@@ -33,4 +33,6 @@ public record User
     public virtual ICollection<ApplicationUsers> ApplicationUsers { get; set; }
 
     public virtual ICollection<UserRoles> UserRoles { get; set; }
+
+    public virtual ICollection<Session> Session { get; set; }
 }
