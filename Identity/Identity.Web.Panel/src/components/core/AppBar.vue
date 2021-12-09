@@ -11,7 +11,7 @@
                        src="@/assets/R.png"
                        transition="scale-transition"
                        width="40" />-->
-                <v-lable>Identity Panel</v-lable>
+                <v-card-title>{{title}}</v-card-title>
             </div>
 
             <v-spacer></v-spacer>
@@ -25,12 +25,27 @@
     import TheNavigation from "./TheNavigation.vue"
 
     export default Vue.extend({
+        name: "AppBar",
+        data: () => ({
+            title:'Home'
+        }),
         components: {
             TheNavigation
+        },
+        mounted() {
+            this.setData()
+        },
+        watch: {
+            $route() {
+                this.setData()
+            }
         },
         methods: {
             drawer() {
                 this.$root.$refs.navigationDrawer.open();
+            },
+            setData() {
+                this.title = this.$route.meta(this.$route).title
             }
         }
     })

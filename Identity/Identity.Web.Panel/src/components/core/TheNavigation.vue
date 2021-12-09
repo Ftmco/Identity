@@ -22,7 +22,7 @@
 
         <template v-slot:append v-if="user.isAuthenticated">
             <div class="pa-2">
-                <v-btn block color="error" @click="logOut"> خروج </v-btn>
+                <v-btn block color="error" @click="logOut"> Logout </v-btn>
             </div>
         </template>
     </v-navigation-drawer>
@@ -31,6 +31,7 @@
 
 <script lang="ts">
     import Vue from 'vue'
+    import { navigationItems } from "@/constants/"
 
     export default Vue.extend({
         data: () => ({
@@ -39,6 +40,8 @@
                 isAuthenticated: false,
                 profile: {},
             },
+            items: navigationItems,
+            group: null
         }),
         created() {
             this.$root.$refs.navigationDrawer = this;
