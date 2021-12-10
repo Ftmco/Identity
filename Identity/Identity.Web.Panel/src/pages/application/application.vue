@@ -10,31 +10,49 @@
             <template v-slot:top>
                 <v-text-field v-model="search"
                               label="Search Applications"
-                              class="mx-4"></v-text-field>
+                              class="mx-4">
+                    <template v-slot:append>
+                        <v-btn color="primary" text>
+                            <span>New Application</span>
+                            <v-icon>mdi-plus</v-icon>
+                        </v-btn>
+                    </template>
+                </v-text-field>
             </template>
             <template v-slot:item.image="{item}">
                 <v-img :src="item.src"
                        :lazy-src="item.src" />
             </template>
-            <template v-slot:item.acions>
+            <template v-slot:item.actions="{item}">
                 <div>
-                    <v-btn outlined
-                           color="red">
-                        <span>Delete</span>
-                        <v-icon>mdi-trash</v-icon>
-                    </v-btn>
+                    <v-row>
+                        <v-col>
+                            <v-btn outlined
+                                   block
+                                   color="red">
+                                <span>Delete</span>
+                                <v-icon>mdi-trash-can-outline</v-icon>
+                            </v-btn>
+                        </v-col>
+                        <v-col>
+                            <v-btn outlined
+                                   block
+                                   color="warning">
+                                <span>Edit</span>
+                                <v-icon>mdi-pencil</v-icon>
+                            </v-btn>
+                        </v-col>
+                        <v-col>
 
-                    <v-btn outlined
-                           color="warning">
-                        <span>Edit</span>
-                        <v-icon>mdi-trash</v-icon>
-                    </v-btn>
-
-                    <v-btn outlined
-                           color="primary">
-                        <span>Copy Key</span>
-                        <v-icon>mdi-trash</v-icon>
-                    </v-btn>
+                            <v-btn outlined
+                                   block
+                                   color="primary"
+                                   @click="copyKey(item.apiKey)">
+                                <span>Copy Key</span>
+                                <v-icon>mdi-clipboard-multiple-outline</v-icon>
+                            </v-btn>
+                        </v-col>
+                    </v-row>
                 </div>
             </template>
             <template v-slot:body.append>
@@ -82,8 +100,16 @@
                         this.showMessages(messages.netWorkError(e.message).title)
                     })
             },
+            copyKey(key: string) {
+                navigator.clipboard.writeText(key)
+                    .then((res) => {
+                        this.showMessages(`Text copied ${key}`)
+                    }).catch((e) => {
+                        this.showMessages(`Faild to copy ${e.message}`)
+                    })
+            },
             showMessages(message: string) {
-                this.$root.$refs.snakBar.open(message)
+                this.$root.$refs.snackbar.open(message)
             }
         }
     })
