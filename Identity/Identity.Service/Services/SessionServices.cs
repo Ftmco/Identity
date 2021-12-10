@@ -13,7 +13,7 @@ public class SessionServices : ISessionRules, IDisposable
         _sessionCrud = sessionCrud;
     }
 
-    public async Task<Session> CreateSessionAsync(User user)
+    public async Task<Session> CreateSessionAsync(User user, Application application)
     => await Task.Run(async () =>
     {
         Session session = new()
@@ -22,7 +22,8 @@ public class SessionServices : ISessionRules, IDisposable
             ExpireDate = DateTime.Now.AddDays(30),
             Key = "I-Authentication",
             Value = Guid.NewGuid().ToString().CreateSHA256(),
-            UserId = user.Id
+            UserId = user.Id,
+            ApplicationId = application.Id,
         };
         return await _sessionCrud.InsertAsync(session) ? session : null;
     });

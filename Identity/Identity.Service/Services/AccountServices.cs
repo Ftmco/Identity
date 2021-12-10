@@ -14,13 +14,15 @@ public class AccountServices : IAccountRules, IDisposable
 
     private readonly IBaseRules<User> _userCrud;
 
+    private readonly IBaseRules<Application> _applicationCrud;
+
     private readonly ISessionRules _session;
 
-
-    public AccountServices(IBaseRules<User> userCrud, ISessionRules session)
+    public AccountServices(IBaseRules<User> userCrud, ISessionRules session, IBaseRules<Application> applicationCrud)
     {
         _userCrud = userCrud;
         _session = session;
+        _applicationCrud = applicationCrud;
     }
 
     public Task<ChangePasswordStatus> ChangePasswordAsync(ChangePasswordViewModel changePassword)
@@ -61,23 +63,34 @@ public class AccountServices : IAccountRules, IDisposable
     public async Task<LoginResponse> LoginAsync(LoginViewModel login)
         => await Task.Run(async () =>
         {
-            User user = await GetUserAsync(login.UserName);
-            if (user != null)
+            Application application = await GetApplicationAsync(login.Application);
+            if (application != null)
             {
-                if (await CheckPasswordAsync(user, login.Password))
+                User user = await GetUserAsync(login.UserName);
+                if (user != null)
                 {
-                    Session session = await _session.CreateSessionAsync(user);
-                    return session != null ?
-                        new LoginResponse(LoginStatus.Success, new(session.Key, session.Value, session.ExpireDate)) :
-                            new LoginResponse(LoginStatus.Exception, null);
+                    if (await CheckPasswordAsync(user, login.Password))
+                    {
+                        Session session = await _session.CreateSessionAsync(user,application);
+                        return session != null ?
+                            new LoginResponse(LoginStatus.Success, new(session.Key, session.Value, session.ExpireDate)) :
+                                new LoginResponse(LoginStatus.Exception, null);
+                    }
+                    return new LoginResponse(LoginStatus.UserNotFound, null);
                 }
                 return new LoginResponse(LoginStatus.UserNotFound, null);
             }
-            return new LoginResponse(LoginStatus.UserNotFound, null);
+            return new LoginResponse(LoginStatus.ApplicationNotFound, null);
         });
 
     public Task<SignUpResponse> SignUpAsync(SignUpViewModel signUp)
     {
         throw new NotImplementedException();
     }
+
+    public async Task<Application> GetApplicationAsync(ApplicationRequest application)
+            => await Task.Run(async () =>
+               await _applicationCrud.GetOneAsync(app =>
+                   app.ApiKey == application.ApiKey &&
+                       app.Password == application.Password.CreateSHA256()));
 }

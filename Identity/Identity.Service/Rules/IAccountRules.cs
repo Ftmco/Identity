@@ -12,10 +12,12 @@ public interface IAccountRules
 
     Task<User> GetUserAsync(string userName);
 
-    Task<bool> CheckPasswordAsync(User user,string password);
+    Task<bool> CheckPasswordAsync(User user, string password);
 
-    Task<bool> CheckPasswordAsync(string userName,string password);
+    Task<bool> CheckPasswordAsync(string userName, string password);
 
     Task<ChangePasswordStatus> ChangePasswordAsync(ChangePasswordViewModel changePassword);
+
+    Task<Application> GetApplicationAsync(ApplicationRequest application);
 }
 

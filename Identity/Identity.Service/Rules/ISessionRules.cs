@@ -6,5 +6,5 @@ public interface ISessionRules
 {
     Task<Session> GetSessionAsync(HttpContext context);
 
-    Task<Session> CreateSessionAsync(User user);
+    Task<Session> CreateSessionAsync(User user,Application application);
 }

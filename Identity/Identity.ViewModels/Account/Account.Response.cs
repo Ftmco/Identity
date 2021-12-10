@@ -18,7 +18,8 @@ public enum LoginStatus
 {
     Success = 0,
     UserNotFound = 1,
-    Exception = 2
+    Exception = 2,
+    ApplicationNotFound = 3
 }
 
 public enum ChangePasswordStatus

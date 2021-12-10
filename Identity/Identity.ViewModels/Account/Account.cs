@@ -1,7 +1,9 @@
-﻿namespace Identity.ViewModels.Account;
+﻿using Identity.ViewModels.Application;
 
-public record SignUpViewModel(string UserName, string FullName, string Password, string? Email, string? MobileNo);
+namespace Identity.ViewModels.Account;
 
-public record LoginViewModel(string UserName,string Password);
+public record SignUpViewModel(string UserName, string FullName, string Password, string? Email, string? MobileNo, ApplicationRequest? Application);
 
-public record ChangePasswordViewModel(string CurrentPassword,string NewPassword);
+public record LoginViewModel(string UserName, string Password, ApplicationRequest? Application);
+
+public record ChangePasswordViewModel(string CurrentPassword, string NewPassword, ApplicationRequest? Application);

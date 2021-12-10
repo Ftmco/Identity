@@ -20,7 +20,7 @@ public class ApplicationServices : IApplicationRules, IDisposable
      => await Task.FromResult(applications.Select(app => CreateApplicationViewModelAsync(app).Result));
 
     public async Task<ApplicationViewModel> CreateApplicationViewModelAsync(Application application)
-        => await Task.Run(() => new ApplicationViewModel(application.Name, application.Image, application.ApiKey));
+        => await Task.Run(() => new ApplicationViewModel(application.Id, application.Name, application.Image, application.ApiKey));
 
     public void Dispose()
     {
@@ -30,11 +30,11 @@ public class ApplicationServices : IApplicationRules, IDisposable
     public async Task<GetApplicationsResponse> GetApplcationsAsync(int page, int count, HttpContext context)
      => await Task.Run(async () =>
      {
-         User? user = await _account.GetUserAsync(context);
-         if (user == null)
+         User user = await _account.GetUserAsync(context);
+         if (user != null)
          {
-             IEnumerable<Application>? userApplications = await _applicationCrud.GetAsync(app => app.OwnerId == user.Id);
-             IEnumerable<ApplicationViewModel>? applicationViewModel = await CreateApplicationViewModelAsync(userApplications);
+             IEnumerable<Application> userApplications = await _applicationCrud.GetAsync(app => app.OwnerId == user.Id);
+             IEnumerable<ApplicationViewModel> applicationViewModel = await CreateApplicationViewModelAsync(userApplications);
              return new GetApplicationsResponse(GetApplicationsStatus.Success, applicationViewModel);
          }
          return new GetApplicationsResponse(GetApplicationsStatus.UserNotFound, null);
@@ -54,5 +54,7 @@ public class ApplicationServices : IApplicationRules, IDisposable
     {
         throw new NotImplementedException();
     }
+
+   
 }
 
