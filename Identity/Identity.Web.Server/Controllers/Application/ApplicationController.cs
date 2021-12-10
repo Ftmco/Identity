@@ -19,9 +19,9 @@ public class ApplicationController : ControllerBase
         GetApplicationsResponse? applications = await _application.GetApplcationsAsync(page, count, HttpContext);
         return applications.Status switch
         {
-            GetApplicationsStatus.Success => Ok(Success("Applications", "", new { applications.Applications })),
-            GetApplicationsStatus.UserNotFound => Ok(Notfound("User Notfound", "Please Login to See your applications")),
-            GetApplicationsStatus.Exception => Ok(Excetpion("Exception", "Please Try again to get applications")),
+            ActionApplicationsStatus.Success => Ok(Success("Applications", "", new { applications.Applications })),
+            ActionApplicationsStatus.UserNotFound => Ok(Notfound("User Notfound", "Please Login to See your applications")),
+            ActionApplicationsStatus.Exception => Ok(Excetpion("Exception", "Please Try again to get applications")),
             _ => Ok(Excetpion("Exception", "Please Try again to get applications")),
         };
     }
@@ -35,10 +35,24 @@ public class ApplicationController : ControllerBase
         {
             CUApplicationStatus.Success => Ok(Success($"Success To Create Application : {create.Name}", "", new { createApplication.Application })),
             CUApplicationStatus.UserNotFound => Ok(Notfound("User Notfound", "Please Login to See your applications")),
-            CUApplicationStatus.Exception => Ok(Excetpion("Exception", "Please Try again to create applications")),
+            CUApplicationStatus.Exception => Ok(Excetpion("Exception", "Please Try again to create application")),
             CUApplicationStatus.ApplicationNotFound => Ok(Notfound("Application Notfound", "Application is not exist")),
             CUApplicationStatus.ApplicationExist => Ok(AccessDenied("Application Has Exist", $"An application has exist with this name : {create.Name}")),
-            _ => Ok(Excetpion("Exception", "Please Try again to create applications")),
+            _ => Ok(Excetpion("Exception", "Please Try again to create application")),  
+        };
+    }
+
+    [HttpPost("Delete")]
+    public async Task<IActionResult> Delete(DeleteApplicationViewModel dApp)
+    {
+        DeleteApplicationResponse? delete = await _application.DeleteApplicationAsync(dApp, HttpContext);
+        return delete.Status switch
+        {
+            ActionApplicationsStatus.Success => Ok(Success($"Success To Delete Application : {delete.AppName}", "", new { delete.Id })),
+            ActionApplicationsStatus.UserNotFound => Ok(Notfound("User Notfound", "Please Login to delete application")),
+            ActionApplicationsStatus.Exception => Ok(Excetpion("Exception", "Please Try again to delete application")),
+            ActionApplicationsStatus.ApplicationNotFound => Ok(Notfound("Application Notfound", "Application is not exist")),
+            _ => Ok(Excetpion("Exception", "Please Try again to delete application")),
         };
     }
 }

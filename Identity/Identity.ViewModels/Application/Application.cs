@@ -7,3 +7,5 @@ public record ApplicationViewModel(Guid Id,string Name, string Image, string Api
 public record ApplicationRequest(string ApiKey,string Password);
 
 public record CUApplicationViewModel(Guid? Id,string Name,string Password,FileBase64ViewModel? File);
+
+public record DeleteApplicationViewModel(Guid Id);

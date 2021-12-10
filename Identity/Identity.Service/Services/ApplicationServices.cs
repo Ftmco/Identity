@@ -55,9 +55,9 @@ public class ApplicationServices : IApplicationRules, IDisposable
          {
              IEnumerable<Application> userApplications = await _applicationCrud.GetAsync(app => app.OwnerId == user.Id);
              IEnumerable<ApplicationViewModel> applicationViewModel = await CreateApplicationViewModelAsync(userApplications);
-             return new GetApplicationsResponse(GetApplicationsStatus.Success, applicationViewModel);
+             return new GetApplicationsResponse(ActionApplicationsStatus.Success, applicationViewModel);
          }
-         return new GetApplicationsResponse(GetApplicationsStatus.UserNotFound, null);
+         return new GetApplicationsResponse(ActionApplicationsStatus.UserNotFound, null);
      });
 
     public Task<GetApplicationsResponse> GetApplcationsAsync(HttpContext context)
@@ -99,5 +99,26 @@ public class ApplicationServices : IApplicationRules, IDisposable
                             Image = img
                         };
                     });
+
+    public async Task<DeleteApplicationResponse> DeleteApplicationAsync(DeleteApplicationViewModel delete, HttpContext httpContext)
+        => await Task.Run(async () =>
+        {
+            User user = await _account.GetUserAsync(httpContext);
+            if (user != null)
+            {
+                Application application = await _applicationCrud.GetOneAsync(app => app.Id == delete.Id && app.OwnerId == user.Id);
+                if (application != null)
+                {
+                    if (await _applicationCrud.DeleteAsync(application))
+                    {
+                        _ = await application.Image.DeleteFileAsync("application");
+                        return new DeleteApplicationResponse(ActionApplicationsStatus.Success, application.Id, application.Name);
+                    }
+                    return new DeleteApplicationResponse(ActionApplicationsStatus.Exception, null, null);
+                }
+                return new DeleteApplicationResponse(ActionApplicationsStatus.ApplicationNotFound, null, null);
+            }
+            return new DeleteApplicationResponse(ActionApplicationsStatus.UserNotFound, null, null);
+        });
 }
 

@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\files\application\" />
     <Folder Include="wwwroot\files\profile\" />
   </ItemGroup>
 

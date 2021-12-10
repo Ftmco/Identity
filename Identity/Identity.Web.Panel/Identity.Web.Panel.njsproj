@@ -111,17 +111,20 @@
     <Content Include="src\assets\logo.svg" />
     <Content Include="src\assets\R.png" />
     <Content Include="src\assets\style\account.css" />
+    <Content Include="src\components\application\cuApplication.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\components\core\AppBar.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\components\core\AppDialog.vue" />
+    <Content Include="src\components\core\ConfirmDialog.vue" />
     <Content Include="src\components\core\TheBottomNavigation.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\components\core\TheLoading.vue" />
     <Content Include="src\components\core\TheNavigation.vue" />
     <Content Include="src\components\core\TheSnackbar.vue" />
-    <Content Include="src\components\HelloWorld.vue" />
-    <Content Include="src\components\Home.vue" />
     <Content Include="src\layouts\homeLayout.vue">
       <SubType>Code</SubType>
     </Content>
@@ -159,6 +162,7 @@
     <Folder Include="src\assets\style\" />
     <Folder Include="src\components\" />
     <Folder Include="src\components\core\" />
+    <Folder Include="src\components\application\" />
     <Folder Include="src\layouts\" />
     <Folder Include="src\constants\" />
     <Folder Include="src\api\" />

@@ -1,6 +1,6 @@
 ﻿namespace Identity.ViewModels.Api;
 
-public record ApiResponse(bool Status, short Code, string? Title, string? message, object Result)
+public record ApiResponse(bool Status, short Code, string? Title, string? Message, object Result)
 {
 
     public static ApiResponse Success(string title, string? message, object result)
