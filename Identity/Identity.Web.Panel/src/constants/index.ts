@@ -13,7 +13,7 @@ export const bottomItems = [
         id: 2,
         title: 'Profile',
         icon: 'mdi-account',
-        to: '/profile'
+        to: '/account/profile'
     }
 ]
 
@@ -34,7 +34,7 @@ export const navigationItems = [
         id: 2,
         title: 'Profile',
         icon: 'mdi-account',
-        to: '/profile'
+        to: '/account/profile'
     }
 ]
 
@@ -44,7 +44,8 @@ export const messages = {
         code: 500,
         title: 'Connection to server faild',
         message: message
-    })
+    }),
+    invalidForm: 'Please fill in all fields'
 }
 
 export const applicationTableHeaders = [
@@ -70,5 +71,11 @@ export const applicationTableHeaders = [
         text: 'Actions',
         align: 'start',
         sortable: false,
+        value:'actions'
     }
 ]
+
+export const rules = {
+    require: (value: string) => !!value || 'Required.',
+    password: (value: string) => !!value && (value.length > 5 || 'Password required more than 6 characters')
+}
