@@ -3,7 +3,7 @@
         <v-list nav dense>
             <v-list-item-group v-model="group"
                                active-class="deep-purple--text text--accent-4">
-                <v-list-item to="/account" v-if="user.isAuthenticated">
+                <v-list-item :to="{name:'Profile'}" v-if="user.isAuthenticated">
                     <v-col align="center">
                         <v-list-item-avatar size="100" color="grey">
                             <v-img :src="user.profile.image" :lazy-src="user.profile.image" />
@@ -32,16 +32,20 @@
 <script lang="ts">
     import Vue from 'vue'
     import { navigationItems } from "@/constants/"
+    import Account from '@/services/account'
+    import AccountServiec from '@/api/service/account.service';
+    import { apiCall } from '@/api';
 
     export default Vue.extend({
         data: () => ({
             drawer: false,
             user: {
-                isAuthenticated: false,
+                isAuthenticated: Account.isAuthenticated(),
                 profile: {},
             },
             items: navigationItems,
-            group: null
+            group: null,
+            accountServices: new AccountServiec(apiCall)
         }),
         created() {
             this.$root.$refs.navigationDrawer = this;
@@ -62,11 +66,11 @@
             //        });
             //    }
             ////},
-            //logOut() {
-            //    AccountApi.logout().then(() => {
-            //        window.location.reload();
-            //    });
-            //},
+            logOut() {
+                this.accountServices.LogOut().then(() => {
+                    window.location = "/account/login"
+                })
+            },
         },
     });
 </script>
