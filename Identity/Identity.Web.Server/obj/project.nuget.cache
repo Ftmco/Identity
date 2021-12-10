@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "3SloQaYonhGDbpiqfMRgI8KLzCUOkJlCS1sBiyLGRRQEw9ri45WBvm4AR4Aqw09xbEXtxG27zKkFQtFALgxw0Q==",
+  "dgSpecHash": "tTwEvHppwKCe6MqKGdofR/uTSVaptTDyXvfB9pmayNCqgUdHI1z4/62c3UGqEJboZopV9/SIn9+1BjsqM70I6A==",
   "success": true,
   "projectFilePath": "D:\\project\\Teams\\FTeam\\Identity\\Identity\\Identity.Web.Server\\Identity.Web.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hooshmand\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Hooshmand\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\Hooshmand\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\Hooshmand\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Hooshmand\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\Hooshmand\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
@@ -51,6 +53,7 @@
     "C:\\Users\\Hooshmand\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\Hooshmand\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
     "C:\\Users\\Hooshmand\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0\\system.text.encoding.codepages.4.7.0.nupkg.sha512",
+    "C:\\Users\\Hooshmand\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512",
     "C:\\Users\\Hooshmand\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
   "logs": []

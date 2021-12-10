@@ -66,3 +66,5 @@ D:\project\Teams\FTeam\Identity\Identity\Identity.Web.Server\bin\Debug\net6.0\Id
 D:\project\Teams\FTeam\Identity\Identity\Identity.Web.Server\bin\Debug\net6.0\Identity.ViewModels.dll
 D:\project\Teams\FTeam\Identity\Identity\Identity.Web.Server\bin\Debug\net6.0\Identity.Service.pdb
 D:\project\Teams\FTeam\Identity\Identity\Identity.Web.Server\bin\Debug\net6.0\Identity.ViewModels.pdb
+D:\project\Teams\FTeam\Identity\Identity\Identity.Web.Server\bin\Debug\net6.0\Identity.Tools.dll
+D:\project\Teams\FTeam\Identity\Identity\Identity.Web.Server\bin\Debug\net6.0\Identity.Tools.pdb

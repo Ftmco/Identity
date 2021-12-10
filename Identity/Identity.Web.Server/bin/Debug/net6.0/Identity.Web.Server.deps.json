@@ -502,11 +502,17 @@
       "Identity.Service/1.0.0": {
         "dependencies": {
           "Identity.Context": "1.0.0",
+          "Identity.Tools": "1.0.0",
           "Identity.ViewModels": "1.0.0",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0"
         },
         "runtime": {
           "Identity.Service.dll": {}
+        }
+      },
+      "Identity.Tools/1.0.0": {
+        "runtime": {
+          "Identity.Tools.dll": {}
         }
       },
       "Identity.ViewModels/1.0.0": {
@@ -893,6 +899,11 @@
       "sha512": ""
     },
     "Identity.Service/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Identity.Tools/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

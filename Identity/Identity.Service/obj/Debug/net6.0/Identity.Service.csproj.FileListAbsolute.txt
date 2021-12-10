@@ -17,3 +17,5 @@ D:\project\Teams\FTeam\Identity\Identity\Identity.Service\obj\Debug\net6.0\Ident
 D:\project\Teams\FTeam\Identity\Identity\Identity.Service\obj\Debug\net6.0\Identity.Service.dll
 D:\project\Teams\FTeam\Identity\Identity\Identity.Service\obj\Debug\net6.0\ref\Identity.Service.dll
 D:\project\Teams\FTeam\Identity\Identity\Identity.Service\obj\Debug\net6.0\Identity.Service.pdb
+D:\project\Teams\FTeam\Identity\Identity\Identity.Service\bin\Debug\net6.0\Identity.Tools.dll
+D:\project\Teams\FTeam\Identity\Identity\Identity.Service\bin\Debug\net6.0\Identity.Tools.pdb
