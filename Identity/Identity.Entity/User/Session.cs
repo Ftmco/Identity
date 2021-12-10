@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Identity.Entity.User;
+﻿namespace Identity.Entity.User;
 
 public record Session
 {
@@ -17,7 +11,7 @@ public record Session
     [Required]
     public string Value { get; set; }
 
-    
+
     [Required]
     public DateTime CreateDate { get; set; }
 
@@ -26,6 +20,9 @@ public record Session
 
     [Required]
     public Guid UserId { get; set; }
+
+    [Required]
+    public Guid ApplicationId { get; set; }
 
     //Navigation Property
     //Relationships
