@@ -5,6 +5,7 @@
             <router-view />
         </v-main>
         <TheBottomNavigation />
+        <TheSnackbar/>
     </div>
 </template>
 
@@ -12,12 +13,14 @@
     import Vue from 'vue'
     import AppBar from '@/components/core/AppBar.vue'
     import TheBottomNavigation from '@/components/core/TheBottomNavigation.vue'
+    import TheSnackbar from "@/components/core/TheSnackbar.vue"
 
     export default Vue.extend({
 
         components: {
             AppBar,
-            TheBottomNavigation
+            TheBottomNavigation,
+            TheSnackbar
         },
     })
 </script>
