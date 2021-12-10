@@ -11,4 +11,7 @@ public record ApiResponse(bool Status, short Code, string? Title, string? messag
 
     public static ApiResponse Notfound(string? title, string? message)
         => new(false, 404, title, message, new { });
+
+    public static ApiResponse AccessDenied(string? title, string? message)
+        => new(false, 403, title, message, new { });
 }
