@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Identity.Entity\Identity.Entity.csproj" />
+    <ProjectReference Include="..\Identity.ViewModels\Identity.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>

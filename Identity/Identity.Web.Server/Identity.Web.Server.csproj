@@ -20,4 +20,9 @@
     <ProjectReference Include="..\Identity.Service\Identity.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\files\application\" />
+    <Folder Include="wwwroot\files\profile\" />
+  </ItemGroup>
+
 </Project>
