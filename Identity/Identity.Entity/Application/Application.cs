@@ -1,4 +1,6 @@
-﻿namespace Identity.Entity.Application;
+﻿using Identity.Entity.User;
+
+namespace Identity.Entity.Application;
 
 public record Application
 {
