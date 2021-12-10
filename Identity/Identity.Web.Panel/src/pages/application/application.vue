@@ -20,8 +20,9 @@
                 </v-text-field>
             </template>
             <template v-slot:item.image="{item}">
-                <v-img :src="item.src"
-                       :lazy-src="item.src" />
+                <v-img :src="item.image"
+                       :lazy-src="item.image"
+                        width="100"/>
             </template>
             <template v-slot:item.actions="{item}">
                 <div>
