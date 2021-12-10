@@ -51,7 +51,7 @@ public class BaseServices<TEntity> : IDisposable, IBaseRules<TEntity> where TEnt
     });
 
     public async Task<bool> DeleteAsync(object id)
-        => await Task.FromResult(await DeleteAsync(await GetAsync(id)));
+        => await Task.FromResult(await DeleteAsync(await GetOneAsync(id)));
 
     public async Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> where)
     => await Task.FromResult(await DeleteAsync(await GetAsync(where)));
@@ -67,8 +67,12 @@ public class BaseServices<TEntity> : IDisposable, IBaseRules<TEntity> where TEnt
     public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> where)
         => await Task.FromResult(await _dbSet.Where(where).ToListAsync());
 
-    public async Task<TEntity> GetAsync(object id)
+    public async Task<TEntity> GetOneAsync(Expression<Func<TEntity, bool>> where)
+      => await Task.FromResult(await _dbSet.FirstOrDefaultAsync(where));
+
+    public async Task<TEntity> GetOneAsync(object id)
         => await Task.FromResult(await _dbSet.FindAsync(id));
+
 
     public async Task<bool> InsertAsync(TEntity entity)
         => await Task.Run(async () =>
