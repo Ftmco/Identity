@@ -7,10 +7,6 @@ public interface IApplicationRules
     Task<IEnumerable<ApplicationViewModel>> CreateApplicationViewModelAsync(IEnumerable<Application> applications);
 
     Task<ApplicationViewModel> CreateApplicationViewModelAsync(Application application);
-        
-    Task GetApplicationAsync(Guid appId,HttpContext context);
 
-    Task GetApplicationAsync(string apiKey);
-
-    Task GetApplicationAsync(string apiKey,HttpContext context);
+    Task<CUApplicationResponse> CreateApplicationAsync(CUApplicationViewModel application,HttpContext context);
 }
