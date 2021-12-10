@@ -14,9 +14,13 @@ public class AccountServices : IAccountRules, IDisposable
 
     private readonly IBaseRules<User> _userCrud;
 
-    public AccountServices(IBaseRules<User> userCrud)
+    private readonly ISessionRules _session;
+
+
+    public AccountServices(IBaseRules<User> userCrud, ISessionRules session)
     {
         _userCrud = userCrud;
+        _session = session;
     }
 
     public Task<ChangePasswordStatus> ChangePasswordAsync(ChangePasswordViewModel changePassword)
@@ -27,14 +31,14 @@ public class AccountServices : IAccountRules, IDisposable
     public async Task<bool> CheckPasswordAsync(User user, string password)
         => await Task.Run(async () =>
         {
-            string? hashPassword = await password.CreateSHA256Async();
+            string hashPassword = await password.CreateSHA256Async();
             return user.Password == hashPassword;
         });
 
     public async Task<bool> CheckPasswordAsync(string userName, string password)
     => await Task.Run(async () =>
     {
-        User? user = await GetUserAsync(userName);
+        User user = await GetUserAsync(userName);
         return await CheckPasswordAsync(user, password);
     });
 
@@ -43,10 +47,12 @@ public class AccountServices : IAccountRules, IDisposable
         GC.SuppressFinalize(this);
     }
 
-    public Task<User> GetUserAsync(HttpContext context)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<User> GetUserAsync(HttpContext context)
+     => await Task.Run(async () =>
+     {
+         Session session = await _session.GetSessionAsync(context);
+         return session != null ? await _userCrud.GetOneAsync(u => u.Id == session.UserId) : default;
+     });
 
     public async Task<User> GetUserAsync(string userName)
          => await Task.Run(async () =>
@@ -55,12 +61,15 @@ public class AccountServices : IAccountRules, IDisposable
     public async Task<LoginResponse> LoginAsync(LoginViewModel login)
         => await Task.Run(async () =>
         {
-            User? user = await GetUserAsync(login.UserName);
+            User user = await GetUserAsync(login.UserName);
             if (user != null)
             {
                 if (await CheckPasswordAsync(user, login.Password))
                 {
-
+                    Session session = await _session.CreateSessionAsync(user);
+                    return session != null ?
+                        new LoginResponse(LoginStatus.Success, new(session.Key, session.Value, session.ExpireDate)) :
+                            new LoginResponse(LoginStatus.Exception, null);
                 }
                 return new LoginResponse(LoginStatus.UserNotFound, null);
             }
