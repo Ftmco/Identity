@@ -5,7 +5,7 @@ public record SignUpResponse(SignUpStatus Status, User User);
 
 public record LoginResponse(LoginStatus Status, SessionViewModel? Session);
 
-public record SessionViewModel(string Key, string Value);
+public record SessionViewModel(string Key, string Value,DateTime ExpireDate);
 
 public enum SignUpStatus
 {
