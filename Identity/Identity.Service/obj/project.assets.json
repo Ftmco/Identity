@@ -2,6 +2,31 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Features": "2.2.0",
+          "System.Text.Encodings.Web": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Http.Features/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.5.0": {
         "type": "package",
         "compile": {
@@ -577,6 +602,15 @@
           }
         }
       },
+      "System.Text.Encodings.Web/4.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
+        }
+      },
       "System.Windows.Extensions/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -621,6 +655,16 @@
           "bin/placeholder/Identity.Entity.dll": {}
         }
       },
+      "Identity.Tools/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Identity.Tools.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Identity.Tools.dll": {}
+        }
+      },
       "Identity.ViewModels/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -637,6 +681,32 @@
     }
   },
   "libraries": {
+    "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
+      "sha512": "Nxs7Z1q3f1STfLYKJSVXCs1iBl+Ya6E8o4Oy1bCxJ/rNI44E/0f6tbsrVqAWfB7jlnJfyaAtIalBVxPKUPQb4Q==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.http.abstractions/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.xml",
+        "microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.http.abstractions.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Http.Features/2.2.0": {
+      "sha512": "ziFz5zH8f33En4dX81LW84I6XrYXKf9jg6aM39cM+LffN9KJahViKZ61dGMSO2gd3e+qe5yBRwsesvyqlZaSMg==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.http.features/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.xml",
+        "microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.http.features.nuspec"
+      ]
+    },
     "Microsoft.CSharp/4.5.0": {
       "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
       "type": "package",
@@ -1777,6 +1847,25 @@
         "version.txt"
       ]
     },
+    "System.Text.Encodings.Web/4.5.0": {
+      "sha512": "Xg4G4Indi4dqP1iuAiMSwpiWS54ZghzR644OtsRCm/m/lBMG8dUBhLVN7hLm8NNrNTR+iGbshCPTwrvxZPlm4g==",
+      "type": "package",
+      "path": "system.text.encodings.web/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netstandard1.0/System.Text.Encodings.Web.dll",
+        "lib/netstandard1.0/System.Text.Encodings.Web.xml",
+        "lib/netstandard2.0/System.Text.Encodings.Web.dll",
+        "lib/netstandard2.0/System.Text.Encodings.Web.xml",
+        "system.text.encodings.web.4.5.0.nupkg.sha512",
+        "system.text.encodings.web.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Windows.Extensions/4.7.0": {
       "sha512": "CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
       "type": "package",
@@ -1808,6 +1897,11 @@
       "path": "../Identity.Entity/Identity.Entity.csproj",
       "msbuildProject": "../Identity.Entity/Identity.Entity.csproj"
     },
+    "Identity.Tools/1.0.0": {
+      "type": "project",
+      "path": "../Identity.Tools/Identity.Tools.csproj",
+      "msbuildProject": "../Identity.Tools/Identity.Tools.csproj"
+    },
     "Identity.ViewModels/1.0.0": {
       "type": "project",
       "path": "../Identity.ViewModels/Identity.ViewModels.csproj",
@@ -1817,7 +1911,9 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Identity.Context >= 1.0.0",
-      "Identity.ViewModels >= 1.0.0"
+      "Identity.Tools >= 1.0.0",
+      "Identity.ViewModels >= 1.0.0",
+      "Microsoft.AspNetCore.Http.Abstractions >= 2.2.0"
     ]
   },
   "packageFolders": {
@@ -1856,6 +1952,9 @@
             "D:\\project\\Teams\\FTeam\\Identity\\Identity\\Identity.Context\\Identity.Context.csproj": {
               "projectPath": "D:\\project\\Teams\\FTeam\\Identity\\Identity\\Identity.Context\\Identity.Context.csproj"
             },
+            "D:\\project\\Teams\\FTeam\\Identity\\Identity\\Identity.Tools\\Identity.Tools.csproj": {
+              "projectPath": "D:\\project\\Teams\\FTeam\\Identity\\Identity\\Identity.Tools\\Identity.Tools.csproj"
+            },
             "D:\\project\\Teams\\FTeam\\Identity\\Identity\\Identity.ViewModels\\Identity.ViewModels.csproj": {
               "projectPath": "D:\\project\\Teams\\FTeam\\Identity\\Identity\\Identity.ViewModels\\Identity.ViewModels.csproj"
             }
@@ -1871,6 +1970,12 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Abstractions": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

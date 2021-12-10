@@ -9,19 +9,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Base", "Data Base", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{CEB42054-CCDC-47E1-BB1A-0338813EF697}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Web.Server", "Identity.Web.Server\Identity.Web.Server.csproj", "{90AF8E61-F1D0-4789-B81D-5715936B5C3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Web.Server", "Identity.Web.Server\Identity.Web.Server.csproj", "{90AF8E61-F1D0-4789-B81D-5715936B5C3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Context", "Identity.Context\Identity.Context.csproj", "{A24F1902-C420-45FC-8BA6-973AC53F9A57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Context", "Identity.Context\Identity.Context.csproj", "{A24F1902-C420-45FC-8BA6-973AC53F9A57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Entity", "Identity.Entity\Identity.Entity.csproj", "{8D9C31B7-0325-47E3-934D-D1826DCE7633}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Entity", "Identity.Entity\Identity.Entity.csproj", "{8D9C31B7-0325-47E3-934D-D1826DCE7633}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{C8294E93-971C-48C5-9364-034EF4654B47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Service", "Identity.Service\Identity.Service.csproj", "{5F7529B9-D476-477D-A934-24A1C27A2DB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Service", "Identity.Service\Identity.Service.csproj", "{5F7529B9-D476-477D-A934-24A1C27A2DB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.ViewModels", "Identity.ViewModels\Identity.ViewModels.csproj", "{227EBBB8-B977-4EF9-891E-90D3B09B1FF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.ViewModels", "Identity.ViewModels\Identity.ViewModels.csproj", "{227EBBB8-B977-4EF9-891E-90D3B09B1FF7}"
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Identity.Web.Panel", "Identity.Web.Panel\Identity.Web.Panel.njsproj", "{0BFC2FA2-F3F3-47CC-A27E-D5E9E06F6228}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Tools", "Identity.Tools\Identity.Tools.csproj", "{1B09DAC6-D442-49D6-9246-5567F9695614}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{0BFC2FA2-F3F3-47CC-A27E-D5E9E06F6228}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BFC2FA2-F3F3-47CC-A27E-D5E9E06F6228}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BFC2FA2-F3F3-47CC-A27E-D5E9E06F6228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B09DAC6-D442-49D6-9246-5567F9695614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B09DAC6-D442-49D6-9246-5567F9695614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B09DAC6-D442-49D6-9246-5567F9695614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B09DAC6-D442-49D6-9246-5567F9695614}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{5F7529B9-D476-477D-A934-24A1C27A2DB0} = {C8294E93-971C-48C5-9364-034EF4654B47}
 		{227EBBB8-B977-4EF9-891E-90D3B09B1FF7} = {E059DA73-8C85-4261-8787-3B93D13A8548}
 		{0BFC2FA2-F3F3-47CC-A27E-D5E9E06F6228} = {CEB42054-CCDC-47E1-BB1A-0338813EF697}
+		{1B09DAC6-D442-49D6-9246-5567F9695614} = {C8294E93-971C-48C5-9364-034EF4654B47}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1FB1441-2977-4A50-843A-E73DAAB73AEE}

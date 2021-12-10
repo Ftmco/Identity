@@ -91,6 +91,12 @@
     <Content Include="src\layouts\homeLayout.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\pages\application\application.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\pages\home\index.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -105,11 +111,18 @@
     <Folder Include="public\img\" />
     <Folder Include="public\img\icons\" />
     <Folder Include="src\" />
+    <Folder Include="src\api\models\" />
+    <Folder Include="src\api\service\" />
+    <Folder Include="src\api\rules\" />
     <Folder Include="src\assets\" />
     <Folder Include="src\components\" />
     <Folder Include="src\components\core\" />
     <Folder Include="src\layouts\" />
+    <Folder Include="src\constants\" />
+    <Folder Include="src\api\" />
     <Folder Include="src\pages\" />
+    <Folder Include="src\pages\home\" />
+    <Folder Include="src\pages\application\" />
     <Folder Include="src\store\" />
     <Folder Include="src\router\" />
     <Folder Include="src\plugins\" />
@@ -123,6 +136,13 @@
     <Content Include="babel.config.js" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\api\index.ts" />
+    <TypeScriptCompile Include="src\api\models\account.model.ts" />
+    <TypeScriptCompile Include="src\api\rules\account.rule.ts" />
+    <TypeScriptCompile Include="src\api\rules\application.rule.ts" />
+    <TypeScriptCompile Include="src\api\service\account.service.ts" />
+    <TypeScriptCompile Include="src\api\service\application.service.ts" />
+    <TypeScriptCompile Include="src\constants\index.ts" />
     <TypeScriptCompile Include="src\plugins\axios.ts" />
     <TypeScriptCompile Include="src\plugins\vuetify.ts" />
     <TypeScriptCompile Include="src\router\index.ts" />

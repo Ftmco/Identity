@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Identity.Context\Identity.Context.csproj" />
+    <ProjectReference Include="..\Identity.Tools\Identity.Tools.csproj" />
     <ProjectReference Include="..\Identity.ViewModels\Identity.ViewModels.csproj" />
   </ItemGroup>
 
