@@ -37,3 +37,38 @@ export const navigationItems = [
         to: '/profile'
     }
 ]
+
+export const messages = {
+    netWorkError: (message: string) => ({
+        status: false,
+        code: 500,
+        title: 'Connection to server faild',
+        message: message
+    })
+}
+
+export const applicationTableHeaders = [
+    {
+        text: 'Image',
+        align: 'start',
+        sortable: false,
+        value: 'image',
+    },
+    {
+        text: 'Name',
+        align: 'start',
+        sortable: true,
+        value: 'name'
+    },
+    {
+        text: 'Api Key',
+        align: 'start',
+        sortable: true,
+        value: 'apiKey'
+    },
+    {
+        text: 'Actions',
+        align: 'start',
+        sortable: false,
+    }
+]
