@@ -1,6 +1,0 @@
-D:\project\Teams\FTeam\Identity\Identity\Identity Panel\obj\Debug\Identity Panel.njsproj.AssemblyReference.cache
-D:\project\Teams\FTeam\Identity\Identity\Identity Panel\obj\Debug\Identity Panel.njsproj.CoreCompileInputs.cache
-D:\project\Teams\FTeam\Identity\Identity\Identity Panel\bin\Microsoft.NodejsTools.WebRole.dll
-D:\project\Teams\FTeam\Identity\Identity\Identity.Web.Panel\obj\Debug\Identity.Web.Panel.njsproj.AssemblyReference.cache
-D:\project\Teams\FTeam\Identity\Identity\Identity.Web.Panel\obj\Debug\Identity.Web.Panel.njsproj.CoreCompileInputs.cache
-D:\project\Teams\FTeam\Identity\Identity\Identity.Web.Panel\bin\Microsoft.NodejsTools.WebRole.dll

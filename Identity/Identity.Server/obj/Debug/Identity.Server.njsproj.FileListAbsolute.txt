@@ -1,3 +1,0 @@
-D:\project\Teams\FTeam\Identity\Identity\Identity.Server\obj\Debug\Identity.Server.njsproj.AssemblyReference.cache
-D:\project\Teams\FTeam\Identity\Identity\Identity.Server\obj\Debug\Identity.Server.njsproj.CoreCompileInputs.cache
-D:\project\Teams\FTeam\Identity\Identity\Identity.Server\bin\Microsoft.NodejsTools.WebRole.dll
