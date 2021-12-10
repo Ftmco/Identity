@@ -4,10 +4,24 @@
 [ApiController]
 public class AccountController : ControllerBase
 {
-    [HttpPost("Login")]
-    public async Task<IActionResult> Login()
+    private readonly IAccountRules _account;
+
+    public AccountController(IAccountRules account)
     {
-        return Ok();
+        _account = account;
+    }
+
+    [HttpPost("Login")]
+    public async Task<IActionResult> Login(LoginViewModel login)
+    {
+        LoginResponse loginResult = await _account.LoginAsync(login);
+        return loginResult.Status switch
+        {
+            LoginStatus.Success => Ok(Success("Success","Login Successfully",loginResult.Session)),
+            LoginStatus.UserNotFound => Ok(Notfound("User Not Found","Wrong UserName or Password")),
+            LoginStatus.Exception => Ok(Excetpion("Exception","Please Try Again To Login")),
+            _ => Ok(Excetpion("Exception", "Please Try Again To Login")),
+        };
     }
 
     [HttpPost("SignUp")]
