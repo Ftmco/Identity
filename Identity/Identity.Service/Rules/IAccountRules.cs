@@ -8,6 +8,8 @@ public interface IAccountRules
 
     Task<User> GetUserAsync(HttpContext context);
 
+    Task<User> GetUserFromAuthTokenAsync(Session session);
+
     Task<User> GetUserAsync(string userName);
 
     Task<bool> CheckPasswordAsync(User user, string password);
@@ -17,5 +19,9 @@ public interface IAccountRules
     Task<ChangePasswordStatus> ChangePasswordAsync(ChangePasswordViewModel changePassword,HttpContext context);
 
     Task<Application> GetApplicationAsync(ApplicationRequest application);
+
+    Task<IEnumerable<UserViewModel>> CreateUserViewModelAsync(IEnumerable<User> users);
+
+    Task<UserViewModel> CreateUserViewModelAsync(User user);
 }
 

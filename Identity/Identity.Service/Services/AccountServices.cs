@@ -58,7 +58,7 @@ public class AccountServices : IAccountRules, IDisposable
      => await Task.Run(async () =>
      {
          Session session = await _session.GetSessionAsync(context);
-         return session != null ? await _userCrud.GetOneAsync(u => u.Id == session.UserId) : default;
+         return await GetUserFromAuthTokenAsync(session);
      });
 
     public async Task<User> GetUserAsync(string userName)
@@ -125,4 +125,21 @@ public class AccountServices : IAccountRules, IDisposable
             RegisterDate = DateTime.Now,
             UserName = signUp.UserName
         };
+
+    public async Task<User> GetUserFromAuthTokenAsync(Session session)
+        => await Task.Run(async () =>
+            session != null ? await _userCrud.GetOneAsync(u => u.Id == session.UserId) : default);
+
+    public async Task<IEnumerable<UserViewModel>> CreateUserViewModelAsync(IEnumerable<User> users)
+        => await Task.Run(() => users.Select(u => CreateUserViewModelAsync(u).Result));
+
+    public async Task<UserViewModel> CreateUserViewModelAsync(User user)
+            => await Task.Run(() => new UserViewModel(
+                Id: user.Id,
+                UserName: user.UserName,
+                FullName: user.FullName,
+                Email: user.Email,
+                MobileNo: user.MobileNo,
+                RegisterDate: user.RegisterDate
+                ));
 }
