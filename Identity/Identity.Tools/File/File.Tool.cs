@@ -34,7 +34,7 @@ public static class FileExtensions
         });
 
     public static string CreateFileAddress(this string fileName, string path)
-        => $"https://localhost:44343/files/{path}/{fileName}";
+        => $"https://localhost:7130/files/{path}/{fileName}";
 
     public static async Task<bool> DeleteFileAsync(this string fileName, string path)
         => await Task.Run(() =>
