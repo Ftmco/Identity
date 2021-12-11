@@ -7,3 +7,6 @@ global using Microsoft.AspNetCore.Http;
 global using Identity.ViewModels.Application;
 global using Identity.Entity.Application;
 global using Identity.Tools.Hash;
+global using Identity.Entity.User;
+global using Identity.Service.Rules;
+global using Identity.Services.Base;
