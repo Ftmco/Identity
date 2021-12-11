@@ -38,9 +38,25 @@ public class ApplicationController : ControllerBase
             CUApplicationStatus.Exception => Ok(Excetpion("Exception", "Please Try again to create application")),
             CUApplicationStatus.ApplicationNotFound => Ok(Notfound("Application Notfound", "Application is not exist")),
             CUApplicationStatus.ApplicationExist => Ok(AccessDenied("Application Has Exist", $"An application has exist with this name : {create.Name}")),
-            _ => Ok(Excetpion("Exception", "Please Try again to create application")),  
+            _ => Ok(Excetpion("Exception", "Please Try again to create application")),
         };
     }
+
+    [HttpPost("Update")]
+    public async Task<IActionResult> Update(CUApplicationViewModel update)
+    {
+        CUApplicationResponse? updateApplicatin = await _application.UpdateApplicationAsync(update, HttpContext);
+        return updateApplicatin.Status switch
+        {
+            CUApplicationStatus.Success => Ok(Success($"Success To Update Application : {updateApplicatin.Application.Name}", "", new { updateApplicatin.Application })),
+            CUApplicationStatus.UserNotFound => Ok(Notfound("User Notfound", "Please Login to update application")),
+            CUApplicationStatus.Exception => Ok(Excetpion("Exception", "Please Try again to update application")),
+            CUApplicationStatus.ApplicationNotFound => Ok(Notfound("Application Notfound", "Application is not exist")),
+            CUApplicationStatus.ApplicationExist => Ok(AccessDenied("Application Has Exist", $"An application has exist with this name : {update.Name}")),
+            _ => Ok(Excetpion("Exception", "Please Try again to update application")),
+        };
+    }
+
 
     [HttpPost("Delete")]
     public async Task<IActionResult> Delete(DeleteApplicationViewModel dApp)
