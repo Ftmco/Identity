@@ -13,4 +13,6 @@ public interface IApplicationRules
     Task<CUApplicationResponse> UpdateApplicationAsync(CUApplicationViewModel application,HttpContext context);
 
     Task<DeleteApplicationResponse> DeleteApplicationAsync(DeleteApplicationViewModel delete,HttpContext httpContext);
+
+    Task<GetApplicationUsersResponse> GetUsersAsync(ApplicationRequest application);
 }

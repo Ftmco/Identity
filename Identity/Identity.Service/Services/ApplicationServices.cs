@@ -10,12 +10,18 @@ public class ApplicationServices : IApplicationRules, IDisposable
 {
     private readonly IBaseRules<Application> _applicationCrud;
 
+    private readonly IBaseRules<User> _userCrud;
+
     private readonly IAccountRules _account;
 
-    public ApplicationServices(IBaseRules<Application> applicationCrud, IAccountRules account)
+    private readonly ISessionRules _session;
+
+    public ApplicationServices(IBaseRules<Application> applicationCrud, IAccountRules account, ISessionRules session, IBaseRules<User> userCrud)
     {
         _applicationCrud = applicationCrud;
         _account = account;
+        _session = session;
+        _userCrud = userCrud;
     }
 
     public async Task<CUApplicationResponse> CreateApplicationAsync(CUApplicationViewModel application, HttpContext context)
@@ -152,5 +158,23 @@ public class ApplicationServices : IApplicationRules, IDisposable
                 }
                 return new CUApplicationResponse(CUApplicationStatus.UserNotFound, null);
             });
+
+    public async Task<GetApplicationUsersResponse> GetUsersAsync(ApplicationRequest application)
+        => await Task.Run(async () =>
+        {
+            Application app = await _applicationCrud.GetOneAsync(a => a.ApiKey == application.ApiKey && a.Password == application.Password.CreateSHA256());
+            if (app != null)
+            {
+                IEnumerable<Session> appSessions = await _session.GetApplicationSessionAsync(app);
+                IEnumerable<IGrouping<Guid, Session>> groupSessions = appSessions.GroupBy(s => s.UserId);
+                List<User> users = new();
+                foreach (var gs in groupSessions)
+                    users.Add(await _userCrud.GetOneAsync(gs.Key));
+
+                return new GetApplicationUsersResponse(GetApplicationUsersStatus.Success, await _account.CreateUserViewModelAsync(users));
+
+            }
+            return new GetApplicationUsersResponse(GetApplicationUsersStatus.ApplicationNotFound, null);
+        });
 }
 

@@ -71,5 +71,18 @@ public class ApplicationController : ControllerBase
             _ => Ok(Excetpion("Exception", "Please Try again to delete application")),
         };
     }
+
+    [HttpPost("GetUsers")]
+    public async Task<IActionResult> GetUsers(ApplicationRequest application)
+    {
+        GetApplicationUsersResponse? users = await _application.GetUsersAsync(application);
+        return users.Status switch
+        {
+            GetApplicationUsersStatus.Success => Ok(Success("User Applications", "", new { users.Users })),
+            GetApplicationUsersStatus.ApplicationNotFound => Ok(Notfound("Application Notfound", "")),
+            GetApplicationUsersStatus.Exception => Ok(Excetpion("Exception", "Please Try again to get application users")),
+            _ => Ok(Excetpion("Exception", "Please Try again to get application users")),
+        };
+    }
 }
 
