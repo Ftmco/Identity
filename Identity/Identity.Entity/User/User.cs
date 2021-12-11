@@ -27,6 +27,9 @@ public record User
 
     public string MobileNo { get; set; }
 
+    [Required]
+    public DateTime RegisterDate { get; set; }
+
     //Navigation Property
     //Relationships
 
