@@ -35,6 +35,13 @@ export const navigationItems = [
         title: 'Profile',
         icon: 'mdi-account',
         to: '/account/profile'
+    },
+
+    {
+        id: 3,
+        title: 'Docs',
+        icon: 'mdi-newspaper-variant-outline',
+        to: 'docs'
     }
 ]
 
@@ -71,7 +78,7 @@ export const applicationTableHeaders = [
         text: 'Actions',
         align: 'start',
         sortable: false,
-        value:'actions'
+        value: 'actions'
     }
 ]
 
