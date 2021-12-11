@@ -10,5 +10,7 @@ public interface IApplicationRules
 
     Task<CUApplicationResponse> CreateApplicationAsync(CUApplicationViewModel application,HttpContext context);
 
+    Task<CUApplicationResponse> UpdateApplicationAsync(CUApplicationViewModel application,HttpContext context);
+
     Task<DeleteApplicationResponse> DeleteApplicationAsync(DeleteApplicationViewModel delete,HttpContext httpContext);
 }
