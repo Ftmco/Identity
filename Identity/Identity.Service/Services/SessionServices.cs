@@ -1,8 +1,4 @@
-﻿using Identity.Entity.User;
-using Identity.Service.Rules;
-using Identity.Services.Base;
-
-namespace Identity.Service.Services;
+﻿namespace Identity.Service.Services;
 
 public class SessionServices : ISessionRules, IDisposable
 {
@@ -33,10 +29,19 @@ public class SessionServices : ISessionRules, IDisposable
         GC.SuppressFinalize(this);
     }
 
+    public async Task<IEnumerable<Session>> GetApplicationSessionAsync(Guid appId)
+        => await Task.Run(async () => await _sessionCrud.GetAsync(s => s.ApplicationId == appId));
+
+    public async Task<IEnumerable<Session>> GetApplicationSessionAsync(Application application)
+        => await Task.FromResult(await GetApplicationSessionAsync(application.Id));
+
     public async Task<Session> GetSessionAsync(HttpContext context)
             => await Task.Run(async () =>
             {
                 string value = context.Request.Headers["I-Authentication"].ToString();
                 return !string.IsNullOrEmpty(value) ? await _sessionCrud.GetOneAsync(s => s.Value == value) : null;
             });
+
+    public async Task<Session> GetSessionAsync(string value)
+        => await Task.FromResult(await _sessionCrud.GetOneAsync(s => s.Value == value));
 }
