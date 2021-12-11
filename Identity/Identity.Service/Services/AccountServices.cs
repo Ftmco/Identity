@@ -1,11 +1,4 @@
-﻿using Identity.Entity.User;
-using Identity.Service.Rules;
-using Identity.Services.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Identity.Tools.Code;
 
 namespace Identity.Service.Services;
 
@@ -25,10 +18,22 @@ public class AccountServices : IAccountRules, IDisposable
         _applicationCrud = applicationCrud;
     }
 
-    public Task<ChangePasswordStatus> ChangePasswordAsync(ChangePasswordViewModel changePassword)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<ChangePasswordStatus> ChangePasswordAsync(ChangePasswordViewModel changePassword, HttpContext context)
+        => await Task.Run(async () =>
+        {
+            User user = await GetUserAsync(context);
+            if (user != null)
+            {
+                if (await CheckPasswordAsync(user, changePassword.CurrentPassword))
+                {
+                    user.Password = await changePassword.NewPassword.CreateSHA256Async();
+                    return await _userCrud.UpdateAsync(user) ?
+                        ChangePasswordStatus.Success : ChangePasswordStatus.Exception;
+                }
+                return ChangePasswordStatus.WrongPassword;
+            }
+            return ChangePasswordStatus.UserNotFound;
+        });
 
     public async Task<bool> CheckPasswordAsync(User user, string password)
         => await Task.Run(async () =>
@@ -71,7 +76,7 @@ public class AccountServices : IAccountRules, IDisposable
                 {
                     if (await CheckPasswordAsync(user, login.Password))
                     {
-                        Session session = await _session.CreateSessionAsync(user,application);
+                        Session session = await _session.CreateSessionAsync(user, application);
                         return session != null ?
                             new LoginResponse(LoginStatus.Success, new(session.Key, session.Value, session.ExpireDate)) :
                                 new LoginResponse(LoginStatus.Exception, null);
@@ -83,14 +88,41 @@ public class AccountServices : IAccountRules, IDisposable
             return new LoginResponse(LoginStatus.ApplicationNotFound, null);
         });
 
-    public Task<SignUpResponse> SignUpAsync(SignUpViewModel signUp)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<SignUpResponse> SignUpAsync(SignUpViewModel signUp)
+            => await Task.Run(async () =>
+            {
+                User checkUserName = await GetUserAsync(signUp.UserName);
+                if (checkUserName != null)
+                    return new SignUpResponse(SignUpStatus.UserExist, null);
+                User checkMobile = await GetUserAsync(signUp.MobileNo);
+                if (checkUserName != null)
+                    return new SignUpResponse(SignUpStatus.UserExist, null);
+                User checkEmail = await GetUserAsync(signUp.Email);
+                if (checkUserName != null)
+                    return new SignUpResponse(SignUpStatus.UserExist, null);
+
+                User newUser = CreateUser(signUp);
+                return await _userCrud.InsertAsync(newUser) ?
+                    new SignUpResponse(SignUpStatus.Success, newUser) :
+                        new SignUpResponse(SignUpStatus.Exception, null);
+            });
 
     public async Task<Application> GetApplicationAsync(ApplicationRequest application)
             => await Task.Run(async () =>
                await _applicationCrud.GetOneAsync(app =>
                    app.ApiKey == application.ApiKey &&
                        app.Password == application.Password.CreateSHA256()));
+
+    private static User CreateUser(SignUpViewModel signUp)
+        => new()
+        {
+            ActiveCode = 6.CreateCode(),
+            Email = signUp.Email,
+            FullName = signUp.FullName,
+            IsActive = false,
+            MobileNo = signUp.MobileNo,
+            Password = signUp.Password.CreateSHA256(),
+            RegisterDate = DateTime.Now,
+            UserName = signUp.UserName
+        };
 }
