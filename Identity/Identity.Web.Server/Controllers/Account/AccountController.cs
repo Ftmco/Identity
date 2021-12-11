@@ -25,9 +25,17 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("SignUp")]
-    public async Task<IActionResult> SignUp()
+    public async Task<IActionResult> SignUp(SignUpViewModel signUp)
     {
-        return Ok();
+        SignUpResponse signUpUser = await _account.SignUpAsync(signUp);
+        return signUpUser.Status switch
+        {
+            SignUpStatus.Success => Ok(Success("Successfully To Create Account", "", new { signUpUser.User })),
+            SignUpStatus.UserExist => Ok(AccessDenied("User Exist", "")),
+            SignUpStatus.Exception => Ok(Excetpion("Exception When Create Account Please Try Agian", "")),
+            SignUpStatus.ApplicationNotFound => Ok(Notfound("Application Notfound","")),
+            _ => Ok(Excetpion("Exception When Create Account Please Try Agian", "")),
+        };
     }
 
     [HttpPost("LogOut")]
@@ -37,9 +45,17 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("ChangePassword")]
-    public async Task<IActionResult> ChangePassword()
+    public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePassword)
     {
-        return Ok();
+        ChangePasswordStatus change = await _account.ChangePasswordAsync(changePassword, HttpContext);
+        return change switch
+        {
+            ChangePasswordStatus.Success => Ok(Success("Succes To Change Password", "", new { })),
+            ChangePasswordStatus.WrongPassword => Ok(AccessDenied("Wrong Password", "")),
+            ChangePasswordStatus.Exception => Ok(Excetpion("Exception To Change Password Please Try Again", "")),
+            ChangePasswordStatus.UserNotFound => Ok(Notfound("User Notfoun", "Please Login To Change Password")),
+            _ => Ok(Excetpion("Exception To Change Password Please Try Again", "")),
+        };
     }
 
     [HttpPost("ForgotPassword")]
