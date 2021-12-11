@@ -7,3 +7,5 @@ public record SignUpViewModel(string UserName, string FullName, string Password,
 public record LoginViewModel(string UserName, string Password, ApplicationRequest? Application);
 
 public record ChangePasswordViewModel(string CurrentPassword, string NewPassword);
+
+public record UserViewModel(Guid Id,string UserName,string FullName,string Email,string MobileNo,DateTime RegisterDate);
