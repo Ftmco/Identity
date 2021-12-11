@@ -1,6 +1,4 @@
-﻿using Identity.Entity.User;
-
-namespace Identity.Service.Rules;
+﻿namespace Identity.Service.Rules;
 
 public interface IAccountRules
 {
@@ -16,7 +14,7 @@ public interface IAccountRules
 
     Task<bool> CheckPasswordAsync(string userName, string password);
 
-    Task<ChangePasswordStatus> ChangePasswordAsync(ChangePasswordViewModel changePassword);
+    Task<ChangePasswordStatus> ChangePasswordAsync(ChangePasswordViewModel changePassword,HttpContext context);
 
     Task<Application> GetApplicationAsync(ApplicationRequest application);
 }
