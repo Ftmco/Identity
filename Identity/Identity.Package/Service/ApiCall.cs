@@ -64,4 +64,15 @@ public class ApiCall : IApiCall, IDisposable
     }
 }
 
-public record ApiResponse(bool Status, short Code, string? Title, string? Message, object Result);
+public record ApiResponseBase
+{
+    public bool Status { get; set; }
+
+    public short Code { get; set; }
+
+    public string Title { get; set; }
+
+    public string Message { get; set; }
+}
+
+public record ApiResponse(object Result) : ApiResponseBase;

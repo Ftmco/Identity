@@ -14,13 +14,24 @@ public static class ApplicationExtensions
         {
             RegisterDependency();
             ApiResponse response = await _apiCall.PostAsync("Application/GetUsers", application);
-            UserResponse data = JsonConvert.DeserializeObject<UserResponse>(response.Result.ToString());
-            return data.Users;
+            if (response.Status)
+            {
+                UserResponse data = JsonConvert.DeserializeObject<UserResponse>(response.Result.ToString());
+                return data.Users;
+            }
+            return null;
         });
 
-    public static async Task UsersAsync(this Application application, int page, int count)
+    public static async Task<IEnumerable<User>> UsersAsync(this Application application, int page, int count)
     {
-
+        RegisterDependency();
+        ApiResponse response = await _apiCall.PostAsync("Application/GetUsers", new { application, page, count });
+        if (response.Status)
+        {
+            UserResponse data = JsonConvert.DeserializeObject<UserResponse>(response.Result.ToString());
+            return data.Users;
+        }
+        return null;
     }
 
     private static void RegisterDependency()

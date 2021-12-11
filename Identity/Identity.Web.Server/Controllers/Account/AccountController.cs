@@ -17,7 +17,7 @@ public class AccountController : ControllerBase
         LoginResponse loginResult = await _account.LoginAsync(login);
         return loginResult.Status switch
         {
-            LoginStatus.Success => Ok(Success("Success", "Login Successfully", new { loginResult.Session })),
+            LoginStatus.Success => Ok(Success("Success", "Login Successfully", new { loginResult.Session.Key, loginResult.Session.Value })),
             LoginStatus.UserNotFound => Ok(Notfound("User Not Found", "Wrong UserName or Password")),
             LoginStatus.Exception => Ok(Excetpion("Exception", "Please Try Again To Login")),
             _ => Ok(Excetpion("Exception", "Please Try Again To Login")),
@@ -33,7 +33,7 @@ public class AccountController : ControllerBase
             SignUpStatus.Success => Ok(Success("Successfully To Create Account", "", new { signUpUser.User })),
             SignUpStatus.UserExist => Ok(AccessDenied("User Exist", "")),
             SignUpStatus.Exception => Ok(Excetpion("Exception When Create Account Please Try Agian", "")),
-            SignUpStatus.ApplicationNotFound => Ok(Notfound("Application Notfound","")),
+            SignUpStatus.ApplicationNotFound => Ok(Notfound("Application Notfound", "")),
             _ => Ok(Excetpion("Exception When Create Account Please Try Agian", "")),
         };
     }
