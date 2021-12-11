@@ -41,6 +41,6 @@ public static class ApplicationExtensions
             ["content-type"] = "application/json",
             ["connection"] = "keep-alive"
         };
-        _apiCall = new ApiCall(_headers, new HttpClient(), "https://localhost:7130/api/");
+        _apiCall = new ApiCall(_headers, new HttpClient(), "https://localhost:5001/api/");
     }
 }
