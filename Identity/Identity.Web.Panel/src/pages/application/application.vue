@@ -49,8 +49,7 @@
 
                             <v-btn outlined
                                    block
-                                   color="info"
-                                  >
+                                   color="info">
                                 <span>App Info</span>
                                 <v-icon>mdi-information-outline</v-icon>
                             </v-btn>
@@ -85,7 +84,7 @@
                        :disagreeText="confirmDialog.disagreeText" />
         <Appdialog :title="dTitle" :titleColor="dColor">
             <template v-slot:body>
-                <component @submit="addApp" v-bind="props" :is="comp">
+                <component @submit="submit" v-bind="props" :is="comp">
 
                 </component>
             </template>
@@ -196,8 +195,11 @@
                 this.props.editApp = item
                 this.$root.$refs.dialog.open()
             },
-            addApp(data: any) {
+            submit(data: any) {
                 this.$root.$refs.dialog.close()
+                if (data.update) {
+                    this.removeItem(data.app.id)
+                }
                 this.applications.push(data.app)
             },
             showMessages(message: string) {
