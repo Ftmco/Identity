@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 import { messages } from "@/constants";
 import IApplicationRule from "../rules/application.rule";
-import { CreateApp } from "../models/application.model";
+import { CreateApp, UpdateApp } from "../models/application.model";
 
 
 export default class ApplicationService implements IApplicationRule {
@@ -33,6 +33,15 @@ export default class ApplicationService implements IApplicationRule {
     async Delete(id: any) {
         try {
             let request = await this._axois.post("Application/Delete", { id: id })
+            return await request.data
+        } catch (e) {
+            return messages.netWorkError(e.message)
+        }
+    }
+
+    async Update(app: UpdateApp) {
+        try {
+            let request = await this._axois.post("Application/Update", app)
             return await request.data
         } catch (e) {
             return messages.netWorkError(e.message)
