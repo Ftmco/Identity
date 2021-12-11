@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.4e902fe1e4c45bbf7ea9d12e5010336e.js"
+  "/precache-manifest.c07f697d51d7e48d53412baa9cce608e.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "Identity.Panel"});
