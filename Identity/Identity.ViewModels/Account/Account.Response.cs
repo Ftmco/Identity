@@ -11,7 +11,8 @@ public enum SignUpStatus
 {
     Success = 0,
     UserExist = 1,
-    Exception = 2
+    Exception = 2,
+    ApplicationNotFound = 3
 }
 
 public enum LoginStatus
@@ -26,5 +27,6 @@ public enum ChangePasswordStatus
 {
     Success = 0,
     WrongPassword = 1,
-    Exception = 2
+    Exception = 2,
+    UserNotFound = 3
 }
