@@ -2,7 +2,7 @@ import Axios, { AxiosRequestConfig } from 'axios';
 import Account from '@/services/account'
 
 const _confing: AxiosRequestConfig = {
-    baseURL: "https://localhost:44343/api/",
+    baseURL: "https://localhost:7130/api/",
     timeout: 60 * 1000,
     headers: {
         "Content-Type": "application/json",
