@@ -23,5 +23,7 @@ public interface IAccountRules
     Task<IEnumerable<UserViewModel>> CreateUserViewModelAsync(IEnumerable<User> users);
 
     Task<UserViewModel> CreateUserViewModelAsync(User user);
+
+    Task ForgotPasswordAsync();
 }
 
