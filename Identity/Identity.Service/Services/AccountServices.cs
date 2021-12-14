@@ -103,7 +103,7 @@ public class AccountServices : IAccountRules, IDisposable
 
                 User newUser = CreateUser(signUp);
                 return await _userCrud.InsertAsync(newUser) ?
-                    new SignUpResponse(SignUpStatus.Success, newUser) :
+                    new SignUpResponse(SignUpStatus.Success, await CreateUserViewModelAsync(newUser)) :
                         new SignUpResponse(SignUpStatus.Exception, null);
             });
 
@@ -142,4 +142,34 @@ public class AccountServices : IAccountRules, IDisposable
                 MobileNo: user.MobileNo,
                 RegisterDate: user.RegisterDate
                 ));
+
+    public async Task<ForgotPasswordStatus> ForgotPasswordAsync(ForgotPasswordViewModel forgotPassword)
+        => await Task.Run(async () =>
+        {
+            User user = await GetUserAsync(forgotPassword.UserName);
+            if (user == null)
+                return ForgotPasswordStatus.UserNotFound;
+
+            user.ActiveCode = 7.CreateCode();
+            return await _userCrud.UpdateAsync(user) ?
+                    ForgotPasswordStatus.Success
+                        : ForgotPasswordStatus.Exception;
+        });
+
+    public async Task<ForgotPasswordStatus> ResetPasswordAsync(ResetPasswordViewModel resetPassword)
+            => await Task.Run(async () =>
+            {
+                User user = await GetUserAsync(resetPassword.UserName);
+                if (user == null)
+                    return ForgotPasswordStatus.UserNotFound;
+
+                if (user.ActiveCode != resetPassword.Code)
+                    return ForgotPasswordStatus.WrongCode;
+
+                user.Password = await resetPassword.Password.CreateSHA256Async();
+
+                return await _userCrud.UpdateAsync(user) ?
+                        ForgotPasswordStatus.Success
+                            : ForgotPasswordStatus.Exception;
+            });
 }

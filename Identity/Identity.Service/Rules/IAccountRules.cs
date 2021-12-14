@@ -24,6 +24,8 @@ public interface IAccountRules
 
     Task<UserViewModel> CreateUserViewModelAsync(User user);
 
-    Task ForgotPasswordAsync();
+    Task<ForgotPasswordStatus> ForgotPasswordAsync(ForgotPasswordViewModel forgotPassword);
+
+    Task<ForgotPasswordStatus> ResetPasswordAsync(ResetPasswordViewModel resetPassword);
 }
 
