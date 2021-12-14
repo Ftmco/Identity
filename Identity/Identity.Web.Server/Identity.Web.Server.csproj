@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Application\Middleware.Extensionns.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -22,6 +26,10 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\files\profile\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Application\Middleware.Extensionns.cs" />
   </ItemGroup>
 
 </Project>
