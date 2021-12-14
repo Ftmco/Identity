@@ -1,4 +1,4 @@
-import Axios, { AxiosRequestConfig } from 'axios';
+import Axios, { AxiosRequestConfig } from 'axios'
 import Account from '@/services/account'
 
 const _confing: AxiosRequestConfig = {
@@ -8,6 +8,7 @@ const _confing: AxiosRequestConfig = {
         "Content-Type": "application/json",
         "I-Authentication": Account.authenticationToken(),
     },
+
 }
 
 export const changeConfigHeader = (key: any, value: string) => {
@@ -15,3 +16,4 @@ export const changeConfigHeader = (key: any, value: string) => {
 };
 
 export const apiCall = Axios.create(_confing)
+
