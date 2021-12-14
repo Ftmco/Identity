@@ -1,5 +1,3 @@
-
-
 export default function pipeline(context: any, middleware: any, index: number) {
     const nextMiddleware = middleware[index]
     if (!nextMiddleware) {
