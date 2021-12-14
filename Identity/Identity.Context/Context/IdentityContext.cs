@@ -21,4 +21,6 @@ public class IdentityContext : DbContext
     public DbSet<RolePages> RolePages { get; set; }
 
     public DbSet<Session> Session { get; set; }
+
+    public DbSet<Setting> Setting { get; set; }
 }
