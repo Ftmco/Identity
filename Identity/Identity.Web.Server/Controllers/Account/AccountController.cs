@@ -59,14 +59,24 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("ForgotPassword")]
-    public async Task<IActionResult> ForgotPassword()
-    {
-        return Ok();
-    }
+    public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel forgotPassword)
+        => await _account.ForgotPasswordAsync(forgotPassword) switch
+        {
+            ForgotPasswordStatus.Success => throw new NotImplementedException(),
+            ForgotPasswordStatus.UserNotFound => throw new NotImplementedException(),
+            ForgotPasswordStatus.Exception => throw new NotImplementedException(),
+            ForgotPasswordStatus.WrongCode => throw new NotImplementedException(),
+            _ => throw new NotImplementedException(),
+        };
 
     [HttpPost("ResetPassword")]
-    public async Task<IActionResult> ResetPassword()
-    {
-        return Ok();
-    }
+    public async Task<IActionResult> ResetPassword(ResetPasswordViewModel resetPassword)
+        => await _account.ResetPasswordAsync(resetPassword) switch
+        {
+            ForgotPasswordStatus.Success => throw new NotImplementedException(),
+            ForgotPasswordStatus.UserNotFound => throw new NotImplementedException(),
+            ForgotPasswordStatus.Exception => throw new NotImplementedException(),
+            ForgotPasswordStatus.WrongCode => throw new NotImplementedException(),
+            _ => throw new NotImplementedException(),
+        };
 }

@@ -1,19 +1,19 @@
-﻿using Identity.Entity.Application;
-using Identity.Entity.Page;
-using Identity.Entity.User;
-using Identity.Services.Base;
-
-namespace Identity.Web.Server;
+﻿namespace Identity.Web.Server;
 
 public static class ServiceExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
+        services.AddServices();
+        services.AddBaseServices();
+        return services;
+    }
+
+    private static IServiceCollection AddServices(this IServiceCollection services)
+    {
         services.AddScoped<IAccountRules, AccountServices>();
         services.AddScoped<IApplicationRules, ApplicationServices>();
         services.AddScoped<ISessionRules, SessionServices>();
-
-        services.AddBaseServices();
         return services;
     }
 

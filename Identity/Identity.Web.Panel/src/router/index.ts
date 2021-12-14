@@ -32,7 +32,8 @@ const routes: RouteConfig[] = [
                 component: () => import("@/pages/application/application.vue"),
                 meta: (route: Route) => ({
                     route: route,
-                    title: 'Application'
+                    title: 'Application',
+                    middleware: auth
                 })
             },
             {
@@ -54,6 +55,38 @@ const routes: RouteConfig[] = [
                     title: 'Profile',
                     middleware: auth
                 })
+            },
+            {
+                path: "/account/forgotPassword",
+                name: "ForgotPassword",
+                component: () => import("@/pages/account/ForgotPassword.vue"),
+                meta: (route: Route) => ({
+                    route: route,
+                    title: 'Forgot Password',
+                    middleware: guest
+                })
+            },
+
+            {
+                path: "/account/signup",
+                name: "SignUp",
+                component: () => import("@/pages/account/SignUp.vue"),
+                meta: (route: Route) => ({
+                    route: route,
+                    title: 'SignUp',
+                    middleware: guest
+                })
+            },
+
+            {
+                path: "/account/activeAccount",
+                name: "ActiveAccount",
+                component: () => import("@/pages/account/ActiveAccount.vue"),
+                meta: (route: Route) => ({
+                    route: route,
+                    title: 'Active Account',
+                    middleware: guest
+                })
             }
         ]
     }
@@ -68,7 +101,7 @@ router.beforeEach((to: any, from: Route, next: NavigationGuardNext<Vue>) => {
 
     let meta = to.meta(to)
 
-    console.log(typeof(to.meta))
+    console.log(typeof (to.meta))
 
     if (!meta.middleware) {
         return next()
