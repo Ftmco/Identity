@@ -26,6 +26,8 @@ public interface IBaseRules<Tentity> where Tentity : class
 
     Task<bool> DeleteAsync(Expression<Func<Tentity, bool>> where);
 
+    Task<bool> AnyAsync(Expression<Func<Tentity, bool>> where);
+
     Task<bool> SaveAsync();
 }
 

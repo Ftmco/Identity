@@ -143,5 +143,8 @@ public class BaseServices<TEntity> : IDisposable, IBaseRules<TEntity> where TEnt
              return false;
          }
      });
+
+    public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> where)
+        => await Task.FromResult(await _dbSet.AnyAsync(where));
 }
 
