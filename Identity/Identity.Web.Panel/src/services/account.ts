@@ -1,4 +1,3 @@
-
 export default {
     authenticationToken() {
         return localStorage.getItem("I-Authentication");

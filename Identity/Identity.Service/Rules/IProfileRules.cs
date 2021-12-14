@@ -2,6 +2,8 @@
 
 public interface IProfileRules
 {
+    Task GetProfileAsync();
 
+    Task UpdateProfileAsync();
 }
 

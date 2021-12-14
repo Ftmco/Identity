@@ -72,6 +72,23 @@ namespace Identity.Context.Migrations
                     b.ToTable("ApplicationUsers");
                 });
 
+            modelBuilder.Entity("Identity.Entity.Application.Setting", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ApplicationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId")
+                        .IsUnique();
+
+                    b.ToTable("Setting");
+                });
+
             modelBuilder.Entity("Identity.Entity.Page.Page", b =>
                 {
                     b.Property<Guid>("Id")
@@ -248,6 +265,17 @@ namespace Identity.Context.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Identity.Entity.Application.Setting", b =>
+                {
+                    b.HasOne("Identity.Entity.Application.Application", "Application")
+                        .WithOne("Setting")
+                        .HasForeignKey("Identity.Entity.Application.Setting", "ApplicationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Application");
+                });
+
             modelBuilder.Entity("Identity.Entity.Page.Page", b =>
                 {
                     b.HasOne("Identity.Entity.Application.Application", "Application")
@@ -313,6 +341,8 @@ namespace Identity.Context.Migrations
                     b.Navigation("ApplicationUsers");
 
                     b.Navigation("Page");
+
+                    b.Navigation("Setting");
                 });
 
             modelBuilder.Entity("Identity.Entity.Page.Page", b =>

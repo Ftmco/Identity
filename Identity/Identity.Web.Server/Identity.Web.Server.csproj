@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Identity.Context\Identity.Context.csproj" />
+    <ProjectReference Include="..\Identity.Middelware\Identity.Middelware.csproj" />
     <ProjectReference Include="..\Identity.Service\Identity.Service.csproj" />
   </ItemGroup>
 

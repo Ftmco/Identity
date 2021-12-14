@@ -3,7 +3,7 @@
 namespace Identity.Entity.User;
 
 public record User
-{ 
+{
 
     [Key]
     public Guid Id { get; set; }

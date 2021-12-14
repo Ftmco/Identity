@@ -8,11 +8,11 @@ public interface IApplicationRules
 
     Task<ApplicationViewModel> CreateApplicationViewModelAsync(Application application);
 
-    Task<CUApplicationResponse> CreateApplicationAsync(CUApplicationViewModel application,HttpContext context);
+    Task<CUApplicationResponse> CreateApplicationAsync(CUApplicationViewModel application, HttpContext context);
 
-    Task<CUApplicationResponse> UpdateApplicationAsync(CUApplicationViewModel application,HttpContext context);
+    Task<CUApplicationResponse> UpdateApplicationAsync(CUApplicationViewModel application, HttpContext context);
 
-    Task<DeleteApplicationResponse> DeleteApplicationAsync(DeleteApplicationViewModel delete,HttpContext httpContext);
+    Task<DeleteApplicationResponse> DeleteApplicationAsync(DeleteApplicationViewModel delete, HttpContext httpContext);
 
     Task<GetApplicationUsersResponse> GetUsersAsync(ApplicationRequest application);
 }

@@ -6,7 +6,7 @@ public record GetApplicationsResponse(ActionApplicationsStatus Status, IEnumerab
 
 public record CUApplicationResponse(CUApplicationStatus Status, ApplicationViewModel Application);
 
-public record DeleteApplicationResponse(ActionApplicationsStatus Status,Guid? Id,string? AppName);
+public record DeleteApplicationResponse(ActionApplicationsStatus Status, Guid? Id, string? AppName);
 
 public record GetApplicationUsersResponse(GetApplicationUsersStatus Status, IEnumerable<UserViewModel> Users);
 

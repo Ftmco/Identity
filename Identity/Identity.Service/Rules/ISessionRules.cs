@@ -1,6 +1,4 @@
-﻿using Identity.Entity.User;
-
-namespace Identity.Service.Rules;
+﻿namespace Identity.Service.Rules;
 
 public interface ISessionRules
 {
@@ -8,7 +6,7 @@ public interface ISessionRules
 
     Task<Session> GetSessionAsync(string value);
 
-    Task<Session> CreateSessionAsync(User user,Application application);
+    Task<Session> CreateSessionAsync(User user, Application application);
 
     Task<IEnumerable<Session>> GetApplicationSessionAsync(Guid appId);
 

@@ -33,7 +33,7 @@ public static class ApplicationExtensions
         }
         return null;
     }
-       
+
     private static void RegisterDependency()
     {
         _headers = new Dictionary<string, string>()

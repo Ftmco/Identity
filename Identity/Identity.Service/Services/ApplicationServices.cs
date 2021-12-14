@@ -1,7 +1,4 @@
-﻿using Identity.Entity.User;
-using Identity.Service.Rules;
-using Identity.Services.Base;
-using Identity.Tools.File;
+﻿using Identity.Tools.File;
 using Identity.ViewModels.File;
 
 namespace Identity.Service.Services;

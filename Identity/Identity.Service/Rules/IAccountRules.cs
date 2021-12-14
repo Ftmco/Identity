@@ -16,7 +16,7 @@ public interface IAccountRules
 
     Task<bool> CheckPasswordAsync(string userName, string password);
 
-    Task<ChangePasswordStatus> ChangePasswordAsync(ChangePasswordViewModel changePassword,HttpContext context);
+    Task<ChangePasswordStatus> ChangePasswordAsync(ChangePasswordViewModel changePassword, HttpContext context);
 
     Task<Application> GetApplicationAsync(ApplicationRequest application);
 

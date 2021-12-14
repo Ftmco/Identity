@@ -5,6 +5,7 @@ import guest from './middleware/guest';
 import store from "@/store/index"
 import pipeline from './pipeline';
 import auth from './middleware/auth';
+import { changeTitle } from '@/services/title';
 
 Vue.use(VueRouter)
 
@@ -100,9 +101,7 @@ const router = new VueRouter({
 router.beforeEach((to: any, from: Route, next: NavigationGuardNext<Vue>) => {
 
     let meta = to.meta(to)
-
-    console.log(typeof (to.meta))
-
+    changeTitle(meta.title)
     if (!meta.middleware) {
         return next()
     }

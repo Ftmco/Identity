@@ -1,6 +1,4 @@
-﻿using Identity.Entity.User;
-
-namespace Identity.Entity.Application;
+﻿namespace Identity.Entity.Application;
 
 public record Application
 {
@@ -14,7 +12,7 @@ public record Application
 
     [Required]
     public string ApiKey { get; set; }
-        
+
     [Required]
     public string Password { get; set; }
 
@@ -27,4 +25,6 @@ public record Application
     public virtual ICollection<ApplicationUsers> ApplicationUsers { get; set; }
 
     public virtual ICollection<Page.Page> Page { get; set; }
+
+    public virtual Setting Setting { get; set; }
 }

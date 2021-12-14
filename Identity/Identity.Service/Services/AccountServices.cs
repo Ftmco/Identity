@@ -91,14 +91,10 @@ public class AccountServices : IAccountRules, IDisposable
     public async Task<SignUpResponse> SignUpAsync(SignUpViewModel signUp)
             => await Task.Run(async () =>
             {
-                User checkUserName = await GetUserAsync(signUp.UserName);
-                if (checkUserName != null)
-                    return new SignUpResponse(SignUpStatus.UserExist, null);
-                User checkMobile = await GetUserAsync(signUp.MobileNo);
-                if (checkUserName != null)
-                    return new SignUpResponse(SignUpStatus.UserExist, null);
-                User checkEmail = await GetUserAsync(signUp.Email);
-                if (checkUserName != null)
+                bool userExist = await _userCrud.AnyAsync(u => u.UserName == signUp.UserName
+                                                          || u.Email == signUp.Email
+                                                              || u.MobileNo == signUp.MobileNo);
+                if (userExist)
                     return new SignUpResponse(SignUpStatus.UserExist, null);
 
                 User newUser = CreateUser(signUp);
