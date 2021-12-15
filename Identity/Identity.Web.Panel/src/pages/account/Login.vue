@@ -85,6 +85,9 @@ export default Vue.extend({
     rules: rules,
     accountService: new AccountServiec(apiCall),
   }),
+  mounted() {
+    this.login.userName = this.$route.query.userName?.toString();
+  },
   methods: {
     loginSubmit() {
       let isValid = this.$refs.loginForm.validate();

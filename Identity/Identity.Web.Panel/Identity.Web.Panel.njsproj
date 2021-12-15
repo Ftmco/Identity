@@ -111,6 +111,7 @@
     <Content Include="src\assets\logo.svg" />
     <Content Include="src\assets\R.png" />
     <Content Include="src\assets\style\account.css" />
+    <Content Include="src\components\account\AccountBase.vue" />
     <Content Include="src\components\application\cuApplication.vue">
       <SubType>Code</SubType>
     </Content>
@@ -128,12 +129,15 @@
     <Content Include="src\layouts\homeLayout.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\pages\account\ActiveAccount.vue" />
+    <Content Include="src\pages\account\ForgotPassword.vue" />
     <Content Include="src\pages\account\Login.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\pages\account\Profile.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\pages\account\SignUp.vue" />
     <Content Include="src\pages\application\application.vue">
       <SubType>Code</SubType>
     </Content>
@@ -161,6 +165,7 @@
     <Folder Include="src\assets\images\" />
     <Folder Include="src\assets\style\" />
     <Folder Include="src\components\" />
+    <Folder Include="src\components\account\" />
     <Folder Include="src\components\core\" />
     <Folder Include="src\components\application\" />
     <Folder Include="src\layouts\" />
@@ -192,7 +197,6 @@
     <TypeScriptCompile Include="src\api\service\account.service.ts" />
     <TypeScriptCompile Include="src\api\service\application.service.ts" />
     <TypeScriptCompile Include="src\constants\index.ts" />
-    <TypeScriptCompile Include="src\plugins\axios.ts" />
     <TypeScriptCompile Include="src\plugins\vuetify.ts" />
     <TypeScriptCompile Include="src\router\index.ts" />
     <TypeScriptCompile Include="src\router\middleware\auth.ts" />
