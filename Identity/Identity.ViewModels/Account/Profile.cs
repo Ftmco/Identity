@@ -1,3 +1,8 @@
-﻿namespace Identity.ViewModels.Account;
+﻿using Identity.ViewModels.Application;
+using Identity.ViewModels.File;
 
-public record ProfileViewModel(string Image,string Json,UserViewModel User);
+namespace Identity.ViewModels.Account;
+
+public record ProfileViewModel(string Image, string Json, UserViewModel User);
+
+public record UpdateProfileViewModel(ApplicationRequest Application, FileBase64ViewModel Image, string Json, UserViewModel User);

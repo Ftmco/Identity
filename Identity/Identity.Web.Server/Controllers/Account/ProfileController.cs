@@ -16,7 +16,7 @@ public class ProfileController : ControllerBase
     [HttpPost("GetProfile")]
     public async Task<IActionResult> GetProfile(ApplicationRequest application)
     {
-        GetProfileResponse? profile = await _profile.GetProfileAsync(application, HttpContext);
+        ProfileResponse? profile = await _profile.GetProfileAsync(application, HttpContext);
         return profile.Status switch
         {
             GetprofileStatus.Success => Ok(Success("Profile", "", profile.Profile)),
@@ -29,9 +29,18 @@ public class ProfileController : ControllerBase
     }
 
     [HttpPost("UpdateProfile")]
-    public async Task<IActionResult> UpdateProfile()
+    public async Task<IActionResult> UpdateProfile(UpdateProfileViewModel profile)
     {
-        return Ok();
+        ProfileResponse? updateProfile = await _profile.UpdateProfileAsync(profile, HttpContext);
+        return updateProfile.Status switch
+        {
+            GetprofileStatus.Success => Ok(Success("Profile", "", updateProfile.Profile)),
+            GetprofileStatus.ApplicationNotFoud => Ok(Notfound("Application NotFound", "")),
+            GetprofileStatus.Exception => Ok(Excetpion("Exception", "Please Try Again")),
+            GetprofileStatus.UserNotFound => Ok(Notfound("User Notfound", "Please Login to see yout profile")),
+            GetprofileStatus.EmptyProfile => Ok(AccessDenied("Your Profile is empty for this application", "")),
+            _ => Ok(Excetpion("Exception", "Please Try Again")),
+        };
     }
 }
 

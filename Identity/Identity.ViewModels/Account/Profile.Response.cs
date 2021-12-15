@@ -1,6 +1,6 @@
 ﻿namespace Identity.ViewModels.Account;
 
-public record GetProfileResponse(GetprofileStatus Status,ProfileViewModel Profile);
+public record ProfileResponse(GetprofileStatus Status,ProfileViewModel Profile);
 
 public enum GetprofileStatus
 {
