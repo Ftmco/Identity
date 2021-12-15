@@ -8,4 +8,5 @@ public enum GetprofileStatus
     ApplicationNotFoud =1,
     Exception = 2,
     UserNotFound = 3,
+    EmptyProfile = 4
 }
