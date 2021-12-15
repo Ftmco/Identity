@@ -1,14 +1,22 @@
-﻿namespace Identity.Web.Server.Controllers.Account;
+﻿using Identity.ViewModels.Application;
+
+namespace Identity.Web.Server.Controllers.Account;
 
 [Route("api/[controller]")]
 [ApiController]
 public class ProfileController : ControllerBase
 {
+    private readonly IProfileRules _profile;
 
-    [HttpGet("GetProfile")]
-    public async Task<IActionResult> GetProfile()
+    public ProfileController(IProfileRules profile)
     {
-        return Ok();
+        _profile = profile;
+    }
+
+    [HttpPost("GetProfile")]
+    public async Task<IActionResult> GetProfile(ApplicationRequest application)
+    {
+        var profile = await _profile.GetProfileAsync(application,HttpContext);
     }
 
     [HttpPost("UpdateProfile")]

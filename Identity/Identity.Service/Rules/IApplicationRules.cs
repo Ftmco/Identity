@@ -4,6 +4,8 @@ public interface IApplicationRules
 {
     Task<GetApplicationsResponse> GetApplcationsAsync(int page, int count, HttpContext context);
 
+    Task<Application> FindApplicationAsync(ApplicationRequest application);
+
     Task<IEnumerable<ApplicationViewModel>> CreateApplicationViewModelAsync(IEnumerable<Application> applications);
 
     Task<ApplicationViewModel> CreateApplicationViewModelAsync(Application application);
