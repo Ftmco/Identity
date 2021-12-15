@@ -12,7 +12,7 @@ const _confing: AxiosRequestConfig = {
 }
 
 export const changeConfigHeader = (key: any, value: string) => {
-    _confing[key] = value;
+    _confing.headers[key] = value;
 };
 
 export const apiCall = Axios.create(_confing)
