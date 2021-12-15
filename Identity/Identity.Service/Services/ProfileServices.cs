@@ -32,8 +32,11 @@ public class ProfileService : IProfileRules, IDisposable
                 User user = await _account.GetUserAsync(httpContext);
                 if (user != null)
                 {
+                    var userViewModel = await _account.CreateUserViewModelAsync(user);
                     Profile profile = await _profileCrud.GetOneAsync(p => p.UserId == user.Id && p.ApplicationId == findApplication.Id);
-                    return new GetProfileResponse(GetprofileStatus.Success, new(profile.Image.CreateFileAddress("profile"), profile.Json));
+                    return new GetProfileResponse(GetprofileStatus.Success, (profile != null ?
+                            new(profile.Image.CreateFileAddress("profile"), profile.Json, userViewModel)
+                                : new("", "", userViewModel)));
                 }
                 return new GetProfileResponse(GetprofileStatus.UserNotFound, null);
             }
