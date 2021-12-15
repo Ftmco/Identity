@@ -16,7 +16,15 @@ public class ProfileController : ControllerBase
     [HttpPost("GetProfile")]
     public async Task<IActionResult> GetProfile(ApplicationRequest application)
     {
-        var profile = await _profile.GetProfileAsync(application,HttpContext);
+        GetProfileResponse? profile = await _profile.GetProfileAsync(application, HttpContext);
+        return profile.Status switch
+        {
+            GetprofileStatus.Success => Ok(Success("Profile", "", profile.Profile)),
+            GetprofileStatus.ApplicationNotFoud => Ok(Notfound("Application NotFound","")),
+            GetprofileStatus.Exception => Ok(Excetpion("Exception","Please Try Again")),
+            GetprofileStatus.UserNotFound => Ok(Notfound("User Notfound","Please Login to see yout profile")),
+            _ => Ok(Excetpion("Exception", "Please Try Again")),
+        };
     }
 
     [HttpPost("UpdateProfile")]
