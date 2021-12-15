@@ -2,7 +2,7 @@
 
 public interface IProfileRules
 {
-    Task GetProfileAsync(ApplicationRequest application,HttpContext httpContext);
+    Task<GetProfileResponse> GetProfileAsync(ApplicationRequest application, HttpContext httpContext);
 
     Task UpdateProfileAsync();
 }

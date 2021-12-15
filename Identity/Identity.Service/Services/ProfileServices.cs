@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Identity.Tools.File;
 
 namespace Identity.Service.Services;
 
@@ -15,24 +11,33 @@ public class ProfileService : IProfileRules, IDisposable
 
     private readonly IBaseRules<Profile> _profileCrud;
 
-    public void Dispose()
+    public ProfileService(IApplicationRules application, IAccountRules account, IBaseRules<Profile> profileCrud)
     {
-       GC.SuppressFinalize(this);
+        _account = account;
+        _application = application;
+        _profileCrud = profileCrud;
     }
 
-    public async Task GetProfileAsync(ApplicationRequest application,HttpContext httpContext)
+    public void Dispose()
+    {
+        GC.SuppressFinalize(this);
+    }
+
+    public async Task<GetProfileResponse> GetProfileAsync(ApplicationRequest application, HttpContext httpContext)
         => await Task.Run(async () =>
         {
             Application findApplication = await _application.FindApplicationAsync(application);
             if (findApplication != null)
             {
                 User user = await _account.GetUserAsync(httpContext);
-                if(user != null)
+                if (user != null)
                 {
                     Profile profile = await _profileCrud.GetOneAsync(p => p.UserId == user.Id && p.ApplicationId == findApplication.Id);
+                    return new GetProfileResponse(GetprofileStatus.Success, new(profile.Image.CreateFileAddress("profile"), profile.Json));
                 }
+                return new GetProfileResponse(GetprofileStatus.UserNotFound, null);
             }
-            
+            return new GetProfileResponse(GetprofileStatus.ApplicationNotFoud, null);
         });
 
     public Task UpdateProfileAsync()
