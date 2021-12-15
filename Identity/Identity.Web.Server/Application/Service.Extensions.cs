@@ -14,6 +14,7 @@ public static class ServiceExtensions
         services.AddScoped<IAccountRules, AccountServices>();
         services.AddScoped<IApplicationRules, ApplicationServices>();
         services.AddScoped<ISessionRules, SessionServices>();
+        services.AddScoped<IProfileRules, ProfileService>();
         return services;
     }
 
@@ -27,6 +28,7 @@ public static class ServiceExtensions
         services.AddTransient<IBaseRules<Page>, BaseServices<Page>>();
         services.AddTransient<IBaseRules<RolePages>, BaseServices<RolePages>>();
         services.AddTransient<IBaseRules<Session>, BaseServices<Session>>();
+        services.AddTransient<IBaseRules<Profile>, BaseServices<Profile>>();
         return services;
     }
 }
