@@ -173,5 +173,11 @@ public class ApplicationServices : IApplicationRules, IDisposable
             }
             return new GetApplicationUsersResponse(GetApplicationUsersStatus.ApplicationNotFound, null);
         });
+
+    public async Task<Application> FindApplicationAsync(ApplicationRequest application)
+    => await Task.Run(async () =>
+    {
+        return await _applicationCrud.GetOneAsync(app => app.ApiKey == application.ApiKey && app.Password == application.Password.CreateSHA256());
+    });
 }
 
