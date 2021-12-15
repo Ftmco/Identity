@@ -21,7 +21,7 @@ export default class ProfileService implements IProfileRules {
         try {
             let request = await this._axios.post("Profile/GetProfile", this.application)
             let response = await request.data;
-            if (response.status)
+            if (response.status && response.result.json != "")
                 response.result.json = JSON.parse(response.result.json)
             return response
         } catch (e) {
