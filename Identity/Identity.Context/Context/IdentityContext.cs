@@ -23,4 +23,6 @@ public class IdentityContext : DbContext
     public DbSet<Session> Session { get; set; }
 
     public DbSet<Setting> Setting { get; set; }
+
+    public DbSet<Profile> Profile { get; set; }
 }

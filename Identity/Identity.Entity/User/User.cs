@@ -38,4 +38,6 @@ public record User
     public virtual ICollection<UserRoles> UserRoles { get; set; }
 
     public virtual ICollection<Session> Session { get; set; }
+
+    public virtual Profile Profile { get; set; }
 }
