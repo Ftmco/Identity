@@ -1,6 +1,6 @@
 import { AxiosInstance } from "axios";
-import { apiUrls } from "../../constants";
-import { axios } from "../apiCall";
+import { apiUrls, messages } from "../../constants";
+import { addHeader, axios, changeBaseURL } from "../apiCall";
 import { Login, Signup, ChangePassword, ResetPassword } from "../models/account.model";
 import IAccountRules from "../rules/account.rules";
 
@@ -8,14 +8,15 @@ export default class AccountService implements IAccountRules {
 
     private readonly _axios: AxiosInstance;
 
-    constructor() {
+    constructor(baseUrl: string) {
         this._axios = axios;
+        changeBaseURL(baseUrl)
     }
 
     forgotPassword(userName: string) {
         throw new Error("Method not implemented.");
     }
-    
+
     resetPassword(reset: ResetPassword) {
         throw new Error("Method not implemented.");
     }
@@ -23,9 +24,12 @@ export default class AccountService implements IAccountRules {
     async login(login: Login) {
         try {
             let request = await this._axios.post(apiUrls.login, login)
-            return await request.data;
+            let response = await request.data
+            if (response)
+                addHeader(response.result.key, response.result.value)
+            return response
         } catch (e) {
-            return {};
+            return messages.serverError(e.message)
         }
     }
 

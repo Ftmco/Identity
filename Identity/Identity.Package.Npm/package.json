@@ -1,14 +1,17 @@
 {
-  "name": "identity.package.npm",
-  "version": "1.0.0",
+  "name": "fteam.identity.package",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "Identity",
+    "Fteam"
+  ],
+  "author": "ّFteam",
+  "license": "Apache",
   "dependencies": {
     "axios": "^0.24.0"
   }

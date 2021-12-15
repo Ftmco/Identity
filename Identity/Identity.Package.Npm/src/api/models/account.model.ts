@@ -1,5 +1,8 @@
 import { Application } from "./application.model"
 
+/**
+ * Login model for login user into application
+ */
 export type Login = {
     userName: string;
     password: string;
