@@ -38,7 +38,7 @@
               </v-btn>
             </v-col>
             <v-col>
-              <v-btn outlined block color="info">
+              <v-btn outlined block color="info" @click="info(item)">
                 <span>App Info</span>
                 <v-icon>mdi-information-outline</v-icon>
               </v-btn>
@@ -92,6 +92,7 @@ import { apiCall } from "@/api";
 import { applicationTableHeaders, messages } from "@/constants";
 import Appdialog from "@/components/core/AppDialog.vue";
 import cuApp from "@/components/application/cuApplication.vue";
+import appInfo from "@/components/application/appInfo.vue";
 
 export default Vue.extend({
   data: () => ({
@@ -116,6 +117,7 @@ export default Vue.extend({
   components: {
     ConfirmDialog,
     Appdialog,
+    appInfo,
   },
   mounted() {
     this.getApplications(this.page);
@@ -187,6 +189,15 @@ export default Vue.extend({
       this.dTitle = `Update ${item.name}`;
       this.dColor = "warning";
       this.props.editApp = item;
+      this.$root.$refs.dialog.open();
+    },
+    info(item: any) {
+      this.dColor = "info";
+      this.dTitle = `${item.name} Info`;
+      this.props = {
+        application: item,
+      };
+      this.comp = appInfo;
       this.$root.$refs.dialog.open();
     },
     submit(data: any) {

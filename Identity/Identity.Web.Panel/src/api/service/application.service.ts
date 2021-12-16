@@ -2,6 +2,7 @@ import { AxiosInstance } from "axios";
 import { messages } from "@/constants";
 import IApplicationRule from "../rules/application.rule";
 import { CreateApp, UpdateApp } from "../models/application.model";
+import { Application } from "../models/account.model";
 
 
 export default class ApplicationService implements IApplicationRule {
@@ -10,6 +11,15 @@ export default class ApplicationService implements IApplicationRule {
 
     constructor(axios: AxiosInstance) {
         this._axois = axios;
+    }
+
+    async GetUsers(app: Application) {
+        try {
+            let request = await this._axois.post("Application/GetUsers", app)
+            return await request.data
+        } catch (e) {
+            return messages.netWorkError(e.message)
+        }
     }
 
     async Create(app: CreateApp) {

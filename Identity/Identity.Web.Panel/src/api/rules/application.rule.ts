@@ -1,3 +1,4 @@
+import { Application } from "../models/account.model";
 import { CreateApp, UpdateApp } from "../models/application.model";
 
 export default interface IApplicationRule {
@@ -5,4 +6,5 @@ export default interface IApplicationRule {
     Delete(id: any): any;
     Create(app: CreateApp): any;
     Update(app: UpdateApp): any;
+    GetUsers(app: Application): any;
 }

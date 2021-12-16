@@ -1,3 +1,5 @@
+import { Application } from "@/api/models/account.model"
+
 export const bottomItems = [
     {
         id: 0,
@@ -86,3 +88,33 @@ export const rules = {
     require: (value: string) => !!value || 'Required.',
     password: (value: string) => !!value && (value.length > 5 || 'Password required more than 6 characters')
 }
+
+export const app: Application = {
+    apikey: "54AD86E7-BC7B-4B24-A43A-4AD0ADD6EBAF",
+    password: "1G14ijWA"
+}
+
+export const userTableHeaders = [
+    {
+        text: 'User Name',
+        align: 'start',
+        sortable: true,
+        value: 'userName',
+    },
+    {
+        text: 'Full Name',
+        align: 'start',
+        sortable: true,
+        value: 'fullName',
+    }, {
+        text: 'E-main',
+        align: 'start',
+        sortable: true,
+        value: 'email',
+    }, {
+        text: 'Mobile No',
+        align: 'start',
+        sortable: true,
+        value: 'mobileNo',
+    },
+]
