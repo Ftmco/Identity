@@ -51,6 +51,7 @@ export default Vue.extend({
           component: ApplicationUsers,
           props: {
             appId: this.application.id,
+            apiKey: this.application.apiKey,
           },
         },
       ];

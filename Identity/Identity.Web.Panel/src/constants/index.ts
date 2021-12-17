@@ -116,5 +116,10 @@ export const userTableHeaders = [
         align: 'start',
         sortable: true,
         value: 'mobileNo',
-    },
+    }, {
+        text: 'Actions',
+        align: 'start',
+        sortable: false,
+        value: 'actions'
+    }
 ]
