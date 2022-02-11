@@ -1,6 +1,6 @@
 import { AxiosInstance } from "axios";
 import { apiUrls, messages } from "../../constants";
-import { addHeader, axios, changeBaseURL } from "../apiCall";
+import { addHeader, axios } from "../apiCall";
 import { Login, Signup, ChangePassword, ResetPassword } from "../models/account.model";
 import IAccountRules from "../rules/account.rules";
 
@@ -8,17 +8,26 @@ export default class AccountService implements IAccountRules {
 
     private readonly _axios: AxiosInstance;
 
-    constructor(baseUrl: string) {
+    constructor() {
         this._axios = axios;
-        changeBaseURL(baseUrl)
     }
 
-    forgotPassword(userName: string) {
-        throw new Error("Method not implemented.");
+    async forgotPassword(userName: string) {
+        try {
+            let request = await this._axios.post("Account/ForgotPassword", { userName: userName })
+            return await request.data;
+        } catch (e) {
+            return messages.serverError(e.mssage)
+        }
     }
 
-    resetPassword(reset: ResetPassword) {
-        throw new Error("Method not implemented.");
+    async resetPassword(reset: ResetPassword) {
+        try {
+            let request = await this._axios.post("Account/ResetPassword", reset)
+            return await request.data
+        } catch (e) {
+            return messages.serverError(e.message)
+        }
     }
 
     async login(login: Login) {
@@ -33,12 +42,22 @@ export default class AccountService implements IAccountRules {
         }
     }
 
-    signUp(signup: Signup) {
-        throw new Error("Method not implemented.");
+    async signUp(signup: Signup) {
+        try {
+            let request = await this._axios.post("Account/SignUp", signup)
+            return await request.data
+        } catch (e) {
+            return messages.serverError(e.message)
+        }
     }
 
-    changePassword(changePass: ChangePassword) {
-        throw new Error("Method not implemented.");
+    async changePassword(changePass: ChangePassword) {
+        try {
+            let request = await this._axios.post("Account/ChangePassword", changePass)
+            return await request.data;
+        } catch (e) {
+            return messages.serverError(e.message)
+        }
     }
 
 }

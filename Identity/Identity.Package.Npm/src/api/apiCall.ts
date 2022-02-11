@@ -6,7 +6,7 @@ const _headers: AxiosRequestHeaders = {
 }
 
 const _config: AxiosRequestConfig = {
-    baseURL: '',
+    baseURL: 'https://localhost:7130/api/',
     timeout: 60 * 1000,
     headers: _headers
 }
@@ -18,10 +18,6 @@ const _config: AxiosRequestConfig = {
  */
 export const addHeader = (key: string, value: string) => {
     _headers[key] = value
-}
-
-export const changeBaseURL = (baseURL: string) => {
-    _config.baseURL = baseURL
 }
 
 export const axios = Axios.create(_config);

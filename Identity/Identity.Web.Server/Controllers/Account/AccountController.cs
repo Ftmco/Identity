@@ -20,7 +20,7 @@ public class AccountController : ControllerBase
             LoginStatus.Success => Ok(Success("Success", "Login Successfully", new { loginResult.Session?.Key, loginResult.Session?.Value })),
             LoginStatus.UserNotFound => Ok(Notfound("User Not Found", "Wrong UserName or Password")),
             LoginStatus.Exception => Ok(Excetpion("Exception", "Please Try Again To Login")),
-            LoginStatus.ApplicationNotFound => throw new NotImplementedException(),
+            LoginStatus.ApplicationNotFound => Ok(Notfound("application not found", "")),
             _ => Ok(Excetpion("Exception", "Please Try Again To Login")),
         };
     }

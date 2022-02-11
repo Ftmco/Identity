@@ -1,8 +1,8 @@
 {
   "name": "fteam.identity.package",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

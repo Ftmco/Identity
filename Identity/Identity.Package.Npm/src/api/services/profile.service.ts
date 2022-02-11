@@ -2,16 +2,15 @@ import IProfileRules from "../rules/profile.rules";
 import { Application } from "../models/application.model";
 import { UpdateProfile } from "../models/profile.model";
 import { AxiosInstance } from "axios";
-import { axios, changeBaseURL } from "../apiCall";
+import { axios } from "../apiCall";
 import { apiUrls, messages } from "../../constants";
 
 export default class ProfileService implements IProfileRules {
 
     private readonly _axios: AxiosInstance;
 
-    constructor(baseUrl: string) {
+    constructor() {
         this._axios = axios;
-        changeBaseURL(baseUrl)
     }
 
     async getProfile(app: Application) {
