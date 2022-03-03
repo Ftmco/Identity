@@ -9,4 +9,6 @@ global using Identity.ViewModels.Account;
 global using Identity.ViewModels.Account.Response;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
+global using Identity.ViewModels.Api;
+global using Identity.Tools.Api;
 global using static Identity.ViewModels.Api.ApiResponse;

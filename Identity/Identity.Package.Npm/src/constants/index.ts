@@ -1,8 +1,18 @@
 export const apiUrls = {
-    login: "Account/Login",
-    signUp: "Account/SignUp",
-    getProfile: "Profile/GetProfile",
-    updateProfile: "Profile/UpdateProfile"
+    baseURL: "",
+    login: "/api/Account/Login",
+    logOut: "/api/Account/LogOut",
+    signUp: "/api/Account/SignUp",
+    changePassword: "/api/Account/ChangePassword",
+    forgotPassword: "/api/Account/ForgotPassword",
+    resetPassword: "/api/Account/ResetPassword",
+    getProfile: "/api/Profile/GetProfile",
+    updateProfile: "/api/Profile/UpdateProfile"
+}
+
+export const changeBaseUrl = (url: string) => {
+    apiUrls.baseURL = url
+    return apiUrls.baseURL
 }
 
 export const messages = {

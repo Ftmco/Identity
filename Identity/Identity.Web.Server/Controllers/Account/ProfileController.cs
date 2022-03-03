@@ -1,4 +1,5 @@
-﻿using Identity.ViewModels.Application;
+﻿using Identity.ViewModels.Api;
+using Identity.ViewModels.Application;
 
 namespace Identity.Web.Server.Controllers.Account;
 
@@ -14,32 +15,34 @@ public class ProfileController : ControllerBase
     }
 
     [HttpPost("GetProfile")]
-    public async Task<IActionResult> GetProfile(ApplicationRequest application)
+    public async Task<IActionResult> GetProfile(ApiRequest request)
     {
+        var application = await request.ReadRequestDataAsync<ApplicationRequest>(HttpContext);
         ProfileResponse? profile = await _profile.GetProfileAsync(application, HttpContext);
         return profile.Status switch
         {
-            GetprofileStatus.Success => Ok(Success("Profile", "", profile.Profile)),
-            GetprofileStatus.ApplicationNotFoud => Ok(Notfound("Application NotFound", "")),
-            GetprofileStatus.Exception => Ok(Excetpion("Exception", "Please Try Again")),
-            GetprofileStatus.UserNotFound => Ok(Notfound("User Notfound", "Please Login to see yout profile")),
-            GetprofileStatus.EmptyProfile => Ok(AccessDenied("Your Profile is empty for this application", "")),
-            _ => Ok(Excetpion("Exception", "Please Try Again")),
+            GetprofileStatus.Success => Ok(await Success("Profile", "", profile.Profile).SendResponseAsync(HttpContext)),
+            GetprofileStatus.ApplicationNotFoud => Ok(await Faild(404,"Application NotFound", "").SendResponseAsync(HttpContext)),
+            GetprofileStatus.Exception => Ok(await ApiException("Exception", "Please Try Again").SendResponseAsync(HttpContext)),
+            GetprofileStatus.UserNotFound => Ok(await Faild(404, "User Notfound", "Please Login to see yout profile").SendResponseAsync(HttpContext)),
+            GetprofileStatus.EmptyProfile => Ok(await Faild(403, "Your Profile is empty for this application", "").SendResponseAsync(HttpContext)),
+            _ => Ok(await ApiException("Exception", "Please Try Again").SendResponseAsync(HttpContext)),
         };
     }
 
     [HttpPost("UpdateProfile")]
-    public async Task<IActionResult> UpdateProfile(UpdateProfileViewModel profile)
+    public async Task<IActionResult> UpdateProfile(ApiRequest request)
     {
+        var profile = await request.ReadRequestDataAsync<UpdateProfileViewModel>(HttpContext);
         ProfileResponse? updateProfile = await _profile.UpdateProfileAsync(profile, HttpContext);
         return updateProfile.Status switch
         {
-            GetprofileStatus.Success => Ok(Success("Profile", "", updateProfile.Profile)),
-            GetprofileStatus.ApplicationNotFoud => Ok(Notfound("Application NotFound", "")),
-            GetprofileStatus.Exception => Ok(Excetpion("Exception", "Please Try Again")),
-            GetprofileStatus.UserNotFound => Ok(Notfound("User Notfound", "Please Login to see yout profile")),
-            GetprofileStatus.EmptyProfile => Ok(AccessDenied("Your Profile is empty for this application", "")),
-            _ => Ok(Excetpion("Exception", "Please Try Again")),
+            GetprofileStatus.Success => Ok(await Success("Profile", "", updateProfile.Profile).SendResponseAsync(HttpContext)),
+            GetprofileStatus.ApplicationNotFoud => Ok(await Faild(404, "Application NotFound", "").SendResponseAsync(HttpContext)),
+            GetprofileStatus.Exception => Ok(await ApiException("Exception", "Please Try Again").SendResponseAsync(HttpContext)),
+            GetprofileStatus.UserNotFound => Ok(await Faild(404, "User Notfound", "Please Login to see yout profile").SendResponseAsync(HttpContext)),
+            GetprofileStatus.EmptyProfile => Ok(await Faild(403, "Your Profile is empty for this application", "").SendResponseAsync(HttpContext)),
+            _ => Ok(await ApiException("Exception", "Please Try Again").SendResponseAsync(HttpContext)),
         };
     }
 }

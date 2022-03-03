@@ -1,12 +1,14 @@
 import Axios, { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
+import { apiUrls } from "../constants";
 
 const _headers: AxiosRequestHeaders = {
     ["Content-Type"]: "application/json",
     ["Connection"]: "Keep-alive",
+    ["I-Authentication"]: localStorage.getItem("I-Authentication").toString() ?? ""
 }
 
 const _config: AxiosRequestConfig = {
-    baseURL: 'https://localhost:7130/api/',
+    baseURL: apiUrls.baseURL,
     timeout: 60 * 1000,
     headers: _headers
 }
@@ -18,6 +20,7 @@ const _config: AxiosRequestConfig = {
  */
 export const addHeader = (key: string, value: string) => {
     _headers[key] = value
+    _config.headers = _headers
 }
 
 export const axios = Axios.create(_config);

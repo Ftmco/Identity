@@ -20,9 +20,9 @@ public class ApplicationController : ControllerBase
         return applications.Status switch
         {
             ActionApplicationsStatus.Success => Ok(Success("Applications", "", new { applications.Applications })),
-            ActionApplicationsStatus.UserNotFound => Ok(Notfound("User Notfound", "Please Login to See your applications")),
-            ActionApplicationsStatus.Exception => Ok(Excetpion("Exception", "Please Try again to get applications")),
-            _ => Ok(Excetpion("Exception", "Please Try again to get applications")),
+            ActionApplicationsStatus.UserNotFound => Ok(Faild(404, "User Notfound", "Please Login to See your applications")),
+            ActionApplicationsStatus.Exception => Ok(ApiException("Exception", "Please Try again to get applications")),
+            _ => Ok(ApiException("Exception", "Please Try again to get applications")),
         };
     }
 
@@ -34,11 +34,11 @@ public class ApplicationController : ControllerBase
         return createApplication.Status switch
         {
             CUApplicationStatus.Success => Ok(Success($"Success To Create Application : {create.Name}", "", new { createApplication.Application })),
-            CUApplicationStatus.UserNotFound => Ok(Notfound("User Notfound", "Please Login to See your applications")),
-            CUApplicationStatus.Exception => Ok(Excetpion("Exception", "Please Try again to create application")),
-            CUApplicationStatus.ApplicationNotFound => Ok(Notfound("Application Notfound", "Application is not exist")),
-            CUApplicationStatus.ApplicationExist => Ok(AccessDenied("Application Has Exist", $"An application has exist with this name : {create.Name}")),
-            _ => Ok(Excetpion("Exception", "Please Try again to create application")),
+            CUApplicationStatus.UserNotFound => Ok(Faild(404, "User Notfound", "Please Login to See your applications")),
+            CUApplicationStatus.Exception => Ok(ApiException("Exception", "Please Try again to create application")),
+            CUApplicationStatus.ApplicationNotFound => Ok(Faild(404, "Application Notfound", "Application is not exist")),
+            CUApplicationStatus.ApplicationExist => Ok(Faild(403, "Application Has Exist", $"An application has exist with this name : {create.Name}")),
+            _ => Ok(ApiException("Exception", "Please Try again to create application")),
         };
     }
 
@@ -49,11 +49,11 @@ public class ApplicationController : ControllerBase
         return updateApplicatin.Status switch
         {
             CUApplicationStatus.Success => Ok(Success($"Success To Update Application : {updateApplicatin.Application.Name}", "", new { updateApplicatin.Application })),
-            CUApplicationStatus.UserNotFound => Ok(Notfound("User Notfound", "Please Login to update application")),
-            CUApplicationStatus.Exception => Ok(Excetpion("Exception", "Please Try again to update application")),
-            CUApplicationStatus.ApplicationNotFound => Ok(Notfound("Application Notfound", "Application is not exist")),
-            CUApplicationStatus.ApplicationExist => Ok(AccessDenied("Application Has Exist", $"An application has exist with this name : {update.Name}")),
-            _ => Ok(Excetpion("Exception", "Please Try again to update application")),
+            CUApplicationStatus.UserNotFound => Ok(Faild(404, "User Notfound", "Please Login to update application")),
+            CUApplicationStatus.Exception => Ok(ApiException("Exception", "Please Try again to update application")),
+            CUApplicationStatus.ApplicationNotFound => Ok(Faild(404, "Application Notfound", "Application is not exist")),
+            CUApplicationStatus.ApplicationExist => Ok(Faild(403, "Application Has Exist", $"An application has exist with this name : {update.Name}")),
+            _ => Ok(ApiException("Exception", "Please Try again to update application")),
         };
     }
 
@@ -65,10 +65,10 @@ public class ApplicationController : ControllerBase
         return delete.Status switch
         {
             ActionApplicationsStatus.Success => Ok(Success($"Success To Delete Application : {delete.AppName}", "", new { delete.Id })),
-            ActionApplicationsStatus.UserNotFound => Ok(Notfound("User Notfound", "Please Login to delete application")),
-            ActionApplicationsStatus.Exception => Ok(Excetpion("Exception", "Please Try again to delete application")),
-            ActionApplicationsStatus.ApplicationNotFound => Ok(Notfound("Application Notfound", "Application is not exist")),
-            _ => Ok(Excetpion("Exception", "Please Try again to delete application")),
+            ActionApplicationsStatus.UserNotFound => Ok(Faild(404, "User Notfound", "Please Login to delete application")),
+            ActionApplicationsStatus.Exception => Ok(ApiException("Exception", "Please Try again to delete application")),
+            ActionApplicationsStatus.ApplicationNotFound => Ok(Faild(404, "Application Notfound", "Application is not exist")),
+            _ => Ok(ApiException("Exception", "Please Try again to delete application")),
         };
     }
 
@@ -79,9 +79,9 @@ public class ApplicationController : ControllerBase
         return users.Status switch
         {
             GetApplicationUsersStatus.Success => Ok(Success("User Applications", "", new { users.Users })),
-            GetApplicationUsersStatus.ApplicationNotFound => Ok(Notfound("Application Notfound", "")),
-            GetApplicationUsersStatus.Exception => Ok(Excetpion("Exception", "Please Try again to get application users")),
-            _ => Ok(Excetpion("Exception", "Please Try again to get application users")),
+            GetApplicationUsersStatus.ApplicationNotFound => Ok(Faild(404, "Application Notfound", "")),
+            GetApplicationUsersStatus.Exception => Ok(ApiException("Exception", "Please Try again to get application users")),
+            _ => Ok(ApiException("Exception", "Please Try again to get application users")),
         };
     }
 }
