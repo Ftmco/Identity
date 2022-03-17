@@ -1,1 +1,0 @@
-﻿namespace Identity.Package.Profile;
