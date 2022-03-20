@@ -9,6 +9,9 @@ public class SessionServices : ISessionRules, IDisposable
         _sessionCrud = sessionCrud;
     }
 
+    public async Task<bool> AnyAsync(Expression<Func<Session, bool>> any)
+            => await _sessionCrud.AnyAsync(any);
+
     public async Task<Session> CreateSessionAsync(User user, Application application)
     => await Task.Run(async () =>
     {

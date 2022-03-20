@@ -11,4 +11,6 @@ public interface ISessionRules
     Task<IEnumerable<Session>> GetApplicationSessionAsync(Guid appId);
 
     Task<IEnumerable<Session>> GetApplicationSessionAsync(Application application);
+
+    Task<bool> AnyAsync(Expression<Func<Session,bool>> any);
 }
