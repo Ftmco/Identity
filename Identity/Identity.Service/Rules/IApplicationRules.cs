@@ -17,4 +17,6 @@ public interface IApplicationRules
     Task<DeleteApplicationResponse> DeleteApplicationAsync(DeleteApplicationViewModel delete, HttpContext httpContext);
 
     Task<GetApplicationUsersResponse> GetUsersAsync(ApplicationRequest application);
+
+    Task<bool> CheckUserInAppliactionAsync(Session session,Application application);
 }

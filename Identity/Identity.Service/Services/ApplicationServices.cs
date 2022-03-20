@@ -179,5 +179,8 @@ public class ApplicationServices : IApplicationRules, IDisposable
     {
         return await _applicationCrud.GetOneAsync(app => app.ApiKey == application.ApiKey && app.Password == application.Password.CreateSHA256());
     });
+
+    public async Task<bool> CheckUserInAppliactionAsync(Session session, Application application)
+            => await _session.AnyAsync(s => s.Value == session.Value && s.ApplicationId == application.Id);
 }
 
