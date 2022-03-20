@@ -136,6 +136,7 @@ public class AccountServices : IAccountRules, IDisposable
                 FullName: user.FullName,
                 Email: user.Email,
                 MobileNo: user.MobileNo,
+                IsActive: user.IsActive,
                 RegisterDate: user.RegisterDate
                 ));
 
