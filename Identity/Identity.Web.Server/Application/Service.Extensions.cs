@@ -15,6 +15,7 @@ public static class ServiceExtensions
         services.AddScoped<IApplicationRules, ApplicationServices>();
         services.AddScoped<ISessionRules, SessionServices>();
         services.AddScoped<IProfileRules, ProfileService>();
+        services.AddScoped<IApplicationUserRules, ApplicationUserServices>();
         return services;
     }
 
