@@ -26,7 +26,6 @@ public class ApplicationUserServices : IApplicationUserRules
         GC.SuppressFinalize(this);
         return ValueTask.CompletedTask;
     }
-
     public async Task<GetUserResponse> GetUserByTokenAsync(GetUserByToken getUserByToken)
     {
         Application application = await _application.FindApplicationAsync(getUserByToken.Application);
