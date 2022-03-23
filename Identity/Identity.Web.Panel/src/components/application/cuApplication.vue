@@ -59,6 +59,7 @@
     import ApplicationService from '@/api/service/application.service'
     import { messages, rules } from '@/constants'
     import { File } from '../../api/models/application.model'
+import { loading, showMessage } from '@/services/message'
 
     export default Vue.extend({
         data: () => ({
@@ -120,9 +121,9 @@
                     this.img = ""
             },
             submit() {
-                let isValid = this.$refs.appForm.validate()
+                let isValid = (this.$refs.appForm as any).validate()
                 if (isValid) {
-                    this.$root.$refs.loading.open()
+                    loading(this)
                     this.application.file = this.createFile()
                     if (this.isEdit) {
                         this.application.id = this.editApp.id
@@ -131,7 +132,7 @@
                         this.create(this.application)
                 }
                 else
-                    this.showMessage(messages.invalidForm)
+                    showMessage(this,messages.invalidForm)
             },
             update(app: any) {
                 this.applicationService.Update(app).

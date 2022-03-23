@@ -69,10 +69,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { messages, rules } from "@/constants";
+import { messages, rules, app } from "@/constants";
 import AccountServiec from "@/api/service/account.service";
 import { apiCall } from "@/api";
 import AccountBase from "@/components/account/AccountBase.vue";
+import { showMessage } from "@/services/message";
+import { login } from "fteam.identity.package/src/Account/account";
 
 export default Vue.extend({
   components: { AccountBase },
@@ -90,21 +92,28 @@ export default Vue.extend({
   },
   methods: {
     loginSubmit() {
-      let isValid = this.$refs.loginForm.validate();
+      let isValid = (this.$refs.loginForm as any).validate();
       if (isValid) {
-        this.accountService
-          .Login(this.login)
-          .then((res) => {
-            if (res.status) window.location = "profile";
-            this.showMessage(res.title);
+        login({
+          application: {
+            apiKey: app.apikey,
+            password: app.password,
+          },
+          password: this.login.password,
+          userName: this.login.userName,
+        })
+          .then((res: any) => {
+            if (res.Status) {
+              localStorage.setItem("sessionKey", res.Result.Key);
+              localStorage.setItem(res.Result.Key, res.Result.Value);
+              (window.location as any) = "/account/profile";
+            }
+            showMessage(this, res.title);
           })
           .catch((e) => {
-            this.showMessage(messages.netWorkError(e.message).title);
+            showMessage(this, e.message);
           });
-      } else this.showMessage(messages.invalidForm);
-    },
-    showMessage(message: string) {
-      this.$root.$refs.snackbar.open(message);
+      } else showMessage(this, messages.invalidForm);
     },
   },
 });
