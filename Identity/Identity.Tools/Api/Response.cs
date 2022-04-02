@@ -1,6 +1,4 @@
 ﻿using Identity.ViewModels.Api;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using Tools.Crypto;
 
 namespace Identity.Tools.Api;
