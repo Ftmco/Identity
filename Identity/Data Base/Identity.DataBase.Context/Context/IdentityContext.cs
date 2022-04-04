@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Identity.DataBase.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Identity.DataBase.Context;
 
@@ -11,4 +12,8 @@ public class IdentityContext : DbContext
             optionsBuilder.UseNpgsql("host=localhost;database=identity_db;user id=fteam;password=1G14ijWA;");
         }
     }
+
+    public virtual DbSet<User> User { get; set; }
+
+    public virtual DbSet<Session> Session { get; set; }
 }
