@@ -1,4 +1,7 @@
-﻿namespace Servant.Service.Implemention.Base;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+
+namespace Identity.Service.Implemention.Base;
 
 public class BaseQuery<TEntity, TContext> : IAsyncDisposable, IBaseQuery<TEntity, TContext> where TEntity : class where TContext : DbContext
 {

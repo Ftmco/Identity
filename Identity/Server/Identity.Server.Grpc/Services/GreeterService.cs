@@ -1,5 +1,4 @@
 using Grpc.Core;
-using Identity.Server.Grpc;
 
 namespace Identity.Server.Grpc.Services
 {

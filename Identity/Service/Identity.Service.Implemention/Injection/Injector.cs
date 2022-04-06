@@ -1,14 +1,15 @@
-﻿using Identity.DataBase.Context;
+﻿using Identity.DataBase.Entity;
+using Identity.Service.Implemention;
+using Identity.Service.Implemention.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Servant.Service.Implemention.Base;
 
 namespace Servant.Service.Implemention.Injector;
 
 public static class Injector
 {
-    public static async Task<IServiceCollection> AddFileServicesAsync(this IServiceCollection services, IConfiguration configuration)
+    public static async Task<IServiceCollection> AddIdentityServicesAsync(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<IdentityContext>(options =>
         {
@@ -25,19 +26,26 @@ public static class Injector
 
     public static Task<IServiceCollection> AddBaseQueryAsync(this IServiceCollection services)
     {
-      
+        services.AddScoped<IBaseQuery<User, IdentityContext>, BaseQuery<User, IdentityContext>>();
+        services.AddScoped<IBaseQuery<Session, IdentityContext>, BaseQuery<Session, IdentityContext>>();
         return Task.FromResult(services);
     }
 
     public static Task<IServiceCollection> AddBaseCudAsync(this IServiceCollection services)
     {
-       
+        services.AddScoped<IBaseCud<User, IdentityContext>, BaseCud<User, IdentityContext>>();
+        services.AddScoped<IBaseCud<Session, IdentityContext>, BaseCud<Session, IdentityContext>>();
         return Task.FromResult(services);
     }
 
     public static Task<IServiceCollection> AddServicesAsync(this IServiceCollection services)
     {
-       
+        services.AddTransient<IAccountAction, AccountAction>();
+        services.AddTransient<IUserAction, UserAction>();
+        services.AddTransient<IUserGet, UserGet>();
+        services.AddTransient<IUserViewModel, UserViewModel>();
+        services.AddTransient<ISessionAction, SessionAction>();
+        services.AddTransient<ISessionGet, SessionGet>();
 
         return Task.FromResult(services);
     }

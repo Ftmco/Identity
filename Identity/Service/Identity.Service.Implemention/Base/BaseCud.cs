@@ -1,5 +1,7 @@
-﻿
-namespace Servant.Service.Implemention.Base;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+
+namespace Identity.Service.Implemention.Base;
 
 public class BaseCud<TEntity, TContext> : IAsyncDisposable, IBaseCud<TEntity, TContext> where TEntity : class where TContext : DbContext
 {
@@ -80,7 +82,7 @@ public class BaseCud<TEntity, TContext> : IAsyncDisposable, IBaseCud<TEntity, TC
             await _context.SaveChangesAsync();
             return true;
         }
-        catch
+        catch (Exception ex)
         {
             return false;
         }

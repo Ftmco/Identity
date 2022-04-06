@@ -9,12 +9,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data Base\Identity.DataBase.Context\Identity.DataBase.Context.csproj" />
     <ProjectReference Include="..\..\Data Base\Identity.DataBase.Entity\Identity.DataBase.Entity.csproj" />
-    <ProjectReference Include="..\Identity.Service.Abstratcion\Identity.Service.Abstratcion.csproj" />
+    <ProjectReference Include="..\Identity.Service.Abstraction\Identity.Service.Abstraction.csproj" />
+    <ProjectReference Include="..\Identity.Service.Tools\Identity.Service.Tools.csproj" />
   </ItemGroup>
 
 </Project>
