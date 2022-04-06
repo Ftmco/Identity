@@ -1,8 +1,8 @@
 ﻿namespace Identity.DataBase.ViewModel.Account;
 
-public record Login(string UserName,string Password);
+public record Login(string UserName, string Password);
 
-public record LoginResponse(LoginStatus Status,Session Session);
+public record LoginResponse(LoginStatus Status, Session? Session);
 
 public enum LoginStatus
 {
@@ -11,4 +11,4 @@ public enum LoginStatus
     Exception = 2
 }
 
-public record Session(string Key,string Value);
+public record Session(string Key, string Value);
