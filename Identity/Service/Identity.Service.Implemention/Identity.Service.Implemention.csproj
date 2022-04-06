@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -15,12 +15,6 @@
     <ProjectReference Include="..\..\Data Base\Identity.DataBase.Context\Identity.DataBase.Context.csproj" />
     <ProjectReference Include="..\..\Data Base\Identity.DataBase.Entity\Identity.DataBase.Entity.csproj" />
     <ProjectReference Include="..\Identity.Service.Abstratcion\Identity.Service.Abstratcion.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Account\" />
-    <Folder Include="Session\" />
-    <Folder Include="User\" />
   </ItemGroup>
 
 </Project>
