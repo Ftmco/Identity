@@ -1,5 +1,4 @@
-using Identity.DataBase.Context;
-using Microsoft.EntityFrameworkCore;
+using Servant.Service.Implemention.Injector;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +8,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<IdentityContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Identity_DB")));
+await builder.Services.AddIdentityServicesAsync(builder.Configuration);
 
 var app = builder.Build();
 
