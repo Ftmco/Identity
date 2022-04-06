@@ -1,0 +1,1 @@
+﻿global using static Identity.DataBase.ViewModel.ApiResponse;
