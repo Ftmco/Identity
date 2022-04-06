@@ -28,7 +28,7 @@ public static class Encode
     }
 
     public static string KeyMaker(this string path)
-    {        
+    {
         byte[]? bytes = Encoding.UTF8.GetBytes(path);
         string? base64 = Convert.ToBase64String(bytes);
         return base64.ToString();
