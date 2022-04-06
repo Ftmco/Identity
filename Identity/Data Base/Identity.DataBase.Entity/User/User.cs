@@ -6,6 +6,10 @@ public record User
     public Guid Id { get; set; }
 
     [Required]
+    public string UserName { get; set; }
+
+
+    [Required]
     public string FullName { get; set; }
 
     public string Email { get; set; }
@@ -20,6 +24,9 @@ public record User
 
     [Required]
     public DateTime RegisterDate { get; set; }
+
+    [Required]
+    public string Password { get; set; }
 
     //Navigation Proeprty
     //Relationships
