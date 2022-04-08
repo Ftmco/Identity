@@ -20,9 +20,8 @@ public class SessionAction : ISessionAction
     public async Task<Session?> CreateSessionAsync(User user)
     {
         string key = _configuration["Identity:Key"];
-        string hashKey = key.KeyMaker();
         string userJson = JsonConvert.SerializeObject(user with { Password = "", ActiveCode = "" });
-        string encUser = userJson.Encrypt(hashKey);
+        string encUser = CryptoEngine.Encrypt(userJson, key);
         Session session = new()
         {
             Key = "Auth-Token",
