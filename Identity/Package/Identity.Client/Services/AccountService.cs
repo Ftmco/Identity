@@ -28,7 +28,7 @@ public class AccountService : IAccountRules
     public async Task<User?> GetUserCacheAsync(string session)
     {
         User? userCache = await _cache.GetItemAsync<User>(session);
-        if (userCache != null)
+        if (userCache == null)
         {
             string? channelAddress = _configuration["Identity:Address:gRPC"];
             GrpcChannel? channel = GrpcChannel.ForAddress(channelAddress);

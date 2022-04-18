@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageId>Fteam.Identity.Client</PackageId>
-		<PackageVersion>1.2.1</PackageVersion>
+		<PackageVersion>1.2.2</PackageVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
