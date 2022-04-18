@@ -10,12 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Service\Identity.Service.Abstraction\Identity.Service.Abstraction.csproj" />
+    <ProjectReference Include="..\..\Service\Identity.Service.Implemention\Identity.Service.Implemention.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="Protos\account.proto" GrpcServices="Server" />
+	</ItemGroup>
+	
 </Project>

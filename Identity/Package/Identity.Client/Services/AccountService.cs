@@ -1,8 +1,9 @@
-﻿using Identity.Client.Models;
+﻿using Grpc.Net.Client;
+using Identity.Client.Cache;
+using Identity.Client.Models;
 using Identity.Client.Rules;
-using Identity.Service.Tools.Crypto;
+using Identity.Server.Grpc.Protos;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 
 namespace Identity.Client.Services;
 
@@ -10,9 +11,12 @@ public class AccountService : IAccountRules
 {
     readonly IConfiguration _configuration;
 
-    public AccountService(IConfiguration configuration)
+    readonly ICache _cache;
+
+    public AccountService(IConfiguration configuration, ICache cache)
     {
         _configuration = configuration;
+        _cache = cache;
     }
 
     public ValueTask DisposeAsync()
@@ -21,11 +25,19 @@ public class AccountService : IAccountRules
         return ValueTask.CompletedTask;
     }
 
-    public Task<User?> GetUserCacheAsync(string session)
+    public async Task<User?> GetUserCacheAsync(string session)
     {
-        string? key = _configuration["Identity:Key"];
-        string? decodeJson = CryptoEngine.Decrypt(session, key);
-        User? user = JsonConvert.DeserializeObject<User>(decodeJson);
-        return Task.FromResult(user);
+        User? userCache = await _cache.GetItemAsync<User>(session);
+        if (userCache != null)
+        {
+            string? channelAddress = _configuration["Identity:Address:gRPC"];
+            GrpcChannel? channel = GrpcChannel.ForAddress(channelAddress);
+            Account.AccountClient? client = new(channel);
+            GetUserReply? user = await client.GetUserAsync(new() { Session = session });
+            User? userModel = User.CreateUser(user.Result);
+            await _cache.SetItemAsync(session, userModel);
+            userCache = userModel;
+        }
+        return userCache;
     }
 }
