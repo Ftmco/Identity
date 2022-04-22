@@ -29,4 +29,8 @@ public class IdentityContext : DbContext
     public virtual DbSet<User> User { get; set; }
 
     public virtual DbSet<Session> Session { get; set; }
+
+    public virtual DbSet<Profile> Profile { get; set; }
+
+    public virtual DbSet<ProfileImage> ProfileImage { get; set; }
 }
