@@ -46,6 +46,7 @@ public static class Injector
         services.AddTransient<IUserViewModel, UserViewModel>();
         services.AddTransient<ISessionAction, SessionAction>();
         services.AddTransient<ISessionGet, SessionGet>();
+        services.AddTransient<IFastAccountAction, FastAccountAction>();
 
         return Task.FromResult(services);
     }
