@@ -8,7 +8,7 @@ public class UserViewModel : IUserViewModel
     {
         DataBase.ViewModel.UserViewModel viewModel = new(
             Id: user.Id,
-            FullName: user.FullName,
+            FullName: "",
             Email: user.Email,
             MobileNo: user.MobileNo,
             RegisterDate: user.RegisterDate.ToString(),
