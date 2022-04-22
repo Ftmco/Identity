@@ -34,6 +34,9 @@ public class SessionAction : ISessionAction
         return await _sessionCud.InsertAsync(session) ? session : null;
     }
 
+    public async Task DeleteSessionAsync(string session)
+        => await _sessionCud.DeleteAsync(s => s.Value == session);
+
     public ValueTask DisposeAsync()
     {
         GC.SuppressFinalize(this);
