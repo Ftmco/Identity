@@ -1,4 +1,6 @@
-﻿namespace Identity.Service.Abstraction;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Identity.Service.Abstraction;
 
 public interface IAccountAction : IAsyncDisposable
 {
@@ -8,7 +10,7 @@ public interface IAccountAction : IAsyncDisposable
 
     Task<ActivationStatus> ActivationAsync(Activation activation);
 
-    Task LogoutAsync();
+    Task LogoutAsync(HttpContext httpContext);
 
     Task ResetPasswordAsync();
 

@@ -3,6 +3,7 @@ using Identity.DataBase.ViewModel.Account;
 using Identity.Service.Tools.Code;
 using Identity.Service.Tools.Crypto;
 using Identity.Service.Tools.Sms;
+using Microsoft.AspNetCore.Http;
 
 namespace Identity.Service.Implemention;
 
@@ -16,7 +17,8 @@ public class AccountAction : IAccountAction
 
     readonly IBaseCud<User, IdentityContext> _userCud;
 
-    public AccountAction(IUserGet userGet, ISessionAction sessionAction, IUserAction userAction, IBaseCud<User, IdentityContext> userCud)
+    public AccountAction(IUserGet userGet, ISessionAction sessionAction, IUserAction userAction,
+        IBaseCud<User, IdentityContext> userCud)
     {
         _userGet = userGet;
         _sessionAction = sessionAction;
@@ -65,9 +67,11 @@ public class AccountAction : IAccountAction
         return new LoginResponse(LoginStatus.UserNotFound, null);
     }
 
-    public Task LogoutAsync()
+    public async Task LogoutAsync(HttpContext httpContext)
     {
-        throw new NotImplementedException();
+        string session = httpContext.Request.Headers["Auth-Token"];
+        if (!string.IsNullOrEmpty(session))
+            await _sessionAction.DeleteSessionAsync(session);
     }
 
     public Task ResetForgotPasswordAsync()

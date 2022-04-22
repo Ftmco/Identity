@@ -52,6 +52,7 @@ public class AccountController : ControllerBase
     [HttpGet("Logout")]
     public async Task<IActionResult> LogoutAsync()
     {
-        return Ok();
+        await _account.LogoutAsync(HttpContext);
+        return Ok(Success("کاربر با موفقیت از حساب خارج شد", "", new { }));
     }
 }
