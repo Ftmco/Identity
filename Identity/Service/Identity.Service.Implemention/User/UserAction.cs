@@ -25,7 +25,6 @@ public class UserAction : IUserAction
         User newUser = new()
         {
             Email = " ",
-            FullName = signUp.FullName,
             MobileNo = signUp.MobileNo,
             IsActvie = false,
             Password = signUp.Password.CreateSHA256(),
