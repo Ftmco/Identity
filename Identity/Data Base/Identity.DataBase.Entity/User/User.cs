@@ -8,10 +8,6 @@ public record User
     [Required]
     public string UserName { get; set; }
 
-
-    [Required]
-    public string FullName { get; set; }
-
     public string Email { get; set; }
 
     public string MobileNo { get; set; }
@@ -32,4 +28,6 @@ public record User
     //Relationships
 
     public virtual ICollection<Session> Sessions { get; set; }
+
+    public virtual ICollection<Profile> Profiles { get; set; }
 }
