@@ -23,7 +23,7 @@ public class AccountService : Account.AccountBase
 
         return user.Status switch
         {
-            DataBase.ViewModel.GetUserStatus.Success => new GetUserReply
+            GetUserStatus.Success => new GetUserReply
             {
                 Code = 200,
                 Status = true,
@@ -39,8 +39,8 @@ public class AccountService : Account.AccountBase
                     MobileNo = user.User.MobileNo,
                 }
             },
-            DataBase.ViewModel.GetUserStatus.UserNotFound => new GetUserReply { Code = 404, Status = false, Title = "کاربر یافت نشد", Message = "", Result = null },
-            DataBase.ViewModel.GetUserStatus.Exception => new GetUserReply { Code = 500, Status = false, Title = "خطایی رخ داد مجددا تلاش کنید", Message = "", Result = null },
+            GetUserStatus.UserNotFound => new GetUserReply { Code = 404, Status = false, Title = "کاربر یافت نشد", Message = "", Result = null },
+            GetUserStatus.Exception => new GetUserReply { Code = 500, Status = false, Title = "خطایی رخ داد مجددا تلاش کنید", Message = "", Result = null },
             _ => new GetUserReply { Code = 500, Status = false, Title = "خطایی رخ داد مجددا تلاش کنید", Message = "", Result = null },
         };
     }
