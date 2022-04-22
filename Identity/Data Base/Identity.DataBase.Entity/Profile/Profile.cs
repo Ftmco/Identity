@@ -15,7 +15,7 @@ public record Profile
     public Guid UserId { get; set; }
 
     [Required]
-    public string FistName { get; set; }
+    public string FirstName { get; set; }
 
     [Required]
     public string LastName { get; set; }
