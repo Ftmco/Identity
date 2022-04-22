@@ -19,7 +19,7 @@ public class AccountService : Account.AccountBase
 
     public override async Task<GetUserReply> GetUser(GetUserRequest request, ServerCallContext context)
     {
-        GetUserFromSessionResponse? user = await _userGet.GetUserFromSessionAsync(request.Session);
+        GetUserFromSessionResponse? user = await _userGet.FindUserFromSessionAsync(request.Session);
 
         return user.Status switch
         {
