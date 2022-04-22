@@ -20,8 +20,8 @@ public class SessionAction : ISessionAction
     public async Task<Session?> CreateSessionAsync(User user)
     {
         string key = _configuration["Identity:Key"];
-        string userJson = JsonConvert.SerializeObject(user with { Password = "", ActiveCode = "" });
-        string encUser = CryptoEngine.Encrypt(userJson, key);
+        string sessionData = Guid.NewGuid().ToString();
+        string encSession = CryptoEngine.Encrypt(sessionData, key);
         Session session = new()
         {
             Key = "Auth-Token",
@@ -29,7 +29,7 @@ public class SessionAction : ISessionAction
             ExpireDate = DateTime.UtcNow.AddDays(15),
             Os = "",
             UserId = user.Id,
-            Value = encUser
+            Value = encSession
         };
         return await _sessionCud.InsertAsync(session) ? session : null;
     }
