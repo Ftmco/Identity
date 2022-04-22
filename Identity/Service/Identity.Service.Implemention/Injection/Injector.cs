@@ -28,6 +28,8 @@ public static class Injector
     {
         services.AddScoped<IBaseQuery<User, IdentityContext>, BaseQuery<User, IdentityContext>>();
         services.AddScoped<IBaseQuery<Session, IdentityContext>, BaseQuery<Session, IdentityContext>>();
+        services.AddScoped<IBaseQuery<Profile, IdentityContext>, BaseQuery<Profile, IdentityContext>>();
+        services.AddScoped<IBaseQuery<ProfileImage, IdentityContext>, BaseQuery<ProfileImage, IdentityContext>>();
         return Task.FromResult(services);
     }
 
@@ -35,6 +37,8 @@ public static class Injector
     {
         services.AddScoped<IBaseCud<User, IdentityContext>, BaseCud<User, IdentityContext>>();
         services.AddScoped<IBaseCud<Session, IdentityContext>, BaseCud<Session, IdentityContext>>();
+        services.AddScoped<IBaseCud<Profile, IdentityContext>, BaseCud<Profile, IdentityContext>>();
+        services.AddScoped<IBaseCud<ProfileImage, IdentityContext>, BaseCud<ProfileImage, IdentityContext>>();
         return Task.FromResult(services);
     }
 
@@ -47,6 +51,9 @@ public static class Injector
         services.AddTransient<ISessionAction, SessionAction>();
         services.AddTransient<ISessionGet, SessionGet>();
         services.AddTransient<IFastAccountAction, FastAccountAction>();
+        services.AddTransient<IProfileAction, ProfileAction>();
+        services.AddTransient<IProfileGet, ProfileGet>();
+        services.AddTransient<IProfileViewModel, ProfileViewModel>();
 
         return Task.FromResult(services);
     }
