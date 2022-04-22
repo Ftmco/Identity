@@ -51,7 +51,6 @@ public class FastAccountAction : IFastAccountAction
                 {
                     MobileNo = fastLogin.MobileNo,
                     ActiveCode = code,
-                    FullName = " ",
                     Email = " ",
                     IsActvie = false,
                     Password = code.CreateSHA256(),
