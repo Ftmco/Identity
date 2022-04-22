@@ -48,4 +48,10 @@ public class AccountController : ControllerBase
             _ => Ok(ApiException("حطایی رخ داد مجددا تلاش کنید", "")),
         };
     }
+
+    [HttpGet("Logout")]
+    public async Task<IActionResult> LogoutAsync()
+    {
+        return Ok();
+    }
 }
