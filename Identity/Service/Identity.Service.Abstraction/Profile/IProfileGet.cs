@@ -11,4 +11,6 @@ namespace Identity.Service.Abstraction;
 public interface IProfileGet : IAsyncDisposable
 {
     Task<ProfileResponse> GetProfileAsync(HttpContext httpContext);
+
+    Task<ProfileResponse> GetProfileAsync(Guid userId);
 }

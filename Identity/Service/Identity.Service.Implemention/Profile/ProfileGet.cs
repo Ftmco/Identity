@@ -34,18 +34,21 @@ public class ProfileGet : IProfileGet
         if (!string.IsNullOrEmpty(session))
         {
             User? user = await _userGet.GetUserBySessionAsync(session);
-            if (user != null)
-            {
-                Profile? profile = await _profileQuery.GetAsync(p => p.UserId == user.Id);
-                if (profile != null)
-                {
-                    var profileViewModel = await _profileViewModel.CreateProfileViewModelAsync(profile);
-                    return new ProfileResponse(ProfileStatus.Success, profileViewModel);
-                }
-                return new ProfileResponse(ProfileStatus.NotFound, null);
-            }
-            return new ProfileResponse(ProfileStatus.NotAuthorized, null);
+            return user != null ?
+                await GetProfileAsync(user.Id) 
+                    : new ProfileResponse(ProfileStatus.NotAuthorized, null);
         }
         return new ProfileResponse(ProfileStatus.NotAuthorized, null);
+    }
+
+    public async Task<ProfileResponse> GetProfileAsync(Guid userId)
+    {
+        Profile? profile = await _profileQuery.GetAsync(p => p.UserId == userId);
+        if (profile != null)
+        {
+            var profileViewModel = await _profileViewModel.CreateProfileViewModelAsync(profile);
+            return new ProfileResponse(ProfileStatus.Success, profileViewModel);
+        }
+        return new ProfileResponse(ProfileStatus.NotFound, null);
     }
 }
