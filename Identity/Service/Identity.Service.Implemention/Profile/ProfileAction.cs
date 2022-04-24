@@ -11,6 +11,8 @@ public class ProfileAction : IProfileAction
 {
     readonly IUserGet _userGet;
 
+    readonly IUserAction _userAction;
+
     readonly IProfileViewModel _profileViewModel;
 
     readonly IBaseQuery<Profile, IdentityContext> _profileQuery;
@@ -20,13 +22,15 @@ public class ProfileAction : IProfileAction
     readonly IBaseCud<ProfileImage, IdentityContext> _profileImageCud;
 
     public ProfileAction(IUserGet userGet, IBaseQuery<Profile, IdentityContext> profileQuery,
-        IBaseCud<Profile, IdentityContext> profileCud, IBaseCud<ProfileImage, IdentityContext> profileImageCud, IProfileViewModel profileViewModel)
+        IBaseCud<Profile, IdentityContext> profileCud, IBaseCud<ProfileImage, IdentityContext> profileImageCud,
+        IProfileViewModel profileViewModel, IUserAction userAction)
     {
         _userGet = userGet;
         _profileQuery = profileQuery;
         _profileCud = profileCud;
         _profileImageCud = profileImageCud;
         _profileViewModel = profileViewModel;
+        _userAction = userAction;
     }
 
     public ValueTask DisposeAsync()
@@ -54,6 +58,7 @@ public class ProfileAction : IProfileAction
             }
             profile.FirstName = updateProfile.FirstName;
             profile.LastName = updateProfile.LastName;
+            await _userAction.UpdateUserEmailAsync(user, updateProfile.Email);
             if (await _profileCud.UpdateAsync(profile))
             {
                 if (updateProfile.FileId != null)
