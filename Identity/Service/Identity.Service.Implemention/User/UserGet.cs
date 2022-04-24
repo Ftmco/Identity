@@ -42,4 +42,10 @@ public class UserGet : IUserGet
         Session? userSession = await _sessionGet.GetSessionAsync(session);
         return userSession != null ? await _userQuery.GetAsync(userSession.UserId) : null;
     }
+
+    public async Task<User?> GetUserAsync(string userId)
+    {
+        return Guid.TryParse(userId, out Guid uId)
+            ? await _userQuery.GetAsync(uId) : null;
+    }
 }
