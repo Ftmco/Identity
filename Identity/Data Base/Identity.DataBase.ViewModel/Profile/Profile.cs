@@ -8,7 +8,7 @@ namespace Identity.DataBase.ViewModel;
 
 public record ProfileViewModel(Guid ProfileId, Guid UserId, string FirstName, string LastName,UserViewModel User, IEnumerable<FileViewModel> Images);
 
-public record UpdateProfile(string FirstName,string LastName,Guid? FileId,string? FileToken);
+public record UpdateProfile(string FirstName,string LastName,string Email,Guid? FileId,string? FileToken);
 
 public record FileViewModel(Guid FileId, string FileToken);
 
