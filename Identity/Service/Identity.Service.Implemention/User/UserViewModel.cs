@@ -6,6 +6,7 @@ public class UserViewModel : IUserViewModel
 {
     readonly IBaseQuery<Profile, IdentityContext> _profileQuery;
 
+
     public UserViewModel(IBaseQuery<Profile, IdentityContext> profileQuery)
     {
         _profileQuery = profileQuery;
