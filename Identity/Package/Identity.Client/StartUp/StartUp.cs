@@ -11,6 +11,7 @@ public static class StartUp
     {
         service.AddTransient<IAccountRules, AccountService>();
         service.AddTransient<ICache, Cache.Cache>();
+        service.AddTransient<IGrpcRule, GrpcService>();
         return service;
     }
 }
