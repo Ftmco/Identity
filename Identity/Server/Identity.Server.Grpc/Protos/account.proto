@@ -4,10 +4,15 @@ option csharp_namespace = "Identity.Server.Grpc.Protos";
 
 service Account{
 	rpc GetUser (GetUserRequest) returns (GetUserReply);
+	rpc GetUsers(stream GetUserById) returns(stream UserModel);
 }
 
 message GetUserRequest{
 	string session = 1;
+}
+
+message GetUserById{
+	string id = 1;
 }
 
 message GetUserReply{
