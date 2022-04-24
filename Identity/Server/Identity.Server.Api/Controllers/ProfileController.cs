@@ -33,7 +33,7 @@ public class ProfileController : ControllerBase
     }
 
     [HttpPost("Update")]
-    public async Task<IActionResult> UpdateProfileAsync(UpdateProfile update)
+    public async Task<IActionResult> UpdateProfileAsync([FromBody]UpdateProfile update)
     {
         var profile = await _profileAction.UpdateProfileAsync(update, HttpContext);
         return profile.Status switch
