@@ -40,4 +40,13 @@ public class UserAction : IUserAction
         GC.SuppressFinalize(this);
         await _userGet.DisposeAsync();
     }
+
+    public async Task UpdateUserEmailAsync(User user, string email)
+    {
+        if (user.Email.Trim().ToLower() != email.Trim().ToLower())
+        {
+            user.Email = email;
+            await _userCud.UpdateAsync(user);
+        }
+    }
 }
