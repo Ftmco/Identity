@@ -22,7 +22,7 @@ app.UseCors(c =>
     .AllowAnyOrigin();
 });
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
