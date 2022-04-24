@@ -8,5 +8,7 @@ public interface IUserGet : IAsyncDisposable
 
     Task<User?> GetUserBySessionAsync(string session);
 
+    Task<User?> GetUserAsync(string userId);
+
     Task<GetUserFromSessionResponse> FindUserFromSessionAsync(string session);
 }
