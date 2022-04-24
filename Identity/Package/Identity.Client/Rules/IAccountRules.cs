@@ -6,5 +6,5 @@ public interface IAccountRules : IAsyncDisposable
 {
     Task<User?> GetUserCacheAsync(string session);
 
-    Task GetUsersStreamAsync(IEnumerable<Guid> userIds, Action<User> user);
+    Task<IEnumerable<User>> GetUsersStreamAsync(IEnumerable<Guid> userIds);
 }

@@ -44,10 +44,11 @@ public class AccountService : IAccountRules
         return userCache;
     }
 
-    public async Task GetUsersStreamAsync(IEnumerable<Guid> userIds, Action<User> user)
+    public async Task<IEnumerable<User>> GetUsersStreamAsync(IEnumerable<Guid> userIds)
     {
         GrpcChannel? channel = await _gRPC.OpenChannelAsync();
         Account.AccountClient client = new(channel);
+        List<User> usersResult = new();
         using var users = client.GetUsers();
 
         Task request = Task.Run(async () =>
@@ -63,7 +64,7 @@ public class AccountService : IAccountRules
             {
                 _ = Guid.TryParse(rs.Id, out Guid userId);
                 _ = DateTime.TryParse(rs.RegisterDate, out DateTime registerDate);
-                user(new()
+                usersResult.Add(new()
                 {
                     Id = userId,
                     Email = rs.Email,
@@ -76,5 +77,6 @@ public class AccountService : IAccountRules
         });
 
         await Task.WhenAll(request, response);
+        return usersResult;
     }
 }
