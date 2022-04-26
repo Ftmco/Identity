@@ -2,7 +2,7 @@
 
 public record UserViewModel(Guid Id, string FullName, string Email, string MobileNo, string RegisterDate, bool IsActive);
 
-public record GetUserFromSessionResponse(GetUserStatus Status, UserViewModel? User);
+public record GetUserResponse(GetUserStatus Status, UserViewModel? User);
 
 public enum GetUserStatus
 {
