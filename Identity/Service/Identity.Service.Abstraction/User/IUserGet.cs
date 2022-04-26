@@ -4,11 +4,15 @@ namespace Identity.Service.Abstraction;
 
 public interface IUserGet : IAsyncDisposable
 {
-    Task<User?> GetUserByUserNameAsync(string userName);
+    Task<User?> GetUserAsync(string userName);
+
+    Task<GetUserResponse> GetUserByUserNameAsync(string userName);
+
+    Task<GetUserResponse> GetUserByIdAsync(Guid userId);
 
     Task<User?> GetUserBySessionAsync(string session);
 
-    Task<User?> GetUserAsync(string userId);
+    Task<User?> GetUserAsync(Guid userId);
 
-    Task<GetUserFromSessionResponse> FindUserFromSessionAsync(string session);
+    Task<GetUserResponse> FindUserFromSessionAsync(string session);
 }

@@ -2,16 +2,22 @@ syntax = "proto3";
 
 option csharp_namespace = "Identity.Server.Grpc.Protos";
 
-service Account{
-	rpc GetUser (GetUserRequest) returns (GetUserReply);
-	rpc GetUsers(stream GetUserById) returns(stream UserModel);
+service User{
+	rpc GetBySession (GetBySessionRequest) returns (GetUserReply);
+	rpc GetByUserName (GetByUserNameRequest) returns (GetUserReply);
+	rpc GetById (GetByIdRequest) returns (GetUserReply);
+	rpc GetUsers(stream GetByIdRequest) returns(stream UserModel);
 }
 
-message GetUserRequest{
+message GetBySessionRequest{
 	string session = 1;
 }
 
-message GetUserById{
+message GetByUserNameRequest{
+	string userName = 1;
+}
+
+message GetByIdRequest{
 	string id = 1;
 }
 

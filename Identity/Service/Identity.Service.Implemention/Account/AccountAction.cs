@@ -28,7 +28,7 @@ public class AccountAction : IAccountAction
 
     public async Task<ActivationStatus> ActivationAsync(Activation activation)
     {
-        var user = await _userGet.GetUserByUserNameAsync(activation.UserName);
+        var user = await _userGet.GetUserAsync(activation.UserName);
         if (user != null)
         {
             if (user.ActiveCode == activation.ActiveCode)
@@ -56,7 +56,7 @@ public class AccountAction : IAccountAction
 
     public async Task<LoginResponse> LoginAsync(Login login)
     {
-        User? user = await _userGet.GetUserByUserNameAsync(login.UserName);
+        User? user = await _userGet.GetUserAsync(login.UserName);
         if (user?.Password == login.Password.CreateSHA256())
         {
             DataBase.Entity.Session? session = await _sessionAction.CreateSessionAsync(user);
@@ -86,7 +86,7 @@ public class AccountAction : IAccountAction
 
     public async Task<SignUpStatus> SignUpAsync(SignUp signUp)
     {
-        User? existUser = await _userGet.GetUserByUserNameAsync(signUp.MobileNo);
+        User? existUser = await _userGet.GetUserAsync(signUp.MobileNo);
         if (existUser == null)
         {
             User? user = await _userAction.CreateUserAsync(signUp);

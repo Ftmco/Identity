@@ -17,7 +17,7 @@ public class SessionGet : ISessionGet
         return ValueTask.CompletedTask;
     }
 
-    public async Task<Session> GetSessionAsync(string value)
+    public async Task<Session?> GetSessionAsync(string value)
     {
         return await _sessionQuery.GetAsync(s => s.Value == value);
     }

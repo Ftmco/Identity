@@ -15,7 +15,7 @@ public class Cache : ICache
 
     public async Task<ConnectionMultiplexer> ConnectAsync()
     {
-        var redisConnection = _configuration["Identity:Db:Redis:Connection"];
+        var redisConnection = _configuration["Identity:Cache:Redis:Connection"];
         ConnectionMultiplexer redis = await ConnectionMultiplexer.ConnectAsync(redisConnection);
         return redis;
     }
