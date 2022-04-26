@@ -23,7 +23,7 @@ public class FastAccountAction : IFastAccountAction
 
     public async Task<LoginResponse> ActivationAsync(Activation activation)
     {
-        User? user = await _userGet.GetUserByUserNameAsync(activation.UserName);
+        User? user = await _userGet.GetUserAsync(activation.UserName);
         if (user == null || user.ActiveCode != activation.ActiveCode)
             return new LoginResponse(LoginStatus.UserNotFound, null);
 
@@ -43,7 +43,7 @@ public class FastAccountAction : IFastAccountAction
     {
         try
         {
-            User? user = await _userGet.GetUserByUserNameAsync(fastLogin.MobileNo);
+            User? user = await _userGet.GetUserAsync(fastLogin.MobileNo);
             var code = 7.CreateCode();
             if (user == null)
             {
