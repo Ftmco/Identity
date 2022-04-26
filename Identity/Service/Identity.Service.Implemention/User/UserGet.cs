@@ -24,17 +24,17 @@ public class UserGet : IUserGet
         return ValueTask.CompletedTask;
     }
 
-    public async Task<User?> GetUserByUserNameAsync(string userName)
+    public async Task<User?> GetUserAsync(string userName)
     {
         return await _userQuery.GetAsync(u => u.MobileNo == userName || u.Email == userName || u.UserName == userName);
     }
 
-    public async Task<GetUserFromSessionResponse> FindUserFromSessionAsync(string session)
+    public async Task<GetUserResponse> FindUserFromSessionAsync(string session)
     {
         var user = await GetUserBySessionAsync(session);
         return user != null
-            ? new GetUserFromSessionResponse(GetUserStatus.Success, await _userViewModel.CreateUserViewModelAsync(user))
-            : new GetUserFromSessionResponse(GetUserStatus.UserNotFound, null);
+            ? new GetUserResponse(GetUserStatus.Success, await _userViewModel.CreateUserViewModelAsync(user))
+            : new GetUserResponse(GetUserStatus.UserNotFound, null);
     }
 
     public async Task<User?> GetUserBySessionAsync(string session)
@@ -43,9 +43,25 @@ public class UserGet : IUserGet
         return userSession != null ? await _userQuery.GetAsync(userSession.UserId) : null;
     }
 
-    public async Task<User?> GetUserAsync(string userId)
+    public async Task<User?> GetUserAsync(Guid userId)
     {
-        return Guid.TryParse(userId, out Guid uId)
-            ? await _userQuery.GetAsync(uId) : null;
+        return await _userQuery.GetAsync(userId);
     }
+
+    public async Task<GetUserResponse> GetUserByUserNameAsync(string userName)
+    {
+        var user = await GetUserAsync(userName);
+        return user != null ?
+                new GetUserResponse(GetUserStatus.Success, await _userViewModel.CreateUserViewModelAsync(user)) :
+                    new GetUserResponse(GetUserStatus.UserNotFound, null);
+    }
+
+    public async Task<GetUserResponse> GetUserByIdAsync(Guid userId)
+    {
+        var user = await GetUserAsync(userId);
+        return user != null ?
+                new GetUserResponse(GetUserStatus.Success, await _userViewModel.CreateUserViewModelAsync(user)) :
+                    new GetUserResponse(GetUserStatus.UserNotFound, null);
+    }
+
 }
