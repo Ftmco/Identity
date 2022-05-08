@@ -54,7 +54,7 @@ public class FastAccountAction : IFastAccountAction
                     Email = " ",
                     IsActvie = false,
                     Password = code.CreateSHA256(),
-                    RegisterDate = DateTime.Now,
+                    RegisterDate = DateTime.UtcNow,
                     UserName = fastLogin.MobileNo
                 };
                 if (!await _userCud.InsertAsync(user))
