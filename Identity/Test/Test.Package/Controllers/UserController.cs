@@ -8,9 +8,9 @@ namespace Test.Package.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        readonly IAccountRules _account;
+        readonly IAccountAction _account;
 
-        public UserController(IAccountRules account)
+        public UserController(IAccountAction account)
         {
             _account = account;
         }
