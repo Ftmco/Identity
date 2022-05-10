@@ -22,18 +22,18 @@ message GetByIdRequest{
 }
 
 message GetUserReply{
-	int32 Code = 1;
-	bool Status = 2;
-	string Title = 3;
-	string Message = 4;
-	UserModel Result = 5;
+	int32 code = 1;
+	bool status = 2;
+	string title = 3;
+	string message = 4;
+	UserModel result = 5;
 }
 
 message UserModel {
-	string Id = 1;
-	string FullName = 2;
-	string MobileNo = 3;
-	string Email = 4;
-	string RegisterDate = 5;
-	bool IsActive = 6;
+	string id = 1;
+	string fullName = 2;
+	string mobileNo = 3;
+	string email = 4;
+	string registerDate = 5;
+	bool isActive = 6;
 }
