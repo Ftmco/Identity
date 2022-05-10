@@ -9,7 +9,7 @@ public static class StartUp
 {
     public static IServiceCollection AddFteamIdentityService(this IServiceCollection service)
     {
-        service.AddTransient<IAccountRules, AccountService>();
+        service.AddTransient<IAccountAction, AccountAction>();
         service.AddTransient<ICache, Cache.Cache>();
         service.AddTransient<IGrpcRule, GrpcService>();
         service.AddTransient<IUserGet, UserGet>();
