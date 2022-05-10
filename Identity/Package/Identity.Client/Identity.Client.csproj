@@ -29,7 +29,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Protobuf Include="..\..\Server\Identity.Server.Grpc\Protos\user.proto" Link="Protos\user.proto" GrpcServices="Client"/>
+		<Protobuf Include="..\..\Server\Identity.Server.Grpc\Protos\account.proto" GrpcServices="Client">
+		  <Link>Protos\account.proto</Link>
+		</Protobuf>
+		<Protobuf Include="..\..\Server\Identity.Server.Grpc\Protos\user.proto" Link="Protos\user.proto" GrpcServices="Client" />
 	</ItemGroup>
 
 </Project>
