@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{BCC29AD4-5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test\Test.csproj", "{207559C6-F7CF-459D-9DAB-0D54633FC392}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Package", "Test\Test.Package\Test.Package.csproj", "{116A93CB-CD06-4AA4-9F75-BFB53CB3F032}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Package", "Test\Test.Package\Test.Package.csproj", "{116A93CB-CD06-4AA4-9F75-BFB53CB3F032}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
