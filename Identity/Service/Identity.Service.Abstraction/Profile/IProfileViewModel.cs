@@ -12,4 +12,6 @@ public interface IProfileViewModel : IAsyncDisposable
     Task<ProfileViewModel> CreateProfileViewModelAsync(Profile profile);
 
     Task<IEnumerable<ProfileViewModel>> CreateProfileViewModelAsync(IEnumerable<Profile> profiles);
+
+    Task<IEnumerable<FileViewModel>> CreateProfileImageViewModelAsync(Guid profileId);
 }
