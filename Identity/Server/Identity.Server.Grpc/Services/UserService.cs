@@ -123,6 +123,18 @@ public class UserService : Protos.User.UserBase
                 });
             }
         }
+    }
 
+    public override async Task GetUserAvatars(GetUserAvatarsRequest request, IServerStreamWriter<UserAvatarsReply> responseStream, ServerCallContext context)
+    {
+        _ = Guid.TryParse(request.UserId, out Guid userId);
+        var avatars = await _profileGet.GetUserAvatarsAsync(userId);
+        foreach (FileViewModel? avatar in avatars)
+            await responseStream.WriteAsync(new()
+            {
+                Base64 = avatar.Base64,
+                FileId = avatar.FileId.ToString(),
+                FileToken = avatar.FileToken
+            });
     }
 }

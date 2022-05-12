@@ -7,6 +7,18 @@ service User{
 	rpc GetByUserName (GetByUserNameRequest) returns (GetUserReply);
 	rpc GetById (GetByIdRequest) returns (GetUserReply);
 	rpc GetUsers(stream GetByIdRequest) returns(stream UserModel);
+	rpc GetUserAvatars(GetUserAvatarsRequest) returns(stream UserAvatarsReply);
+}
+
+message GetUserAvatarsRequest{
+	string userId = 1;
+	bool enableBase64 = 2;
+}
+
+message UserAvatarsReply{
+	string fileId = 1;
+	string fileToken = 2;
+	string base64 = 3;
 }
 
 message GetBySessionRequest{
