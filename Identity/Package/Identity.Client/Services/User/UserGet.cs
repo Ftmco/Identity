@@ -137,4 +137,29 @@ public class UserGet : IUserGet
 
         return user;
     }
+
+    public async Task GetUserAvatarsAsync(Guid userId, bool enableBase64, Action<Avatar> avatar)
+    {
+        var gRPC = await _gRPC.OpenChannelAsync();
+        UserRPC.UserClient client = new(gRPC);
+        AsyncServerStreamingCall<UserAvatarsReply>? getAvatar = client.GetUserAvatars(new() { EnableBase64 = enableBase64, UserId = userId.ToString() });
+
+        await foreach (UserAvatarsReply? response in getAvatar.ResponseStream.ReadAllAsync())
+        {
+            _ = Guid.TryParse(response.FileId, out Guid fileId);
+            avatar(new(
+                FileId: fileId,
+                FileToken: response.FileToken,
+                Base64: response.Base64));
+        }
+    }
+
+    public async Task<IEnumerable<Avatar>> GetUserAvatarsAsync(Guid userId, bool enableBase64)
+    {
+        List<Avatar> avatars = new();
+        await GetUserAvatarsAsync(userId, enableBase64, (avatar) =>
+            avatars.Add(avatar));
+
+        return avatars;
+    }
 }
