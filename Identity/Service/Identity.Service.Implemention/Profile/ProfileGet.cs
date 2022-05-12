@@ -35,7 +35,7 @@ public class ProfileGet : IProfileGet
         {
             User? user = await _userGet.GetUserBySessionAsync(session);
             return user != null ?
-                await GetProfileAsync(user.Id) 
+                await GetProfileAsync(user.Id)
                     : new ProfileResponse(ProfileStatus.NotAuthorized, null);
         }
         return new ProfileResponse(ProfileStatus.NotAuthorized, null);
@@ -50,5 +50,36 @@ public class ProfileGet : IProfileGet
             return new ProfileResponse(ProfileStatus.Success, profileViewModel);
         }
         return new ProfileResponse(ProfileStatus.NotFound, null);
+    }
+
+    public async Task<IEnumerable<FileViewModel>?> GetUserAvatarsAsync(HttpContext httpContext)
+    {
+        string session = httpContext.Request.Headers["Auth-Token"];
+        if (!string.IsNullOrEmpty(session))
+        {
+            User? user = await _userGet.GetUserBySessionAsync(session);
+            return await GetUserAvatarsAsync(user?.Id);
+        }
+        return null;
+    }
+
+    public async Task<IEnumerable<FileViewModel>?> GetUserAvatarsAsync(Guid? userId)
+    {
+        if (userId == null)
+            return new List<FileViewModel>();
+        var profile = await _profileQuery.GetAsync(p => p.UserId == userId);
+        if (profile == null)
+            return new List<FileViewModel>();
+        return await _profileViewModel.CreateProfileImageViewModelAsync(profile.Id);
+    }
+
+    public async Task<IEnumerable<FileViewModel>> GetUserAvatarsWithBase64Async(Guid? userId)
+    {
+        var avatars = await GetUserAvatarsAsync(userId);
+        foreach (var avatar in avatars)
+        {
+            avatar.Base64 = "";
+        }
+        return avatars;
     }
 }
