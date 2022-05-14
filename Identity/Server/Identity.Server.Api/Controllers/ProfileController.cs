@@ -19,9 +19,12 @@ public class ProfileController : ControllerBase
     }
 
     [HttpGet("Get")]
-    public async Task<IActionResult> GetProfileAsync()
+    public async Task<IActionResult> GetProfileAsync(Guid? userId)
     {
-        ProfileResponse? profile = await _profileGet.GetProfileAsync(HttpContext);
+        ProfileResponse? profile = userId == null
+            ? await _profileGet.GetProfileAsync(HttpContext)
+                : await _profileGet.GetProfileAsync(userId.Value);
+
         return profile.Status switch
         {
             ProfileStatus.Success => Ok(Success("", "", profile.Profile)),
@@ -33,7 +36,7 @@ public class ProfileController : ControllerBase
     }
 
     [HttpPost("Update")]
-    public async Task<IActionResult> UpdateProfileAsync([FromBody]UpdateProfile update)
+    public async Task<IActionResult> UpdateProfileAsync([FromBody] UpdateProfile update)
     {
         var profile = await _profileAction.UpdateProfileAsync(update, HttpContext);
         return profile.Status switch
