@@ -1,5 +1,4 @@
-﻿using Identity.DataBase.Entity;
-using Identity.DataBase.ViewModel.Account;
+﻿using Identity.DataBase.ViewModel.Account;
 using Identity.Service.Tools.Code;
 using Identity.Service.Tools.Crypto;
 
