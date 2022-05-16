@@ -6,7 +6,7 @@ using Identity.Service.Tools.Sms;
 
 namespace Identity.Service.Implemention;
 
-public class FastAccountAction : IFastAccountAction
+public class OtpAccountAction : IOtpAccountAction
 {
     readonly IUserGet _userGet;
 
@@ -14,7 +14,7 @@ public class FastAccountAction : IFastAccountAction
 
     readonly ISessionAction _sessionAction;
 
-    public FastAccountAction(IUserGet userGet, IBaseCud<User, IdentityContext> userCud, ISessionAction sessionAction)
+    public OtpAccountAction(IUserGet userGet, IBaseCud<User, IdentityContext> userCud, ISessionAction sessionAction)
     {
         _userGet = userGet;
         _userCud = userCud;
@@ -26,6 +26,10 @@ public class FastAccountAction : IFastAccountAction
         User? user = await _userGet.GetUserAsync(activation.UserName);
         if (user == null || user.ActiveCode != activation.ActiveCode)
             return new LoginResponse(LoginStatus.UserNotFound, null);
+
+        user.ActiveCode = 7.CreateCode();
+        user.IsActvie = true;
+        await _userCud.UpdateAsync(user);
 
         var session = await _sessionAction.CreateSessionAsync(user);
         return session != null ?
@@ -39,7 +43,7 @@ public class FastAccountAction : IFastAccountAction
         return ValueTask.CompletedTask;
     }
 
-    public async Task<LoginStatus> FastLoginAsync(FastLogin fastLogin)
+    public async Task<LoginStatus> OtpLoginAsync(FastLogin fastLogin)
     {
         try
         {
