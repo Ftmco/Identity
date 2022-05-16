@@ -5,8 +5,22 @@ option csharp_namespace = "Identity.Server.Grpc.Protos";
 
 service Account{
 	rpc Login(LoginRequest) returns(LoginReply);
+	rpc OtpLogin(OtpRequest) returns(OtpReqply);
+	rpc OtpActivation(OtpActivationRequest) returns(LoginReply);
 }
 
+message OtpRequest{
+	string userName = 1;
+}
+
+message OtpActivationRequest{
+	string userName = 1;
+	string otpCode = 2;
+}
+
+message OtpReqply{
+	int32 status = 1;
+}
 
 message LoginRequest{
 	string userName = 1;
