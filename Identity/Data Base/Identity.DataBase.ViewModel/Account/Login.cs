@@ -2,7 +2,7 @@
 
 public record Login(string UserName, string Password);
 
-public record FastLogin(string MobileNo);
+public record OtpLogin(string MobileNo);
 
 public record LoginResponse(LoginStatus Status, Session? Session);
 
