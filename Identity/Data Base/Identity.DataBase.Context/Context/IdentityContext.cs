@@ -23,7 +23,6 @@ public class IdentityContext : DbContext
 
         if (!optionsBuilder.IsConfigured)
             optionsBuilder.UseNpgsql(ConnectionString);
-
     }
 
     public virtual DbSet<User> User { get; set; }
