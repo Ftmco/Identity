@@ -23,7 +23,7 @@ namespace Test.Package.Controllers
                 Guid.Parse("e0491339-35ab-4cad-8428-03e83dd980b5")
             };
             List<User> users = new();
-           
+
 
             return Ok(users);
         }

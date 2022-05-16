@@ -1,9 +1,7 @@
-﻿using Identity.DataBase.Entity;
-using Identity.DataBase.ViewModel.Account;
+﻿using Identity.DataBase.ViewModel.Account;
 using Identity.Service.Tools.Code;
 using Identity.Service.Tools.Crypto;
 using Identity.Service.Tools.Sms;
-using Microsoft.AspNetCore.Http;
 
 namespace Identity.Service.Implemention;
 

@@ -1,5 +1,4 @@
-﻿using Identity.DataBase.Entity;
-using Identity.DataBase.ViewModel;
+﻿using Identity.DataBase.ViewModel;
 
 namespace Identity.Service.Implemention;
 

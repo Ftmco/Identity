@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace Identity.Service.Abstraction;
+﻿namespace Identity.Service.Abstraction;
 
 public interface IAccountAction : IAsyncDisposable
 {

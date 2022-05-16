@@ -1,5 +1,4 @@
 ﻿using Identity.DataBase.ViewModel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Identity.Server.Api.Controllers;

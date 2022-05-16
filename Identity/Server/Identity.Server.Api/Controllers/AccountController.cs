@@ -1,5 +1,4 @@
 ﻿using Identity.DataBase.ViewModel.Account;
-using Identity.Service.Abstraction;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Identity.Server.Api.Controllers;

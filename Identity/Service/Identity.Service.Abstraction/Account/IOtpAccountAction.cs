@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Identity.Service.Abstraction;
+﻿namespace Identity.Service.Abstraction;
 
 public interface IOtpAccountAction : IAsyncDisposable
 {
-    Task<LoginStatus> OtpLoginAsync(FastLogin fastLogin);
+    Task<LoginStatus> OtpLoginAsync(OtpLogin otpLogin, IHeaderDictionary headers);
 
-    Task<LoginResponse> ActivationAsync(Activation activation);
+    Task<LoginResponse> ActivationAsync(Activation activation, IHeaderDictionary headers);
 }

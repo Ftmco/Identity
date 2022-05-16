@@ -1,7 +1,5 @@
-﻿using Identity.DataBase.Entity;
-using Identity.Service.Tools.Crypto;
+﻿using Identity.Service.Tools.Crypto;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 
 namespace Identity.Service.Implemention;
 
