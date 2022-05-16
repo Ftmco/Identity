@@ -1,5 +1,4 @@
-﻿using Identity.DataBase.Entity;
-using Identity.Service.Implemention;
+﻿using Identity.Service.Implemention;
 using Identity.Service.Implemention.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +29,11 @@ public static class Injector
         services.AddScoped<IBaseQuery<Session, IdentityContext>, BaseQuery<Session, IdentityContext>>();
         services.AddScoped<IBaseQuery<Profile, IdentityContext>, BaseQuery<Profile, IdentityContext>>();
         services.AddScoped<IBaseQuery<ProfileImage, IdentityContext>, BaseQuery<ProfileImage, IdentityContext>>();
+        services.AddScoped<IBaseQuery<Application, IdentityContext>, BaseQuery<Application, IdentityContext>>();
+        services.AddScoped<IBaseQuery<ApplicationsUsers, IdentityContext>, BaseQuery<ApplicationsUsers, IdentityContext>>();
+        services.AddScoped<IBaseQuery<Role, IdentityContext>, BaseQuery<Role, IdentityContext>>();
+        services.AddScoped<IBaseQuery<RolesUsers, IdentityContext>, BaseQuery<RolesUsers, IdentityContext>>();
+        services.AddScoped<IBaseQuery<Setting, IdentityContext>, BaseQuery<Setting, IdentityContext>>();
         return Task.FromResult(services);
     }
 
@@ -39,6 +43,11 @@ public static class Injector
         services.AddScoped<IBaseCud<Session, IdentityContext>, BaseCud<Session, IdentityContext>>();
         services.AddScoped<IBaseCud<Profile, IdentityContext>, BaseCud<Profile, IdentityContext>>();
         services.AddScoped<IBaseCud<ProfileImage, IdentityContext>, BaseCud<ProfileImage, IdentityContext>>();
+        services.AddScoped<IBaseCud<Application, IdentityContext>, BaseCud<Application, IdentityContext>>();
+        services.AddScoped<IBaseCud<ApplicationsUsers, IdentityContext>, BaseCud<ApplicationsUsers, IdentityContext>>();
+        services.AddScoped<IBaseCud<Role, IdentityContext>, BaseCud<Role, IdentityContext>>();
+        services.AddScoped<IBaseCud<RolesUsers, IdentityContext>, BaseCud<RolesUsers, IdentityContext>>();
+        services.AddScoped<IBaseCud<Setting, IdentityContext>, BaseCud<Setting, IdentityContext>>();
         return Task.FromResult(services);
     }
 
@@ -54,6 +63,11 @@ public static class Injector
         services.AddTransient<IProfileAction, ProfileAction>();
         services.AddTransient<IProfileGet, ProfileGet>();
         services.AddTransient<IProfileViewModel, ProfileViewModel>();
+        services.AddTransient<IApplicationGet, ApplicationGet>();
+        services.AddTransient<IApplicationSettingGet, ApplicationSettingGet>();
+        services.AddTransient<IApplicationAction, ApplicationAction>();
+        services.AddTransient<IRoleAction, RoleAction>();
+        services.AddTransient<IRoleGet, RoleGet>();
 
         return Task.FromResult(services);
     }
