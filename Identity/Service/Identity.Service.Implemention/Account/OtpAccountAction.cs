@@ -1,5 +1,4 @@
-﻿using Identity.DataBase.Entity;
-using Identity.DataBase.ViewModel.Account;
+﻿using Identity.DataBase.ViewModel.Account;
 using Identity.Service.Tools.Code;
 using Identity.Service.Tools.Crypto;
 using Identity.Service.Tools.Sms;
@@ -14,14 +13,21 @@ public class OtpAccountAction : IOtpAccountAction
 
     readonly ISessionAction _sessionAction;
 
-    public OtpAccountAction(IUserGet userGet, IBaseCud<User, IdentityContext> userCud, ISessionAction sessionAction)
+    readonly IApplicationGet _applicationGet;
+
+    readonly IApplicationSettingGet _appSettingGet;
+
+    public OtpAccountAction(IUserGet userGet, IBaseCud<User, IdentityContext> userCud, ISessionAction sessionAction,
+        IApplicationGet applicationGet, IApplicationSettingGet applicationSettingGet)
     {
         _userGet = userGet;
         _userCud = userCud;
         _sessionAction = sessionAction;
+        _applicationGet = applicationGet;
+        _appSettingGet = applicationSettingGet;
     }
 
-    public async Task<LoginResponse> ActivationAsync(Activation activation)
+    public async Task<LoginResponse> ActivationAsync(Activation activation, IHeaderDictionary headers)
     {
         User? user = await _userGet.GetUserAsync(activation.UserName);
         if (user == null || user.ActiveCode != activation.ActiveCode)
@@ -43,38 +49,45 @@ public class OtpAccountAction : IOtpAccountAction
         return ValueTask.CompletedTask;
     }
 
-    public async Task<LoginStatus> OtpLoginAsync(FastLogin fastLogin)
+    public async Task<LoginStatus> OtpLoginAsync(OtpLogin fastLogin, IHeaderDictionary headers)
     {
-        try
+        var app = await _applicationGet.GetApplicationAsync(headers);
+        if (app != null)
         {
-            User? user = await _userGet.GetUserAsync(fastLogin.MobileNo);
-            var code = 7.CreateCode();
-            if (user == null)
+            var settings = await _appSettingGet.GetApplicationSettingsAsync(app.Id);
+            try
             {
-                user = new()
+                User? user = await _userGet.GetUserAsync(fastLogin.MobileNo);
+                var code = settings.CodeLength.CreateCode();
+                if (user == null)
                 {
-                    MobileNo = fastLogin.MobileNo,
-                    ActiveCode = code,
-                    Email = " ",
-                    IsActvie = false,
-                    Password = code.CreateSHA256(),
-                    RegisterDate = DateTime.UtcNow,
-                    UserName = fastLogin.MobileNo
-                };
-                if (!await _userCud.InsertAsync(user))
-                    return LoginStatus.Exception;
+                    user = new()
+                    {
+                        MobileNo = fastLogin.MobileNo,
+                        ActiveCode = code,
+                        Email = " ",
+                        IsActvie = false,
+                        Password = code.CreateSHA256(),
+                        RegisterDate = DateTime.UtcNow,
+                        UserName = fastLogin.MobileNo
+                    };
+                    if (!await _userCud.InsertAsync(user))
+                        return LoginStatus.Exception;
+                }
+                user.ActiveCode = code;
+                if (await _userCud.UpdateAsync(user))
+                {
+                    await user.MobileNo.SendSmsAsync(user.ActiveCode);
+                    return LoginStatus.Success;
+                }
+                return LoginStatus.Exception;
             }
-            user.ActiveCode = code;
-            if (await _userCud.UpdateAsync(user))
+            catch
             {
-                await user.MobileNo.SendSmsAsync(user.ActiveCode);
-                return LoginStatus.Success;
+                return LoginStatus.Exception;
             }
-            return LoginStatus.Exception;
         }
-        catch
-        {
-            return LoginStatus.Exception;
-        }
+        return LoginStatus.Exception;
+
     }
 }
