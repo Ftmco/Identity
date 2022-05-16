@@ -50,7 +50,7 @@ public static class Injector
         services.AddTransient<IUserViewModel, UserViewModel>();
         services.AddTransient<ISessionAction, SessionAction>();
         services.AddTransient<ISessionGet, SessionGet>();
-        services.AddTransient<IFastAccountAction, FastAccountAction>();
+        services.AddTransient<IOtpAccountAction, OtpAccountAction>();
         services.AddTransient<IProfileAction, ProfileAction>();
         services.AddTransient<IProfileGet, ProfileGet>();
         services.AddTransient<IProfileViewModel, ProfileViewModel>();
