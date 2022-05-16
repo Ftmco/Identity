@@ -9,4 +9,7 @@ public static class CodeExtension
             newString += Guid.NewGuid().GetHashCode().ToString().Replace("-", "");
         return newString[0..length];
     }
+
+    public static string CreateCode(this short length)
+        => ((int)length).CreateCode();
 }
