@@ -1,13 +1,4 @@
-﻿using Grpc.Net.Client;
-using Identity.Client.Rules;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Identity.Client.Services;
+﻿namespace Identity.Client.Services;
 
 public class GrpcService : IGrpcRule
 {
@@ -16,6 +7,14 @@ public class GrpcService : IGrpcRule
     public GrpcService(IConfiguration configuration)
     {
         _configuration = configuration;
+    }
+
+    public Task<Metadata> ApplicationMetaDataAsync()
+    {
+        string application = _configuration.GetApplicationJson();
+        Metadata headers = new();
+        headers.Add("application", application);
+        return Task.FromResult(headers);
     }
 
     public ValueTask DisposeAsync()
