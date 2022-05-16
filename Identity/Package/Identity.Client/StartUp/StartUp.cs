@@ -1,7 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Identity.Client.Services;
-using Identity.Client.Rules;
-using Identity.Client.Cache;
+﻿using Identity.Client.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Identity.Client.StartUp;
 
@@ -13,6 +11,7 @@ public static class StartUp
         service.AddTransient<ICache, Cache.Cache>();
         service.AddTransient<IGrpcRule, GrpcService>();
         service.AddTransient<IUserGet, UserGet>();
+        service.AddTransient<IOtpAccountAction, OtpAccountAction>();
         return service;
     }
 }

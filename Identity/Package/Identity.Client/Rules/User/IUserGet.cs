@@ -1,6 +1,4 @@
-﻿using Identity.Client.Models;
-
-namespace Identity.Client.Rules;
+﻿namespace Identity.Client.Rules;
 
 public interface IUserGet : IAsyncDisposable
 {

@@ -1,5 +1,4 @@
-﻿using Identity.Server.Grpc.Protos;
-using User = Identity.Client.Models.User;
+﻿using User = Identity.Client.Models.User;
 using UserRPC = Identity.Server.Grpc.Protos.User;
 
 namespace Identity.Client.Services;

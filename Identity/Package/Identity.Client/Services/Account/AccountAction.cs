@@ -1,6 +1,4 @@
-﻿using Identity.Server.Grpc.Protos;
-
-namespace Identity.Client.Services;
+﻿namespace Identity.Client.Services;
 
 public class AccountAction : IAccountAction
 {

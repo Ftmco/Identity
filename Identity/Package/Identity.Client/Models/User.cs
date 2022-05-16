@@ -1,6 +1,4 @@
-﻿using Identity.Server.Grpc.Protos;
-
-namespace Identity.Client.Models;
+﻿namespace Identity.Client.Models;
 
 public record User
 {
