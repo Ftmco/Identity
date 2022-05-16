@@ -38,4 +38,6 @@ public class IdentityContext : DbContext
     public virtual DbSet<Application> Application { get; set; }
 
     public virtual DbSet<RolesUsers> RolesUsers { get; set; }
+
+    public virtual DbSet<Setting> Setting { get; set; }
 }

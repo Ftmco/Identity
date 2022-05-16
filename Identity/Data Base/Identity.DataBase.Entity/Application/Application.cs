@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Identity.DataBase.Entity;
+﻿namespace Identity.DataBase.Entity;
 
 public record Application
 {
@@ -33,4 +27,6 @@ public record Application
     //Relationships
 
     public virtual ICollection<ApplicationsUsers> ApplicationsUsers { get; set; }
+
+    public virtual ICollection<Setting> Settings { get; set; }
 }
