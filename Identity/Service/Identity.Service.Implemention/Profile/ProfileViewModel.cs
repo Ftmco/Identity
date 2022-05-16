@@ -23,9 +23,16 @@ public class ProfileViewModel : IProfileViewModel
         _userQuery = userQuery;
     }
 
+    public async Task<IEnumerable<FileViewModel>> CreateProfileImageViewModelAsync(Guid profileId)
+    {
+        IEnumerable<ProfileImage>? images = await _profileImageQuery.GetAllAsync(pi => pi.ProfileId == profileId);
+        if (images == null)
+            return new List<FileViewModel>();
+        return images.Select(pi => new FileViewModel(FileId: pi.Id, FileToken: pi.FileToken));
+    }
+
     public async Task<DataBase.ViewModel.ProfileViewModel> CreateProfileViewModelAsync(Profile profile)
     {
-        IEnumerable<ProfileImage>? images = await _profileImageQuery.GetAllAsync(pi => pi.ProfileId == profile.Id);
         User? user = await _userQuery.GetAsync(profile.UserId);
         DataBase.ViewModel.ProfileViewModel profileViewModel = new(
             ProfileId: profile.Id,
@@ -33,7 +40,7 @@ public class ProfileViewModel : IProfileViewModel
             FirstName: profile.FirstName,
             LastName: profile.LastName,
             User: await _userViewModel.CreateUserViewModelAsync(user),
-            Images: images.Select(pi => new FileViewModel(FileId: pi.Id, FileToken: pi.FileToken)));
+            Images: await CreateProfileImageViewModelAsync(profile.Id));
         return profileViewModel;
     }
 

@@ -5,19 +5,19 @@ namespace Identity.Server.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class FastAccountController : ControllerBase
+public class OTPAccountController : ControllerBase
 {
-    readonly IFastAccountAction _fastAccount;
+    readonly IOtpAccountAction _otpAccount;
 
-    public FastAccountController(IFastAccountAction fastAccount)
+    public OTPAccountController(IOtpAccountAction otpAccount)
     {
-        _fastAccount = fastAccount;
+        _otpAccount = otpAccount;
     }
 
     [HttpPost("Login")]
     public async Task<IActionResult> LoginAsync(FastLogin login)
     {
-        return await _fastAccount.FastLoginAsync(login) switch
+        return await _otpAccount.OtpLoginAsync(login) switch
         {
             LoginStatus.Success => Ok(Success("رمز یک بار مصرف برای شما ارسال شد", "", new { })),
             LoginStatus.UserNotFound => throw new NotImplementedException(),
@@ -29,7 +29,7 @@ public class FastAccountController : ControllerBase
     [HttpPost("Activation")]
     public async Task<IActionResult> ActivationAsync(Activation activation)
     {
-        var login = await _fastAccount.ActivationAsync(activation);
+        var login = await _otpAccount.ActivationAsync(activation);
         return login.Status switch
         {
             LoginStatus.Success => Ok(Success("ورود موفق بود", "", new { login.Session })),

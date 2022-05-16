@@ -1,6 +1,4 @@
-﻿using Identity.Client.Models;
-
-namespace Identity.Client.Rules;
+﻿namespace Identity.Client.Rules;
 
 public interface IUserGet : IAsyncDisposable
 {
@@ -13,4 +11,8 @@ public interface IUserGet : IAsyncDisposable
     Task GetUsersStreamAsync(IEnumerable<Guid> userIds, Action<User> user);
 
     Task<IEnumerable<User>> GetUsersStreamAsync(IEnumerable<Guid> userIds);
+
+    Task GetUserAvatarsAsync(Guid userId, bool enableBase64, Action<Avatar> avatar);
+
+    Task<IEnumerable<Avatar>> GetUserAvatarsAsync(Guid userId, bool enableBase64);
 }

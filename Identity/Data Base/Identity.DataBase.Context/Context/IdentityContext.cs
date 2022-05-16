@@ -33,4 +33,10 @@ public class IdentityContext : DbContext
     public virtual DbSet<Profile> Profile { get; set; }
 
     public virtual DbSet<ProfileImage> ProfileImage { get; set; }
+
+    public virtual DbSet<ApplicationsUsers> ApplicationsUsers { get; set; }
+
+    public virtual DbSet<Application> Application { get; set; }
+
+    public virtual DbSet<RolesUsers> RolesUsers { get; set; }
 }

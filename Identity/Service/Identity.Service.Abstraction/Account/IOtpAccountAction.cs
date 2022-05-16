@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Identity.Service.Abstraction;
 
-public interface IFastAccountAction : IAsyncDisposable
+public interface IOtpAccountAction : IAsyncDisposable
 {
-    Task<LoginStatus> FastLoginAsync(FastLogin fastLogin);
+    Task<LoginStatus> OtpLoginAsync(FastLogin fastLogin);
 
     Task<LoginResponse> ActivationAsync(Activation activation);
 }

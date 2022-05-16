@@ -3,6 +3,7 @@ using System;
 using Identity.DataBase.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Identity.DataBase.Context.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    partial class IdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20220516085453_CreateApplications")]
+    partial class CreateApplications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,46 +122,6 @@ namespace Identity.DataBase.Context.Migrations
                     b.HasIndex("ProfileId");
 
                     b.ToTable("ProfileImage");
-                });
-
-            modelBuilder.Entity("Identity.DataBase.Entity.Role", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Role");
-                });
-
-            modelBuilder.Entity("Identity.DataBase.Entity.RolesUsers", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ApplicationsUsersId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationsUsersId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("RolesUsers");
                 });
 
             modelBuilder.Entity("Identity.DataBase.Entity.Session", b =>
@@ -269,25 +231,6 @@ namespace Identity.DataBase.Context.Migrations
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("Identity.DataBase.Entity.RolesUsers", b =>
-                {
-                    b.HasOne("Identity.DataBase.Entity.ApplicationsUsers", "GetApplicationsUsers")
-                        .WithMany("RolesUsers")
-                        .HasForeignKey("ApplicationsUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Identity.DataBase.Entity.Role", "Role")
-                        .WithMany("RolesUsers")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("GetApplicationsUsers");
-
-                    b.Navigation("Role");
-                });
-
             modelBuilder.Entity("Identity.DataBase.Entity.Session", b =>
                 {
                     b.HasOne("Identity.DataBase.Entity.User", "User")
@@ -304,19 +247,9 @@ namespace Identity.DataBase.Context.Migrations
                     b.Navigation("ApplicationsUsers");
                 });
 
-            modelBuilder.Entity("Identity.DataBase.Entity.ApplicationsUsers", b =>
-                {
-                    b.Navigation("RolesUsers");
-                });
-
             modelBuilder.Entity("Identity.DataBase.Entity.Profile", b =>
                 {
                     b.Navigation("ProfileImages");
-                });
-
-            modelBuilder.Entity("Identity.DataBase.Entity.Role", b =>
-                {
-                    b.Navigation("RolesUsers");
                 });
 
             modelBuilder.Entity("Identity.DataBase.Entity.User", b =>
