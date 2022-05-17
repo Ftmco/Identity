@@ -20,10 +20,14 @@ public record Session
     [Required]
     public Guid UserId { get; set; }
 
+    [Required]
+    public Guid ApplicationId { get; set; }
+
     public string Os { get; set; }
 
     //Navigation Proerty
     //Relationships
 
     public virtual User User { get; set; }
+
 }
