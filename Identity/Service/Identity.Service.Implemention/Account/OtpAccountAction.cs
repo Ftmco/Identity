@@ -1,4 +1,6 @@
-﻿using Identity.DataBase.ViewModel.Account;
+﻿using Grpc.Core;
+using Identity.DataBase.ViewModel.Account;
+using Identity.Service.Tools;
 using Identity.Service.Tools.Code;
 using Identity.Service.Tools.Crypto;
 using Identity.Service.Tools.Sms;
@@ -37,11 +39,14 @@ public class OtpAccountAction : IOtpAccountAction
         user.IsActvie = true;
         await _userCud.UpdateAsync(user);
 
-        var session = await _sessionAction.CreateSessionAsync(user);
+        var session = await _sessionAction.CreateSessionAsync(user, Guid.Empty);
         return session != null ?
                 new LoginResponse(LoginStatus.Success, new(session.Key, session.Value)) :
                     new LoginResponse(LoginStatus.Exception, null);
     }
+
+    public async Task<LoginResponse> ActivationAsync(Activation activation, Metadata headers)
+        => await ActivationAsync(activation, headers.ConvertToHeaderDictonary());
 
     public ValueTask DisposeAsync()
     {
@@ -51,7 +56,7 @@ public class OtpAccountAction : IOtpAccountAction
 
     public async Task<LoginStatus> OtpLoginAsync(OtpLogin fastLogin, IHeaderDictionary headers)
     {
-        var app = await _applicationGet.GetApplicationAsync(headers);
+        Application? app = await _applicationGet.GetApplicationAsync(headers);
         if (app != null)
         {
             var settings = await _appSettingGet.GetApplicationSettingsAsync(app.Id);
@@ -87,7 +92,10 @@ public class OtpAccountAction : IOtpAccountAction
                 return LoginStatus.Exception;
             }
         }
-        return LoginStatus.Exception;
+        return LoginStatus.ApplicationNotfound;
 
     }
+
+    public Task<LoginStatus> OtpLoginAsync(OtpLogin otpLogin, Metadata headers)
+        => OtpLoginAsync(otpLogin, headers.ConvertToHeaderDictonary());
 }
