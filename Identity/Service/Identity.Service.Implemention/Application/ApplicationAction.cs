@@ -1,8 +1,17 @@
-﻿namespace Identity.Service.Implemention;
+﻿using Identity.DataBase.ViewModel;
+using Identity.Service.Tools.Code;
+using Identity.Service.Tools.Crypto;
+using static Identity.Service.Tools.Crypto.CryptoEngine;
+
+namespace Identity.Service.Implemention;
 
 public class ApplicationAction : IApplicationAction
 {
     readonly IBaseCud<Application, IdentityContext> _applicationCud;
+
+    readonly IBaseCud<Setting, IdentityContext> _settingCud;
+
+    readonly IBaseQuery<Application, IdentityContext> _applicationQuery;
 
     readonly IBaseCud<ApplicationsUsers, IdentityContext> _appUsersCud;
 
@@ -14,9 +23,12 @@ public class ApplicationAction : IApplicationAction
 
     readonly IRoleAction _roleAction;
 
+    readonly IUserGet _userGet;
+
     public ApplicationAction(IBaseCud<Application, IdentityContext> applicationCud, IBaseCud<ApplicationsUsers, IdentityContext> appUsersCud,
         IBaseQuery<ApplicationsUsers, IdentityContext> appUsersQuery, IApplicationSettingGet appSettingGet,
-        IRoleGet roleGet, IRoleAction roleAction)
+        IRoleGet roleGet, IRoleAction roleAction, IBaseQuery<Application, IdentityContext> applicationQuery, IUserGet userGet,
+        IBaseCud<Setting, IdentityContext> settingCud)
     {
         _applicationCud = applicationCud;
         _appUsersCud = appUsersCud;
@@ -24,6 +36,9 @@ public class ApplicationAction : IApplicationAction
         _appSettingGet = appSettingGet;
         _roleGet = roleGet;
         _roleAction = roleAction;
+        _applicationQuery = applicationQuery;
+        _userGet = userGet;
+        _settingCud = settingCud;
     }
 
     public async Task<ApplicationsUsers> CheckApplicationUserAsync(Guid appId, Guid userId)
@@ -52,5 +67,37 @@ public class ApplicationAction : IApplicationAction
     {
         GC.SuppressFinalize(this);
         return ValueTask.CompletedTask;
+    }
+
+    public async Task<UpsertApplicationResponse> UpsertAsync(UpsertApplication upsert, IHeaderDictionary headers)
+    {
+        var user = await _userGet.GetUserBySessionAsync(headers["Auth-Token"]);
+        if (user != null)
+        {
+            Application? app = await _applicationQuery.GetAsync(upsert.Id);
+            if (app == null)
+            {
+                string? code = 16.CreateCode();
+                string? key = Encrypt(upsert.Name, code);
+                app = new()
+                {
+                    Code = code,
+                    ApiKey = Guid.NewGuid().ToString().CreateSHA256(),
+                    Key = key,
+                    CreateDate = DateTime.UtcNow,
+                    IsActive = false,
+                    Name = upsert.Name,
+                    OwnerId = user.Id,
+                };
+                return await _applicationCud.InsertAsync(app) ?
+                        new UpsertApplicationResponse(ApplicationActionStatus.Success, null) :
+                            new UpsertApplicationResponse(ApplicationActionStatus.Exception, null);
+            }
+            app.Name = upsert.Name;
+            return await _applicationCud.UpdateAsync(app) ?
+                       new UpsertApplicationResponse(ApplicationActionStatus.Success, null) :
+                           new UpsertApplicationResponse(ApplicationActionStatus.Exception, null);
+        }
+        return new UpsertApplicationResponse(ApplicationActionStatus.UserNotFound, null);
     }
 }
