@@ -1,4 +1,6 @@
-﻿namespace Identity.Service.Abstraction;
+﻿using Identity.DataBase.ViewModel;
+
+namespace Identity.Service.Abstraction;
 
 public interface IApplicationAction : IAsyncDisposable
 {
@@ -16,4 +18,6 @@ public interface IApplicationAction : IAsyncDisposable
     /// <param name="appId">currnet application primary id</param>
     /// <returns>Application user instance</returns>
     Task<ApplicationsUsers> CheckApplicationUserAsync(Guid appId, Guid userId);
+
+    Task<UpsertApplicationResponse> UpsertAsync(UpsertApplication upsert,IHeaderDictionary headers);
 }
