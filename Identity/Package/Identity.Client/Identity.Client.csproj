@@ -6,7 +6,13 @@
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageId>Fteam.Identity.Client</PackageId>
-		<PackageVersion>1.2.7</PackageVersion>
+		<PackageVersion>1.2.8</PackageVersion>
+		<Authors>Fteam</Authors>
+		<PackageProjectUrl>https://github.com/Ftmco/Identity</PackageProjectUrl>
+		<Copyright>https://github.com/Ftmco/Identity/blob/main/LICENSE</Copyright>
+		<RepositoryUrl>https://github.com/Ftmco/Identity</RepositoryUrl>
+		<RepositoryType>public</RepositoryType>
+		<PackageTags>ftem identity integrated-identity</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>
