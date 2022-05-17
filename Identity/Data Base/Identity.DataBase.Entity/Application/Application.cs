@@ -23,10 +23,14 @@ public record Application
     [Required]
     public string ApiKey { get; set; }
 
+    [Required]
+    public string Code { get; set; }
+
     //Navigation Proeprty
     //Relationships
 
     public virtual ICollection<ApplicationsUsers> ApplicationsUsers { get; set; }
 
     public virtual ICollection<Setting> Settings { get; set; }
+
 }
