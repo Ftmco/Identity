@@ -19,8 +19,15 @@ public class ApplicationGet : IApplicationGet
 
     public async Task<Application?> GetApplicationAsync(IHeaderDictionary requestHeader)
     {
-        var app = ApplicationViewModel.CreateApplication(requestHeader["application"]);
-        return app != null ? await GetApplicationAsync(app.ApiKey, app.Key) : null;
+        try
+        {
+            var app = ApplicationViewModel.CreateApplication(requestHeader["application"]);
+            return app != null ? await GetApplicationAsync(app.ApiKey, app.Key) : null;
+        }
+        catch 
+        {
+            return null;
+        }
     }
 
     public async Task<Application?> GetApplicationAsync(string apiKey, string key)
