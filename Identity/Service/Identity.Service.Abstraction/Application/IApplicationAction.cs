@@ -1,4 +1,5 @@
-﻿using Identity.DataBase.ViewModel;
+﻿using Grpc.Core;
+using Identity.DataBase.ViewModel;
 
 namespace Identity.Service.Abstraction;
 
@@ -19,5 +20,9 @@ public interface IApplicationAction : IAsyncDisposable
     /// <returns>Application user instance</returns>
     Task<ApplicationsUsers> CheckApplicationUserAsync(Guid appId, Guid userId);
 
-    Task<UpsertApplicationResponse> UpsertAsync(UpsertApplication upsert,IHeaderDictionary headers);
+    Task<UpsertApplicationResponse> UpsertAsync(UpsertApplication upsert, IHeaderDictionary headers);
+
+    Task<bool> CheckUserAccessAsync(IHeaderDictionary header, CheckAccess checkAccess);
+
+    Task<bool> CheckUserAccessAsync(Metadata header, CheckAccess checkAccess);
 }

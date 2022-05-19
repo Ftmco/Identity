@@ -1,4 +1,6 @@
-﻿using Identity.DataBase.ViewModel;
+﻿using Grpc.Core;
+using Identity.DataBase.ViewModel;
+using Identity.Service.Tools;
 using Identity.Service.Tools.Code;
 using Identity.Service.Tools.Crypto;
 using static Identity.Service.Tools.Crypto.CryptoEngine;
@@ -25,10 +27,14 @@ public class ApplicationAction : IApplicationAction
 
     readonly IUserGet _userGet;
 
+    readonly IApplicationGet _applicationGet;
+
+    readonly IPageGet _pageGet;
+
     public ApplicationAction(IBaseCud<Application, IdentityContext> applicationCud, IBaseCud<ApplicationsUsers, IdentityContext> appUsersCud,
         IBaseQuery<ApplicationsUsers, IdentityContext> appUsersQuery, IApplicationSettingGet appSettingGet,
         IRoleGet roleGet, IRoleAction roleAction, IBaseQuery<Application, IdentityContext> applicationQuery, IUserGet userGet,
-        IBaseCud<Setting, IdentityContext> settingCud)
+        IBaseCud<Setting, IdentityContext> settingCud, IApplicationGet applicationGet, IPageGet pageGet)
     {
         _applicationCud = applicationCud;
         _appUsersCud = appUsersCud;
@@ -39,6 +45,8 @@ public class ApplicationAction : IApplicationAction
         _applicationQuery = applicationQuery;
         _userGet = userGet;
         _settingCud = settingCud;
+        _applicationGet = applicationGet;
+        _pageGet = pageGet;
     }
 
     public async Task<ApplicationsUsers> CheckApplicationUserAsync(Guid appId, Guid userId)
@@ -54,6 +62,39 @@ public class ApplicationAction : IApplicationAction
             await _appUsersCud.InsertAsync(appUser);
         }
         return appUser;
+    }
+
+    public async Task<bool> CheckUserAccessAsync(IHeaderDictionary header, CheckAccess checkAccess)
+    {
+        Application? app = await _applicationGet.GetApplicationAsync(header);
+        if (app != null)
+        {
+            User? user = await _userGet.GetUserBySessionAsync(checkAccess.UserSession ?? header["Auth-Token"]);
+            if (user != null)
+            {
+                ApplicationsUsers? userApplication = await _appUsersQuery.GetAsync(au => au.UserId == user.Id && au.ApplicationId == app.Id);
+                if (userApplication != null)
+                {
+                    Page? page = await _pageGet.GetPageByNameAsync(checkAccess.PageName, app.Id, true);
+                    if (page != null)
+                    {
+                        IEnumerable<PagesRoles>? pageRoles = await _pageGet.GetPageRolesAsync(page.Id);
+                        //IEnumerable<Role>? applicationRoles = await _roleGet.GetApplicationRolesAsync(app.Id);
+                        IDictionary<RolesUsers, Role>? userAppRoles = await _roleGet.GetUserApplicationRolesAsync(userApplication.Id);
+                        foreach (var pr in pageRoles)
+                            if (userAppRoles.Any(uar => uar.Value.Id == pr.RoleId))
+                                return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public async Task<bool> CheckUserAccessAsync(Metadata header, CheckAccess checkAccess)
+    {
+        var headerDictonary = header.ConvertToHeaderDictonary();
+        return await CheckUserAccessAsync(headerDictonary, checkAccess);
     }
 
     public async Task CheckUserDefaultRoleAsync(Guid userId, Guid appId)
@@ -100,4 +141,6 @@ public class ApplicationAction : IApplicationAction
         }
         return new UpsertApplicationResponse(ApplicationActionStatus.UserNotFound, null);
     }
+
+
 }
