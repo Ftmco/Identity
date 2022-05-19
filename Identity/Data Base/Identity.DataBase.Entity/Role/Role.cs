@@ -11,8 +11,15 @@ public record Role
     [Required]
     public string Title { get; set; }
 
+    [Required]
+    public Guid ApplicationId { get; set; }
+
     //Navigation Proeprty
     //Relationships
 
     public virtual ICollection<RolesUsers> RolesUsers { get; set; }
+
+    public virtual ICollection<PagesRoles> PagesRoles { get; set; }
+
+    public virtual Application Application { get; set; }
 }

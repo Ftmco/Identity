@@ -14,6 +14,8 @@ public record ApplicationInfo(Guid Id, string Name, string ApiKey, string Key, D
 
 public record UpsertApplicationResponse(ApplicationActionStatus Status, ApplicationInfo? Application);
 
+public record CheckAccess(string? UserSession,string? Address,string PageName);
+
 public enum ApplicationActionStatus
 {
     Success = 0,
