@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
@@ -15,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Package\Identity.Authentication\Identity.Authentication.csproj" />
+    <ProjectReference Include="..\..\Service\Identity.Service.Implemention\Identity.Service.Implemention.csproj" />
     <ProjectReference Include="..\..\Service\Identity.Service.Tools\Identity.Service.Tools.csproj" />
   </ItemGroup>
 
