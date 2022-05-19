@@ -1,19 +1,43 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>FteamCo</Authors>
+		<Product>Fteam.Identity.Authentication</Product>
+		<Version>1.0.1</Version>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Fteam.Identity.Client" Version="1.2.8" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Fteam.Identity.Client" Version="1.2.8" />
+		<PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.8" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Google.Protobuf" Version="3.20.1" />
+		<PackageReference Include="Grpc.Core" Version="2.46.1" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.46.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.46.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="StackExchange.Redis" Version="2.5.61" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Protos\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Abstraction\" />
+		<Folder Include="Implemention\" />
+		<Folder Include="Protos\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="..\..\Server\Identity.Server.Grpc\Protos\auth.proto" GrpcServices="Client">
+			<Link>Protos\auth.proto</Link>
+		</Protobuf>
+	</ItemGroup>
 
 </Project>
