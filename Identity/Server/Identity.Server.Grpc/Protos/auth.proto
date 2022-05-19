@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "Identity.Server.Grpc.Protos";
+
+package Auth;
+
+service Auth{
+	rpc CheckAccess(CheckAccessRequest) returns(CheckAccessReply);
+}
+
+message CheckAccessRequest{	
+	string session = 1;
+	string address = 2;
+	string pageName = 3;
+}
+
+message CheckAccessReply{
+	bool hasAccess = 1;
+}
