@@ -26,7 +26,7 @@ public class AccountController : ControllerBase
 
     [HttpPost("Activation")]
     public async Task<IActionResult> ActivationAsync(Activation activation)
-        => await _account.ActivationAsync(activation) switch
+        => await _account.ActivationAsync(activation,Request.Headers) switch
         {
             ActivationStatus.Success => Ok(Success("حساب کاربری با موفقیت فعال شد", "", new { })),
             ActivationStatus.UserNotFound => Ok(Faild(404, "کاربری با این مشخصات یافت نشد", "")),
@@ -38,7 +38,7 @@ public class AccountController : ControllerBase
     [HttpPost("Login")]
     public async Task<IActionResult> LoginAsync(Login login)
     {
-        var loginUser = await _account.LoginAsync(login);
+        var loginUser = await _account.LoginAsync(login,Request.Headers);
         return loginUser.Status switch
         {
             LoginStatus.Success => Ok(Success("ورود موفق بود", "", loginUser.Session)),
