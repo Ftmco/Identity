@@ -18,6 +18,9 @@ public class RoleGet : IRoleGet
         return ValueTask.CompletedTask;
     }
 
+    public async Task<IEnumerable<Role>> GetApplicationRolesAsync(Guid appId)
+        => await _roleQuery.GetAllAsync(ar => ar.ApplicationId == appId);
+
     public async Task<IDictionary<RolesUsers, Role>> GetUserApplicationRolesAsync(Guid appUserId)
     {
         Dictionary<RolesUsers, Role> userRoles = new();
