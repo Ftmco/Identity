@@ -33,4 +33,8 @@ public record Application
 
     public virtual ICollection<Setting> Settings { get; set; }
 
+    public virtual ICollection<Page> Pages { get; set; }
+
+    public virtual ICollection<Role> Roles { get; set; }
+
 }
