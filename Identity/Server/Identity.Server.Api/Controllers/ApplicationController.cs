@@ -28,4 +28,11 @@ public class ApplicationController : ControllerBase
             _ => Ok(ApiException()),
         };
     }
+
+    [HttpPost("CheckAccess")]
+    public async Task<IActionResult> CheckAccessAsync(CheckAccess checkAccess)
+    {
+        var check = await _applicationAction.CheckUserAccessAsync(Request.Headers, checkAccess);
+        return Ok(Success(check ? "دسترسی مجاز" : "دسترسی غیر مجاز", "", new { HasAccess = check }));
+    }
 }
