@@ -13,9 +13,9 @@ public static class MetadataConvertor
 {
     public static IHeaderDictionary ConvertToHeaderDictonary(this Metadata metadata)
     {
-        IDictionary<string, StringValues> headers = new Dictionary<string, StringValues>();
+        IHeaderDictionary dict = new HeaderDictionary();
         foreach (var rHeader in metadata)
-            headers[rHeader.Key] = rHeader.Value;
-        return (IHeaderDictionary)headers;
+            dict[rHeader.Key] = rHeader.Value;
+        return dict;
     }
 }
