@@ -3,6 +3,7 @@ using System;
 using Identity.DataBase.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Identity.DataBase.Context.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    partial class IdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20220518085527_ApplicationPages")]
+    partial class ApplicationPages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,27 +115,6 @@ namespace Identity.DataBase.Context.Migrations
                     b.ToTable("Page");
                 });
 
-            modelBuilder.Entity("Identity.DataBase.Entity.PagesRoles", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("PageId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PageId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("PagesRoles");
-                });
-
             modelBuilder.Entity("Identity.DataBase.Entity.Profile", b =>
                 {
                     b.Property<Guid>("Id")
@@ -187,9 +168,6 @@ namespace Identity.DataBase.Context.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ApplicationId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -199,8 +177,6 @@ namespace Identity.DataBase.Context.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationId");
 
                     b.ToTable("Role");
                 });
@@ -349,25 +325,6 @@ namespace Identity.DataBase.Context.Migrations
                     b.Navigation("Application");
                 });
 
-            modelBuilder.Entity("Identity.DataBase.Entity.PagesRoles", b =>
-                {
-                    b.HasOne("Identity.DataBase.Entity.Page", "Page")
-                        .WithMany("PagesRoles")
-                        .HasForeignKey("PageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Identity.DataBase.Entity.Role", "Role")
-                        .WithMany("PagesRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Page");
-
-                    b.Navigation("Role");
-                });
-
             modelBuilder.Entity("Identity.DataBase.Entity.Profile", b =>
                 {
                     b.HasOne("Identity.DataBase.Entity.User", null)
@@ -386,17 +343,6 @@ namespace Identity.DataBase.Context.Migrations
                         .IsRequired();
 
                     b.Navigation("Profile");
-                });
-
-            modelBuilder.Entity("Identity.DataBase.Entity.Role", b =>
-                {
-                    b.HasOne("Identity.DataBase.Entity.Application", "Application")
-                        .WithMany("Roles")
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Application");
                 });
 
             modelBuilder.Entity("Identity.DataBase.Entity.RolesUsers", b =>
@@ -446,19 +392,12 @@ namespace Identity.DataBase.Context.Migrations
 
                     b.Navigation("Pages");
 
-                    b.Navigation("Roles");
-
                     b.Navigation("Settings");
                 });
 
             modelBuilder.Entity("Identity.DataBase.Entity.ApplicationsUsers", b =>
                 {
                     b.Navigation("RolesUsers");
-                });
-
-            modelBuilder.Entity("Identity.DataBase.Entity.Page", b =>
-                {
-                    b.Navigation("PagesRoles");
                 });
 
             modelBuilder.Entity("Identity.DataBase.Entity.Profile", b =>
@@ -468,8 +407,6 @@ namespace Identity.DataBase.Context.Migrations
 
             modelBuilder.Entity("Identity.DataBase.Entity.Role", b =>
                 {
-                    b.Navigation("PagesRoles");
-
                     b.Navigation("RolesUsers");
                 });
 

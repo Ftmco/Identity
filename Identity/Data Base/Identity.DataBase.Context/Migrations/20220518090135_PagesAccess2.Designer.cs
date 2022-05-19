@@ -3,6 +3,7 @@ using System;
 using Identity.DataBase.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Identity.DataBase.Context.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    partial class IdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20220518090135_PagesAccess2")]
+    partial class PagesAccess2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,9 +189,6 @@ namespace Identity.DataBase.Context.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ApplicationId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -199,8 +198,6 @@ namespace Identity.DataBase.Context.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationId");
 
                     b.ToTable("Role");
                 });
@@ -388,17 +385,6 @@ namespace Identity.DataBase.Context.Migrations
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("Identity.DataBase.Entity.Role", b =>
-                {
-                    b.HasOne("Identity.DataBase.Entity.Application", "Application")
-                        .WithMany("Roles")
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Application");
-                });
-
             modelBuilder.Entity("Identity.DataBase.Entity.RolesUsers", b =>
                 {
                     b.HasOne("Identity.DataBase.Entity.ApplicationsUsers", "ApplicationsUsers")
@@ -445,8 +431,6 @@ namespace Identity.DataBase.Context.Migrations
                     b.Navigation("ApplicationsUsers");
 
                     b.Navigation("Pages");
-
-                    b.Navigation("Roles");
 
                     b.Navigation("Settings");
                 });
