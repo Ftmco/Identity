@@ -40,4 +40,8 @@ public class IdentityContext : DbContext
     public virtual DbSet<RolesUsers> RolesUsers { get; set; }
 
     public virtual DbSet<Setting> Setting { get; set; }
+
+    public virtual DbSet<Page> Page { get; set; }
+
+    public virtual DbSet<PagesRoles> PagesRoles { get; set; }
 }
