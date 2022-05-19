@@ -10,11 +10,11 @@ service Account{
 }
 
 message OtpRequest{
-	string userName = 1;
+	string mobileNo = 1;
 }
 
 message OtpActivationRequest{
-	string userName = 1;
+	string mobileNo = 1;
 	string otpCode = 2;
 }
 

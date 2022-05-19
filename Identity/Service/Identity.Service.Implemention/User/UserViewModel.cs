@@ -1,6 +1,4 @@
-﻿using Identity.DataBase.Entity;
-
-namespace Identity.Service.Implemention;
+﻿namespace Identity.Service.Implemention;
 
 public class UserViewModel : IUserViewModel
 {

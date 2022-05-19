@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Identity.DataBase.Entity;
+﻿namespace Identity.DataBase.Entity;
 
 public record Application
 {
@@ -29,8 +23,18 @@ public record Application
     [Required]
     public string ApiKey { get; set; }
 
+    [Required]
+    public string Code { get; set; }
+
     //Navigation Proeprty
     //Relationships
 
     public virtual ICollection<ApplicationsUsers> ApplicationsUsers { get; set; }
+
+    public virtual ICollection<Setting> Settings { get; set; }
+
+    public virtual ICollection<Page> Pages { get; set; }
+
+    public virtual ICollection<Role> Roles { get; set; }
+
 }

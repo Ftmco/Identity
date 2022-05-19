@@ -82,7 +82,7 @@ public class BaseCud<TEntity, TContext> : IAsyncDisposable, IBaseCud<TEntity, TC
             await _context.SaveChangesAsync();
             return true;
         }
-        catch 
+        catch
         {
             return false;
         }

@@ -23,7 +23,6 @@ public class IdentityContext : DbContext
 
         if (!optionsBuilder.IsConfigured)
             optionsBuilder.UseNpgsql(ConnectionString);
-
     }
 
     public virtual DbSet<User> User { get; set; }
@@ -39,4 +38,10 @@ public class IdentityContext : DbContext
     public virtual DbSet<Application> Application { get; set; }
 
     public virtual DbSet<RolesUsers> RolesUsers { get; set; }
+
+    public virtual DbSet<Setting> Setting { get; set; }
+
+    public virtual DbSet<Page> Page { get; set; }
+
+    public virtual DbSet<PagesRoles> PagesRoles { get; set; }
 }

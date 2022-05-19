@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Identity.DataBase.Entity;
+﻿namespace Identity.DataBase.Entity;
 
 public record RolesUsers
 {
@@ -22,5 +16,5 @@ public record RolesUsers
 
     public virtual Role Role { get; set; }
 
-    public virtual ApplicationsUsers GetApplicationsUsers { get; set; }
+    public virtual ApplicationsUsers ApplicationsUsers { get; set; }
 }

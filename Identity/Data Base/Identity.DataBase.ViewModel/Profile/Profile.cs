@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Identity.DataBase.ViewModel;
+﻿namespace Identity.DataBase.ViewModel;
 
 public record ProfileViewModel(Guid ProfileId, Guid UserId, string FirstName, string LastName, UserViewModel User, IEnumerable<FileViewModel> Images);
 
