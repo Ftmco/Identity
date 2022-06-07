@@ -1,4 +1,6 @@
-﻿namespace Identity.DataBase.Entity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Identity.DataBase.Entity;
 
 public record Application
 {
@@ -26,6 +28,8 @@ public record Application
     [Required]
     public string Code { get; set; }
 
+    public Guid? ApplicationId { get; set; }
+
     //Navigation Proeprty
     //Relationships
 
@@ -36,4 +40,7 @@ public record Application
     public virtual ICollection<Page> Pages { get; set; }
 
     public virtual ICollection<Role> Roles { get; set; }
+
+    [ForeignKey("ApplicationId")]
+    public virtual ICollection<Application> Applications { get; set; }
 }
