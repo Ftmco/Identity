@@ -8,18 +8,24 @@ public record ApplicationViewModel(string Key, string ApiKey)
     JsonConvert.DeserializeObject<ApplicationViewModel>(json);
 }
 
-public record UpsertApplication(Guid? Id, string Name);
+public record UpsertApplication(Guid? Id, Guid? ParentId, string Name);
 
-public record ApplicationInfo(Guid Id, string Name, string ApiKey, string Key, DateTime CreateDate, bool IsActive);
+public record ApplicationInfo(Guid Id, Guid? ParentId, string Name, string ApiKey, string Key, string CreateDate, bool IsActive)
+{
+    public IEnumerable<ApplicationInfo>? Childs { get; set; }
+}
+
+public record GetApplicationResponse(ApplicationActionStatus Status, IEnumerable<ApplicationInfo> Applications);
 
 public record UpsertApplicationResponse(ApplicationActionStatus Status, ApplicationInfo? Application);
 
-public record CheckAccess(string? UserSession,string? Address,string PageName);
+public record CheckAccess(string? UserSession, string? Address, string PageName);
 
 public enum ApplicationActionStatus
 {
     Success = 0,
     UserNotFound = 1,
     Exception = 2,
-    ApplicationNotFound = 3
+    ApplicationNotFound = 3,
+    AccessDenied = 4
 }
