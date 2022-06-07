@@ -32,6 +32,9 @@ namespace Identity.DataBase.Context.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("ApplicationId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("text");
@@ -55,6 +58,8 @@ namespace Identity.DataBase.Context.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationId");
+
                     b.ToTable("Application");
                 });
 
@@ -77,23 +82,6 @@ namespace Identity.DataBase.Context.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ApplicationsUsers");
-                });
-
-            modelBuilder.Entity("Identity.DataBase.Entity.IntegeratedApplication", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ApplicationId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("BaseApplicationId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IntegeratedApplication");
                 });
 
             modelBuilder.Entity("Identity.DataBase.Entity.Page", b =>
@@ -336,6 +324,13 @@ namespace Identity.DataBase.Context.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("Identity.DataBase.Entity.Application", b =>
+                {
+                    b.HasOne("Identity.DataBase.Entity.Application", null)
+                        .WithMany("Applications")
+                        .HasForeignKey("ApplicationId");
+                });
+
             modelBuilder.Entity("Identity.DataBase.Entity.ApplicationsUsers", b =>
                 {
                     b.HasOne("Identity.DataBase.Entity.Application", "Application")
@@ -459,6 +454,8 @@ namespace Identity.DataBase.Context.Migrations
 
             modelBuilder.Entity("Identity.DataBase.Entity.Application", b =>
                 {
+                    b.Navigation("Applications");
+
                     b.Navigation("ApplicationsUsers");
 
                     b.Navigation("Pages");
