@@ -129,6 +129,7 @@ public class ApplicationAction : IApplicationAction
                     IsActive = false,
                     Name = upsert.Name,
                     OwnerId = user.Id,
+                    ApplicationId = upsert.ParentId
                 };
                 return await _applicationCud.InsertAsync(app) ?
                         new UpsertApplicationResponse(ApplicationActionStatus.Success, null) :
