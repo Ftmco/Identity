@@ -44,4 +44,8 @@ public class IdentityContext : DbContext
     public virtual DbSet<Page> Page { get; set; }
 
     public virtual DbSet<PagesRoles> PagesRoles { get; set; }
+
+    public virtual DbSet<PageAction> PageAction { get; set; }
+
+    public virtual DbSet<ActionsRoles> ActionsRoles { get; set; }
 }
