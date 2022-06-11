@@ -8,5 +8,5 @@ public interface IRoleAction : IAsyncDisposable
     /// <param name="appUserId">Application User Id <see cref="ApplicationsUsers"/></param>
     /// <param name="roleId">Role Id <see cref="Role"/></param>
     /// <returns><see cref="RolesUsers"/> Instance</returns>
-    Task<RolesUsers> CheckUserRoleAsync(Guid appUserId, Guid roleId);
+    Task<RolesUsers> CheckAndInsertUserRoleAsync(Guid appUserId, Guid roleId);
 }

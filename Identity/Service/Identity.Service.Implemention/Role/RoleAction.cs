@@ -12,7 +12,7 @@ public class RoleAction : IRoleAction
         _rolesUsersQuery = rolesUsersQuery;
     }
 
-    public async Task<RolesUsers> CheckUserRoleAsync(Guid appUserId, Guid roleId)
+    public async Task<RolesUsers> CheckAndInsertUserRoleAsync(Guid appUserId, Guid roleId)
     {
         var roleUser = await _rolesUsersQuery.GetAsync(ru => ru.ApplicationsUsersId == appUserId && ru.RoleId == roleId);
         if (roleUser == null)
