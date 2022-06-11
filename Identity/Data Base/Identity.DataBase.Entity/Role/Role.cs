@@ -22,4 +22,6 @@ public record Role
     public virtual ICollection<PagesRoles> PagesRoles { get; set; }
 
     public virtual Application Application { get; set; }
+
+    public virtual ICollection<ActionsRoles> ActionsRoles { get; set; }
 }

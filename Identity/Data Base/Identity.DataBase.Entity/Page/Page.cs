@@ -35,4 +35,6 @@ public record Page
     public virtual Application Application { get; set; }
 
     public virtual ICollection<PagesRoles> PagesRoles { get; set; }
+
+    public virtual ICollection<PageAction> PageActions { get; set; }
 }

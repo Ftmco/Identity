@@ -22,6 +22,27 @@ namespace Identity.DataBase.Context.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Identity.DataBase.Entity.ActionsRoles", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ActionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActionId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("ActionsRoles");
+                });
+
             modelBuilder.Entity("Identity.DataBase.Entity.Application", b =>
                 {
                     b.Property<Guid>("Id")
@@ -116,6 +137,30 @@ namespace Identity.DataBase.Context.Migrations
                     b.HasIndex("ApplicationId");
 
                     b.ToTable("Page");
+                });
+
+            modelBuilder.Entity("Identity.DataBase.Entity.PageAction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("PageId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PageId");
+
+                    b.ToTable("PageAction");
                 });
 
             modelBuilder.Entity("Identity.DataBase.Entity.PagesRoles", b =>
@@ -324,6 +369,25 @@ namespace Identity.DataBase.Context.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("Identity.DataBase.Entity.ActionsRoles", b =>
+                {
+                    b.HasOne("Identity.DataBase.Entity.PageAction", "PageAction")
+                        .WithMany("ActionsRoles")
+                        .HasForeignKey("ActionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Identity.DataBase.Entity.Role", "Role")
+                        .WithMany("ActionsRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PageAction");
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("Identity.DataBase.Entity.Application", b =>
                 {
                     b.HasOne("Identity.DataBase.Entity.Application", null)
@@ -359,6 +423,17 @@ namespace Identity.DataBase.Context.Migrations
                         .IsRequired();
 
                     b.Navigation("Application");
+                });
+
+            modelBuilder.Entity("Identity.DataBase.Entity.PageAction", b =>
+                {
+                    b.HasOne("Identity.DataBase.Entity.Page", "Page")
+                        .WithMany("PageActions")
+                        .HasForeignKey("PageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Page");
                 });
 
             modelBuilder.Entity("Identity.DataBase.Entity.PagesRoles", b =>
@@ -472,7 +547,14 @@ namespace Identity.DataBase.Context.Migrations
 
             modelBuilder.Entity("Identity.DataBase.Entity.Page", b =>
                 {
+                    b.Navigation("PageActions");
+
                     b.Navigation("PagesRoles");
+                });
+
+            modelBuilder.Entity("Identity.DataBase.Entity.PageAction", b =>
+                {
+                    b.Navigation("ActionsRoles");
                 });
 
             modelBuilder.Entity("Identity.DataBase.Entity.Profile", b =>
@@ -482,6 +564,8 @@ namespace Identity.DataBase.Context.Migrations
 
             modelBuilder.Entity("Identity.DataBase.Entity.Role", b =>
                 {
+                    b.Navigation("ActionsRoles");
+
                     b.Navigation("PagesRoles");
 
                     b.Navigation("RolesUsers");
