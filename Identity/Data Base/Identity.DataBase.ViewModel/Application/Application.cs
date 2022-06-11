@@ -19,7 +19,7 @@ public record GetApplicationResponse(ApplicationActionStatus Status, IEnumerable
 
 public record UpsertApplicationResponse(ApplicationActionStatus Status, ApplicationInfo? Application);
 
-public record CheckAccess(string? UserSession, string? Address, string PageName);
+public record CheckAccess(string? UserSession, string PageName, string Action);
 
 public enum ApplicationActionStatus
 {
