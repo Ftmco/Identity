@@ -36,6 +36,8 @@ public static class Injector
         services.AddScoped<IBaseQuery<Setting, IdentityContext>, BaseQuery<Setting, IdentityContext>>();
         services.AddScoped<IBaseQuery<Page, IdentityContext>, BaseQuery<Page, IdentityContext>>();
         services.AddScoped<IBaseQuery<PagesRoles, IdentityContext>, BaseQuery<PagesRoles, IdentityContext>>();
+        services.AddScoped<IBaseQuery<PageAction, IdentityContext>, BaseQuery<PageAction, IdentityContext>>();
+        services.AddScoped<IBaseQuery<ActionsRoles, IdentityContext>, BaseQuery<ActionsRoles, IdentityContext>>();
         return Task.FromResult(services);
     }
 
@@ -52,6 +54,8 @@ public static class Injector
         services.AddScoped<IBaseCud<Setting, IdentityContext>, BaseCud<Setting, IdentityContext>>();
         services.AddScoped<IBaseCud<Page, IdentityContext>, BaseCud<Page, IdentityContext>>();
         services.AddScoped<IBaseCud<PagesRoles, IdentityContext>, BaseCud<PagesRoles, IdentityContext>>();
+        services.AddScoped<IBaseCud<PageAction, IdentityContext>, BaseCud<PageAction, IdentityContext>>();
+        services.AddScoped<IBaseCud<ActionsRoles, IdentityContext>, BaseCud<ActionsRoles, IdentityContext>>();
         return Task.FromResult(services);
     }
 
@@ -72,6 +76,7 @@ public static class Injector
         services.AddTransient<IApplicationAction, ApplicationAction>();
         services.AddTransient<IRoleAction, RoleAction>();
         services.AddTransient<IRoleGet, RoleGet>();
+        services.AddTransient<IApplicationViewModel, ApplicationViewModelService>();
         services.AddTransient<IPageGet, PageGet>();
 
         return Task.FromResult(services);
