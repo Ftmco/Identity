@@ -101,7 +101,7 @@ public class ApplicationAction : IApplicationAction
     {
         var appUser = await CheckApplicationUserAsync(appId, userId);
         var settings = await _appSettingGet.GetApplicationSettingsAsync(appId);
-        await _roleAction.CheckUserRoleAsync(appUser.Id, settings.DefaultRole);
+        //await _roleAction.CheckUserRoleAsync(appUser.Id, settings.DefaultRole);
     }
 
     public ValueTask DisposeAsync()

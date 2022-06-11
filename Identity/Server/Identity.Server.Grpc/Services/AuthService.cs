@@ -14,7 +14,7 @@ public class AuthService : Auth.AuthBase
     public override async Task<CheckAccessReply> CheckAccess(CheckAccessRequest request, ServerCallContext context)
     {
         bool hasAccess = await _applicationAction.CheckUserAccessAsync(context.RequestHeaders,
-            new(UserSession: request.Session, Address: request.Address, PageName: request.PageName));
+            new(UserSession: request.Session, PageName: request.PageName,""));
 
         return new CheckAccessReply { HasAccess = hasAccess };
     }
