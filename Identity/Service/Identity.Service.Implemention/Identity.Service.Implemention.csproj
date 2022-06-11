@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Identity.Service.Tools\Identity.Service.Tools.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="PageAction\" />
+  </ItemGroup>
+
 </Project>
