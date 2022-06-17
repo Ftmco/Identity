@@ -17,7 +17,7 @@ public class ApplicationSettingGet : IApplicationSettingGet
 
     public async Task<Setting?> GetApplicationSettingsAsync(Guid appId)
     {
-        IEnumerable<Setting>? settings = await _settingQuery.GetAllAsync(s => s.ApplicationId == appId);
-        return settings.FirstOrDefault();
+        var settings = await _settingQuery.GetAsync(s => s.ApplicationId == appId);
+        return settings;
     }
 }
